@@ -1,0 +1,39 @@
+{% load static %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--adding css -->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+</head>
+<!--<body bgcolor="skyblue"> -->
+<body>
+<nav class="navbar">
+    <div class="logo">SMS</div>
+    <ul class="nav-links">
+        <div class="menu" >
+
+<li><a href="{% url 'home' %}">HOME</a></li>&nbsp;&nbsp;&nbsp;
+<li><a href="{% url 'about' %}">ABOUT</a></li>&nbsp;&nbsp;&nbsp;
+<li class="services">
+    <a href="{% url 'login' %}">LOGIN</a>
+    <ul class="dropdown">
+            <li><a href="{% url 'studentlogin' %}">Student</a></li>
+            <li><a href="{% url 'facultylogin' %}">Faculty</a></li>
+
+    </ul>
+</li>&nbsp;
+<li><a href="{% url  'contactus' %}">CONTACTUS</a></li>&nbsp;&nbsp;&nbsp;
+            </div>
+    </ul>
+</nav>
+<br>
+{% block 'body' %}
+<h2 align ="center">Student Course management System</h2><br>
+<center>
+<img src="{% static 'images/img.jpg' %}" width=50% height=50% >
+</center>
+{% endblock %}
+</body>
+</html>

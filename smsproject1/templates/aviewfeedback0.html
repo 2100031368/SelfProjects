@@ -1,0 +1,35 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+    <table border="2" style="font-size:12px" >
+        <tr>
+              <td>Academic Year</td>
+            <td>Cycle - Year</td>
+            <td>Semester</td>
+            <td>Department</td>
+            <td>FcaultyID - Faculty Name</td>
+            <td>CourseCode - CourseTitle</td>
+            <td>Section</td>
+            <td>Action</td>
+
+        </tr>
+
+        {% for i in x %}
+        <tr>
+            <td>{{i.course.academicyear}}</td>
+            <td>{{i.course.year}}</td>
+            <td>{{i.course.semester}}</td>
+            <td>{{i.course.department}}</td>
+            <td>{{i.faculty.facultyid}} - {{i.faculty.fullname}}</td>
+            <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
+            <td>{{i.section}}</td>
+            <td><a href="aviewfeedback1/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">VIEW</a></td>
+           <td><a href="aviewfeedback3/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">Analyze</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+{% endblock %}

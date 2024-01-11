@@ -1,0 +1,90 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<h2 align="center" style="color:red">{{msg}}</h2>
+<h3 align="center">Add New Course</h3>
+<br>
+<form method="post" action="{% url 'insertcourse' %}" align="center">
+    {% csrf_token %}
+    <table align="center" width="40%" height="50%" >
+        <tr>
+            <td><label>Select Department:</label></td>
+            <td>
+                <select name="dept" required>
+                    <option value="">--Select--</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
+
+                </select>
+            </td>
+        </tr>
+
+
+        <tr >
+            <td><label>Select Program:</label></td>
+            <td>
+                <select name="program" required>
+                    <option value="">--Select--</option>
+                    <option value="BTECH">BTECH</option>
+                    <option value="MTECH">MTECH</option>
+                </select>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td><label>Select Academic Year:</label></td>
+            <td>
+                <select name="ay" required>
+                    <option value="">--Select--</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2022-2023">2022-2023</option>
+                </select>
+            </td>
+        </tr>
+
+         <tr>
+            <td><label>Select Semester:</label></td>
+            <td>
+                <select name="sem" required>
+                    <option value="">--Select--</option>
+                    <option value="ODD">ODD</option>
+                    <option value="EVEN">EVEN</option>
+                </select>
+            </td>
+        </tr>
+
+
+        <tr>
+              <td><label>Enter Year: </label></td>
+            <td><input type="number" name="year" placeholder="Year" min="1" max="4" required/></td>
+        </tr>
+
+         <tr>
+            <td><label>Enter CourseCode:</label></td>
+             <td><input type="text" required name="ccode" placeholder="course - code"/></td>
+        </tr>
+
+         <tr>
+            <td><label>Enter CourseTitle:</label></td>
+             <td><input type="text" name="ctitle" required placeholder="course - title"/></td>
+        </tr>
+
+        <tr>
+            <td><label>LTPS</label></td>
+            <td><input type="text" name="ltps" required /></td>
+        </tr>
+
+        <tr>
+            <td><label>Credits</label></td>
+            <td><input type="number" name="credits" min="0.0" max="8.0" /></td>
+        </tr>
+
+        <tr>
+            <td><input type="submit"  value="Submit" class="addbutton"/></td>
+             <td><input type="reset"  value="Clear" class="addbutton"/></td>
+        </tr>
+
+    </table>
+</form>
+{% endblock %}

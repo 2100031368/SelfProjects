@@ -1,0 +1,20 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <h3>POST ATTENDANCE </h3>
+    <table border="1">
+        <tr>
+            <td>Student ID</td>
+            <td>Action</td>
+
+        </tr>
+        {% for i in r %}
+        <tr>
+            <td>{{i.sid}}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'adminhome.html' %}
+{% block 'body' %}
+<h2> Admin Module - Faculty</h2>
+<!--<button style="background-color:lightgreen; font-size=10px; border-color:lightgreen" ><a href="{% url 'viewfaculty' %}">View Faculty</a></button> -->
+<button class="button" ><a href="{% url 'viewfaculty' %}">View Faculties</a></button>
+<button class="button" ><a href="{% url 'addfaculty' %}" >ADD</a></button>
+<button class="button" ><a href="{% url 'deletefaculty' %}" >DELETE</a></button>
+<button class="button" ><a href="{% url 'updatefaculty1' %}" >UPDATE</a></button>
+{% endblock %}

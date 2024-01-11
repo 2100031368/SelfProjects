@@ -1,0 +1,24 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+
+<center>
+  <div class="card">
+
+  <div class="container">
+    <h4><b>Student Id: </b>{{ x.studentid }}</h4>
+    <h4><b>Full Name: </b>{{ x.fullname }}</h4>
+    <h4><b>Gender: </b>{{ x.gender }}</h4>
+    <h4><b>Department: </b>{{ x.department }}</h4>
+    <h4><b>Program: </b>{{ x.program }}</h4>
+    <h4><b>Semester: </b>{{ x.semester }}</h4>
+    <h4><b>Year: </b>{{ x.year }}</h4>
+    <h4><b>Email: </b>{{ x.email }}</h4>
+    <h4><b>Contact: </b>{{ x.contact }}</h4>
+
+
+  </div>
+</div>
+</center>
+
+{% endblock %}

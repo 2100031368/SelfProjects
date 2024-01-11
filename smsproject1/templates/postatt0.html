@@ -1,0 +1,28 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <form method ="post" action="{% url 'postatt1'%}">
+        {% csrf_token %}
+    <label>Department</label>
+    <input type="text" value="" name="dept" required/><br>
+
+    <label>Academic Year</label>
+    <input type="text" value="" name="ay" required/><br>
+
+    <label>Year</label>
+    <input type="number" value="" name="yr" required/><br>
+
+
+    <label>Semester</label>
+    <input type="text" value="" name="sem" required/><br>
+
+     <label>Section</label>
+    <input type="number" value="" name="sec" required/><br>
+
+    <input type="submit" value="Get"/>
+    <input type="clear" value="Clear"/>
+    </form>
+</center>
+
+{% endblock %}

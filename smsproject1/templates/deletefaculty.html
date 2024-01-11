@@ -1,0 +1,42 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<h2 align="center"><u>View Faculty Details</u></h2>
+Total no. of courses= {{count}}
+ <input class="form-control" id="myInput" type="text" placeholder="Faculty Name" />
+<table border="2" class="table table-bordered table-striped">
+    <thead>
+    <tr bgcolor="lightblue">
+        <td>ID</td>
+        <td>Full Name</td>
+        <td>Gender</td>
+        <td>Department</td>
+        <td>Qualification</td>
+        <td>Designation</td>
+        <td>Password</td>
+        <td>Email</td>
+        <td>Contact</td>
+    </tr>
+    </thead>
+
+    {% for f in faculties %}
+    <tbody id="myTable" >
+    <tr align="center">
+        <td>{{f.id}}</td>
+        <td>{{f.facultyid}}</td>
+        <td>{{f.fullname}}</td>
+        <td>{{f.gender}}</td>
+        <td>{{f.department}}</td>
+        <td>{{f.qualification}}</td>
+        <td>{{f.designation}}</td>
+        <td>{{f.password}}</td>
+        <td>{{f.email}}</td>
+        <td>{{f.contact}}</td>
+        <td><a href="/facultydeletion/{{f.facultyid}}" />DELETE</td>
+    </tr>
+    </tbody>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/adminstyle.css' %}" >
+    <link type="text/css" rel="stylesheet" href="{% static 'css/studentstyle.css' %}" >
+
+
+</head>
+<body>
+<div class="topnavbar">
+  <h2 align="left"><strong>SMS->></strong></h2>
+	<h3 align="center">Student Course Management -> (Student Portal)</h3>
+	<h4 align="right" style="color:white">Welcome {{adminuname}}</h4>
+</div>
+
+<div class="vertical">
+  <ul>
+   <a href="{% url 'adminhome' %}">AdminHome</a>
+   <a href="{% url 'adminstudent' %}">Student</a>
+   <a href="{% url 'adminfaculty'  %}">Faculty</a><a href="{% url 'admincourse' %}">Course</a>
+   <a href="{% url 'facultycoursemapping' %}">Faculty-Course-Mapping</a><a href="{% url 'login' %}">LOGIN</a>
+   <a href="{% url 'aviewfeedback0' %}">View Feedbacks of Students</a>
+      <!-- <li class="services">
+      <a>Registrations</a>
+       <ul class="dropdown">
+           <li><a href="#">Registration History</a></li>
+           <li><a href="#">Available Registrations</a></li>
+
+       </ul>
+    </li> -->
+    <a href="{% url 'regadmin1' %}">Registrations</a>
+      <a href="{% url 'adminchangepwd' %}">Change password</a>&nbsp;&nbsp;
+   <a href="{% url 'AdminLogout' %}">LogOut</a>
+  </ul>
+</div>
+
+<div class="content">
+  <!-- Your page content goes here -->
+   {% block 'body' %}
+     <center>
+         <h3 style="color:green">{{msg}}</h3>
+        <img src="{% static 'images/erpimg1.png' %}" width=30% height=50% >
+     </center>
+	{% endblock %}
+</div>
+
+
+</body>
+</html>
+

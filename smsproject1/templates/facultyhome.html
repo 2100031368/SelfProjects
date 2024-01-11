@@ -1,0 +1,48 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/adminstyle.css' %}" >
+    <link type="text/css" rel="stylesheet" href="{% static 'css/studentstyle.css' %}" >
+
+</head>
+<body>
+<div class="topnavbar">
+  <h2 align="left"><strong>SMS->></strong></h2>
+	<h3 align="center">Student Course Management -> (Faculty Portal)</h3>
+	<h4 align="right" style="color:white">Welcome {{sfid}}</h4>
+</div>
+
+<div class="vertical">
+  <ul>
+<a href="{% url 'facultyhome' %}">Home</a>
+      <a href="{% url 'viewfstudents1' %}">View Students</a>
+       <a href="{% url 'postatt0' %}">Post Attendance</a>
+       <li class="services">
+      <a>Courses</a>
+       <ul class="dropdown">
+           <li><a href="{% url 'facultycourse' %}">My Courses</a></li>
+           <li><a href="{% url 'fccontent0' %}">Material</a></li>
+
+       </ul>
+    </li>
+<a href="{% url 'facultychangepwd' %}">Change password</a>&nbsp;&nbsp;
+<a href="{% url 'facultylogin' %}">LogOut</a>
+
+    </ul>
+</div>
+
+
+<div class="content">
+  <!-- Your page content goes here -->
+   {% block 'body' %}
+     <center>
+         <h3 style="color:green">{{msg}}</h3>
+        <img src="{% static 'images/erpimg1.png' %}" width=30% height=50% >
+     </center>
+	{% endblock %}
+</div>
+
+</body>
+</html>

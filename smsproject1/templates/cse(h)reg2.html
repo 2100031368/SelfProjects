@@ -1,0 +1,15 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <h2 style="color:darkcyan">Enter Student Details-To Allow Registrations</h2><br><br>
+    <h3 style="color:green">{{msg}}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="ADD" />
+        <input type="clear" value="Clear"/>
+
+    </form>
+</center>
+{% endblock %}

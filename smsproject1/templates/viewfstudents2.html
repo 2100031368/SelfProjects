@@ -1,0 +1,21 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+
+      <table border="2">
+          <tr>
+              <td>My Courses</td>
+              <td>Action</td>
+          </tr>
+          {% for i in r  %}
+          <tr>
+              <td>{{i.course.coursetitle}}</td>
+              <td><a href="viewfstudents3/{{i.course.department}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.coursetitle}}/{{i.faculty.facultyid}}">Get Students</a></td>
+          </tr>
+      </table>
+       {% endfor %}
+
+</center>
+
+{% endblock %}

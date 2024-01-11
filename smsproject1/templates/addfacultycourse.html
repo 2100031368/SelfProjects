@@ -1,0 +1,15 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+    <h2>MAP FACULTY-COURSE</h2>
+    <h3 style="color:green">{{msg}}</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="ADD"/>
+        <input type="clear" value="CLEAR" />
+    </form>
+</center>
+{% endblock %}

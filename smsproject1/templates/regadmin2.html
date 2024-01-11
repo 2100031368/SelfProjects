@@ -1,0 +1,37 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <form method="post">
+        {% csrf_token %}
+    <table border="1">
+        <tr>
+            <td>Program</td>
+            <td>Department</td>
+            <td>ID</td>
+            <td>Fullname</td>
+            <td>Academic Year</td>
+            <td>Cycle</td>
+            <td>Semester</td>
+            <td>View</td>
+        </tr>
+        {% for x in b %}
+        <tr>
+            <td>{{x.sprogram}}</td>
+            <td>{{x.sdept}}</td>
+           <!-- <td id="row1">{{x.sid}}</td>  not working if i take like this all values are bein None
+             so instead taking input type and making it readonly as reg are done based on cur_ay accessing them in this case i need to find id too -->
+           <td>{{x.sid}}</td>
+            <td>{{x.sname}}</td>
+            <td>{{x.say}}</td>
+            <td>{{x.syr}}</td>
+            <td>{{x.ssem}}</td>
+            <td><a href="/history/{{x.sid}}/{{x.say}}/{{x.syr}}/{{x.ssem}}">History</a></td>
+        </tr>
+        {% endfor %}
+
+    </table>
+        </form>
+</center>
+
+{% endblock %}

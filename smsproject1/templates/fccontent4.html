@@ -1,0 +1,28 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>Description</td>
+            <td>Link</td>
+            <td>ContentFile</td>
+        </tr>
+        {% for i in f %}
+        <tr>
+            <td>{{i.description}}</td>
+            <td>{{i.link}}</td>
+            <!--<td><a href="fcontentview/{{i.contentimage}}">View FILE</a></td> -->
+            <td>
+                <a href="/media/{{ i.contentimage }}">View FILE</a><br>
+                <!--<a href="deltemyuploads1/{{i.course.coursecode}}/{{i.faculty.facultyid}}/media/{{i.contentimage}}">DELETE</a> -->
+                 <a href="{% url 'deltemyuploads1' i.id %}">DELETE</a>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+
+{% endblock %}

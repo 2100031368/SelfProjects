@@ -1,0 +1,106 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="2">
+    <tr>
+        <td>Course</td>
+        <td>Faculty</td>
+    </tr>
+    {% if d.c1 %}
+    <tr>
+        <td>{{d.c1}}</td>
+
+          <td>
+         <h4>{{d.f11}}</h4>
+              {% if d.f12 %}<h4>{{d.f12}}</h4>{% endif %}
+          {% if d.f13 %}<h4>{{d.f13}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+     {% if d.c2 %}
+    <tr>
+        <td>{{d.c2}}</td>
+
+          <td>
+         <h4>{{d.f21}}</h4>
+              {% if d.f22 %}<h4>{{d.f22}}</h4>{% endif %}
+          {% if d.f23 %}<h4>{{d.f23}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+     {% if d.c3 %}
+    <tr>
+        <td>{{d.c3}}</td>
+
+          <td>
+         <h4>{{d.f31}}</h4>
+              {% if d.f32 %}<h4>{{d.f32}}</h4>{% endif %}
+          {% if d.f33 %}<h4>{{d.f33}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+     {% if d.c4 %}
+    <tr>
+        <td>{{d.c4}}</td>
+
+          <td>
+         <h4>{{d.f41}}</h4>
+              {% if d.f42 %}<h4>{{d.f42}}</h4>{% endif %}
+          {% if d.f43 %}<h4>{{d.f43}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+     {% if d.c5 %}
+    <tr>
+        <td>{{d.c5}}</td>
+
+          <td>
+         <h4>{{d.f51}}</h4>
+              {% if d.f52 %}<h4>{{d.f52}}</h4>{% endif %}
+          {% if d.f53 %}<h4>{{d.f53}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+     {% if d.c6 %}
+    <tr>
+        <td>{{d.c6}}</td>
+
+          <td>
+         <h4>{{d.f61}}</h4>
+              {% if d.f62 %}<h4>{{d.f62}}</h4>{% endif %}
+          {% if d.f63 %}<h4>{{d.f63}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+
+     {% if d.c7 %}
+    <tr>
+        <td>{{d.c7}}</td>
+
+          <td>
+         <h4>{{d.f71}}</h4>
+              {% if d.f72 %}<h4>{{d.f72}}</h4>{% endif %}
+          {% if d.f73 %}<h4>{{d.f73}}</h4>{% endif %}
+
+        </td>
+    </tr>
+    {% endif %}
+
+
+    </table>
+</center>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<h2 align="center"><u>View Course Details</u></h2>
+Total no. of courses= {{count}}
+ <input class="form-control" id="myInput" type="text" placeholder="Course Title">
+
+<table border="2" class="table table-bordered table-striped">
+    <thead>
+    <tr bgcolor="lightblue">
+        <td>ID</td>
+        <td>Department</td>
+        <td>Program</td>
+        <td>Academic Year</td>
+        <td>Semester</td>
+        <td>Year</td>
+        <td>Course Code</td>
+        <td>Course Title</td>
+        <td>Action</td>
+        <td>LTPS</td>
+        <td>Course Credits</td>
+    </tr>
+    </thead>
+    {% for course in coursesdata %}
+    <tbody id="myTable">
+     <tr align="center">
+         <td>{{course.id}}</td>
+         <td>{{course.department}}</td>
+         <td>{{course.program}}</td>
+         <td>{{course.academicyear}}</td>
+         <td>{{course.semester}}</td>
+         <td>{{course.year}}</td>
+         <td>{{course.coursecode}}</td>
+         <td>{{course.coursetitle}}</td>
+         <td>{{course.ltps}}</td>
+         <td>{{course.credits}}</td>
+         <td>
+             <a href="/coursedeletion/{{course.id}}">DELETE</a>
+         </td>
+     </tr>
+     </tbody>
+    {% endfor %}
+
+</table>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

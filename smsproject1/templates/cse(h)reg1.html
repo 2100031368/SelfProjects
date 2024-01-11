@@ -1,0 +1,29 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+<h2><a href="{% url 'addstureg1' %}">ADD Student</a></h2>
+ <h3>{{msg}}</h3>
+ <table border="1">
+     <tr>
+         <td>S.No</td>
+         <td>Student Id</td>
+         <td>Academic Year</td>
+         <td>Department</td>
+         <td>Year</td>
+         <td>Semester</td>
+     </tr>
+     {% for x in ids %}
+       <tr>
+           <td>{{x.id}}</td>
+           <td>{{x.sid}}</td>
+           <td>{{x.ay}}</td>
+           <td>{{x.dept}}</td>
+           <td>{{x.yr}}</td>
+           <td>{{x.sem}}</td>
+       </tr>
+     {% endfor %}
+ </table>
+</center>
+{% endblock %}
+

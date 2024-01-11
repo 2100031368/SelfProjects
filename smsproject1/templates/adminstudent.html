@@ -1,0 +1,8 @@
+{% extends 'adminhome.html' %}
+{% block  'body' %}
+<h2> Admin Module - Student</h2>
+<button class="button" ><a href="{% url 'viewstudents' %}">View Students </a></button>
+<button class="button" ><a href="{% url 'addstudent' %}" >ADD</a></button>
+<button class="button"><a href="{% url 'deletestudent' %}" >DELETE</a></button>
+<button class="button" ><a href="{% url 'updatestudent1' %}" >UPDATE</a></button>
+{% endblock %}

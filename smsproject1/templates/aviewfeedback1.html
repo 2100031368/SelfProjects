@@ -1,0 +1,25 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+    <table border="1">
+        <tr>
+            <td>Student ID</td>
+            <td>View</td>
+
+        </tr>
+        {% for i in a %}
+        <tr>
+            <td>{{i.sid}}</td>
+            <td><a href="/aviewfeedback2/{{i.sid}}/{{p.faculty.facultyid}}/{{i.say}}/{{i.syr}}/{{i.ssem}}/{{p.course.coursecode}}/{{p.section}}">Feedback Posted</a></td>
+
+
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+{% endblock %}
+
+<!-- /{{i.ccode}}/{{i.section}} -->

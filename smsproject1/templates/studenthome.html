@@ -1,0 +1,54 @@
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type="text/css" rel="stylesheet" href="{% static 'css/studentstyle.css'%}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/adminstyle.css' %}" />
+</head>
+<body>
+
+<!-- Top Navbar -->
+<div class="topnavbar">
+  <h2 align="left"><strong>SMS->></strong></h2>
+	<h3 align="center">Student Course Management -> (Student Portal)</h3>
+	<h4 align="right" style="color:white">Welcome {{ssid}}</h4>
+</div>
+
+<!-- Vertical Navbar -->
+<div class="vertical">
+  <ul>
+   <a href="{% url 'studenthome' %}">Home</a><br>
+    <a href="{% url 'stureg1' %}" >Academic Registration</a><br>
+      <a href="{% url 'viewreghistory' %}" >Registration History</a><br>
+
+
+     <li class="services">
+      <a>Courses</a>
+       <ul class="dropdown">
+           <li><a href="{% url 'studentcourse' %}">Material</a></li>
+
+           <li><a href="#">Handouts</a></li>
+
+       </ul>
+    </li>
+    <a href="{% url 'sfeedback0' %}">Give Feedback</a>
+    <a href="{% url 'stmyprofile' %}">MyProfile</a><br>
+    <a href="{% url 'studentchangepwd' %}">Change password</a><br>
+    <a href="{% url 'studentlogin' %}">LogOut</a>
+  </ul>
+</div>
+
+<!-- Page Content -->
+<div class="content">
+  <!-- Your page content goes here -->
+   {% block 'body' %}
+     <center>
+        <img src="{% static 'images/erpimg1.png' %}" width=30% height=50% >
+     </center>
+	{% endblock %}
+</div>
+
+</body>
+</html>

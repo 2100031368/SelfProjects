@@ -1,0 +1,21 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+  <div class="card">
+
+  <div class="container">
+   {% if c.s1 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f1 }}</h4>{% endif %}
+     {% if c.s2 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f2}}</h4>{% endif %}
+     {% if c.s3 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f3}}</h4>{% endif %}
+     {% if c.s4 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f4 }}</h4>{% endif %}
+     {% if c.s5 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f5}}</h4>{% endif %}
+     {% if c.s6 %} v<h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f6}}</h4>{% endif %}
+     {% if c.s7 %} <h4><b>Course&Faculty:&nbsp&nbsp&nbsp&nbsp</b>{{ c.f7}}</h4>{% endif %}
+
+  </div>
+</div>
+</center>
+
+{% endblock %}

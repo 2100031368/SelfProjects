@@ -1,0 +1,26 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<h4 align="center" style="color:red">{{msg}}</h4>
+<center>
+<form method="post" action="{% url 'updatecourse2' %}" >
+
+   {% csrf_token %}
+    <table>
+
+         <tr>
+            <td>Course Code: </td>
+            <td><input type="text" name="key" /></td>
+        </tr>
+
+        <tr align="center">
+            <td><input type="submit" value="Get" class="button"/> </td>
+            <td><input type="reset" value="Clear" class="button"/></td>
+        </tr>
+
+
+    </table>
+</form>
+</center>
+{% endblock %}

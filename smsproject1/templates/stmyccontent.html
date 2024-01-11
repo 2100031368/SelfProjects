@@ -1,0 +1,23 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1" style="font-size:12px">
+        <tr>
+            <td>Course</td>
+            <td>Description</td>
+            <td>Link</td>
+            <td>File</td>
+        </tr>
+        {% for i in x %}
+        <tr>
+            <td>{{i.course}}</td>
+            <td>{{i.description}}</td>
+            <td>{{i.link}}</td>
+            <td><a href="/media/{{ i.contentimage }}">View Material</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+{% endblock %}

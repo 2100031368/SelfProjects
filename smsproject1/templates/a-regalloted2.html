@@ -1,0 +1,12 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <form method="post">
+    {% csrf_token %}
+   {{form.as_p}}
+
+
+  </form>
+</center>
+{% endblock %}

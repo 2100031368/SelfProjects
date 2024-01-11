@@ -1,0 +1,91 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <h3 style="color:red">{{msg}}</h3>
+    <h3>Give Feedback</h3>
+    <table border="1">
+        <tr>
+            <td>Course Code</td>
+            <td>Course Title</td>
+            <td>Faculty</td>
+            <td>Section</td>
+            <td>Click</td>
+        </tr>
+        {% for i in fb %}
+
+        {% if i.s1 %}
+        <tr>
+            <td>{{i.cc1}}</td>
+            <td>{{i.s1}}</td>
+            <td>{{i.f1}}</td>
+            <td>{{i.sec1}}</td>
+            <td><a href="sfeedback1/{{i.cc1}}/{{i.f1}}/{{i.sec1}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s2 %}
+        <tr>
+            <td>{{i.cc2}}</td>
+             <td>{{i.s2}}</td>
+            <td>{{i.f2}}</td>
+            <td>{{i.sec2}}</td>
+            <td><a href="sfeedback1/{{i.cc2}}/{{i.f2}}/{{i.sec2}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s3 %}
+        <tr>
+            <td>{{i.cc3}}</td>
+             <td>{{i.s3}}</td>
+            <td>{{i.f3}}</td>
+            <td>{{i.sec3}}</td>
+            <td><a href="sfeedback1/{{i.cc3}}/{{i.f3}}/{{i.sec3}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s4 %}
+        <tr>
+            <td>{{i.cc4}}</td>
+             <td>{{i.s4}}</td>
+            <td>{{i.f4}}</td>
+            <td>{{i.sec4}}</td>
+            <td><a href="sfeedback1/{{i.cc4}}/{{i.f4}}/{{i.sec4}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s5 %}
+        <tr>
+            <td>{{i.cc5}}</td>
+             <td>{{i.s5}}</td>
+            <td>{{i.f5}}</td>
+            <td>{{i.sec5}}</td>
+            <td><a href="sfeedback1/{{i.cc5}}/{{i.f5}}/{{i.sec5}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s6 %}
+        <tr>
+            <td>{{i.cc6}}</td>
+             <td>{{i.s6}}</td>
+            <td>{{i.f6}}</td>
+            <td>{{i.sec6}}</td>
+            <td><a href="sfeedback1/{{i.cc6}}/{{i.f6}}/{{i.sec6}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% if i.s7 %}
+        <tr>
+            <td>{{i.cc7}}</td>
+             <td>{{i.s7}}</td>
+            <td>{{i.f7}}</td>
+            <td>{{i.sec7}}</td>
+            <td><a href="sfeedback1/{{i.cc7}}/{{i.f7}}/{{i.sec7}}">Post Feedback</a></td>
+        </tr>
+        {% endif %}
+
+        {% endfor %}
+    </table>
+</center>
+
+{% endblock %}

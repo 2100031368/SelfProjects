@@ -1,0 +1,88 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    {% for x in found %}
+        <table border="3">
+            <tr>
+                <td>Academic Year : </td>
+                <td>{{x.say}}</td>
+            </tr>
+
+            <tr>
+                <td> Year : </td>
+                <td>{{x.syr}}</td>
+            </tr>
+
+            <tr>
+                <td>Semester : </td>
+                <td>{{x.ssem}}</td>
+            </tr>
+
+            <tr>
+                <td>CourseCode - {{x.cc1}}</td>
+                <td>Course- {{x.s1}}</td>
+                <td>Faculty- {{x.f1}}</td>
+                <td>Section -  {{x.sec1}}</td>
+            </tr>
+
+            <tr>
+                 <td>CourseCode - {{x.cc2}}</td>
+                <td>Course- {{x.s2}}</td>
+                <td>Faculty- {{x.f2}}</td>
+                <td>Section- {{x.sec2}}</td>
+            </tr>
+
+            <tr>
+                 <td>CourseCode - {{x.cc3}}</td>
+                <td>Course- {{x.s3}}</td>
+                <td>Faculty- {{x.f3}}</td>
+                <td>Section- {{x.sec3}}</td>
+            </tr>
+
+            {% if x.s4 %}
+            <tr>
+                 <td>CourseCode - {{x.cc4}}</td>
+                <td>Course- {{x.s4}}</td>
+                <td>Faculty- {{x.f4}}</td>
+                <td>Section- {{x.sec4}}</td>
+            </tr>
+            {% endif %}
+
+            {% if x.s5 %}
+            <tr>
+                 <td>CourseCode - {{x.cc5}}</td>
+                <td>Course- {{x.s5}}</td>
+                <td>Faculty- {{x.f5}}</td>
+                <td>Section- {{x.sec5}}</td>
+            </tr>
+            {% endif %}
+
+            {% if x.s6 %}
+            <tr>
+                 <td>CourseCode - {{x.cc6}}</td>
+                <td>Course- {{x.s6}}</td>
+                <td>Faculty- {{x.f6}}</td>
+                <td>Section- {{x.sec6}}</td>
+
+            </tr>
+            {% endif %}
+
+            {% if x.s7 %}
+            <tr>
+                 <td>CourseCode - {{x.cc7}}</td>
+                <td>Course- {{x.s7}}</td>
+                <td>Faculty- {{x.f7}}</td>
+                <td>Section- {{x.sec7}}</td>
+            </tr>
+            {% endif %}
+
+
+
+
+
+        </table>
+    {% endfor %}
+</center>
+
+{% endblock %}

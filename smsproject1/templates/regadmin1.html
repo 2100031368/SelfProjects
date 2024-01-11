@@ -1,0 +1,32 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    {{msg}}
+    <form method="post">
+        <a href="{% url 'regadmin5' %}">ADD NEW REGISTRATION</a>
+    <table border="1">
+        <tr>
+            <td>Department</td>
+            <td>Academic Year</td>
+            <td>Cycle(Year)</td>
+            <td>Semester</td>
+            <td>Actions</td>
+        </tr>
+        {% for x in a %}
+        <tr>
+            <td id="row1">{{x.dept}}</td>
+            <td id="row2">{{x.ay}}</td>
+            <td id="row3">{{x.yr}}</td>
+            <td id="row4">{{x.sem}}</td>
+            <td>
+                <a href="/regadmin4/{{x.dept}}/{{x.ay}}/{{x.yr}}/{{x.sem}}">VIEW</a><br>
+                <a href="{% url 'regadmin2' %}">Student-Registration History</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+</center>
+
+{% endblock %}

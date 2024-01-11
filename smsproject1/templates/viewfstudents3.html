@@ -1,0 +1,17 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>Student ID</td>
+
+        </tr>
+        {% for i in r %}
+        <tr>
+            <td>{{i.sid}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}
