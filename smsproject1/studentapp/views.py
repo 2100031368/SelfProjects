@@ -8,7 +8,7 @@ from regapp.models import RegM, RegHistoryM, FeedbackPosted
 
 from regapp.forms import AddRegForm, FeedbackForm
 
-from facultyapp.models import CourseContent
+from facultyapp.models import CourseContent, Internals
 
 
 
@@ -236,4 +236,22 @@ def sfeedback2(request):
         return HttpResponse("saved")
     else:
         return HttpResponse("wrong")
+
+def sviewint0(request):
+    ssid = request.session["sid"]
+    if(request.method == "POST"):
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        x=RegHistoryM.objects.filter(Q(sid=ssid)&Q(say=ay)&Q(ssem=sem))
+        return render(request, "sviewint1.html", {"ssid":ssid, "x":x})
+    else:
+        return render(request, "sviewint0.html", {"ssid":ssid})
+
+def sviewint1(request, ccode):
+    ssid = request.session["sid"]
+    y=Internals.objects.filter(Q(sid=ssid)&Q(cc=ccode))
+    if y:
+        return render(request, "sviewint2.html", {"ssid":ssid, "y":y})
+    else:
+        return HttpResponse("No internals are posted yet. ")
 

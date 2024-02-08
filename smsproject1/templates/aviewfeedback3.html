@@ -1,0 +1,44 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+<table border="1">
+    <tr>
+        <td>QUESTION</td>
+        <td>View Analysis</td>
+    </tr>
+
+
+{% for i in x %}
+
+
+
+    <tr>
+        <td>{{i.q1}}</td>
+        <td><a href="{% url 'aviewfeedback4' '1' ay yr sem dept fid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q2}}</td>
+        <td><a href="{% url 'aviewfeedback4' '2' ay yr sem dept fid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q3}}</td>
+        <td><a href="{% url 'aviewfeedback4' '3' ay yr sem dept fid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q4}}</td>
+        <td><a href="{% url 'aviewfeedback4' '4' ay yr sem dept fid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q5}}</td>
+        <td><a href="{% url 'aviewfeedback4' '5' ay yr sem dept fid cc sec %}">GET</a></td>
+    </tr>
+
+
+{% endfor %}
+
+
+</table>
+</center>
+{% endblock %}

@@ -49,6 +49,10 @@ urlpatterns = [
    path("aviewfeedback0", views.aviewfeedback0, name="aviewfeedback0"),
    path("aviewfeedback1/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback1, name="aviewfeedback1"),
    path("aviewfeedback2/<int:sid>/<int:fid>/<str:ay>/<int:yr>/<str:sem>/<str:cc>/<int:sec>", views.aviewfeedback2, name="aviewfeedback2"),
+   path("aviewfeedback3/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback3, name="aviewfeedback3"),
+   path("aviewfeedback4/<int:q>/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback4, name="aviewfeedback4"),
 
-
+   path("addcc0", views.addcc0, name="addcc0"),
+   path("addcc1/<int:fid>/<int:cc>/<str:ay>/<int:yr>/<str:sem>",views.addcc1, name="addcc1"),
+   path("addcc2", views.addcc2, name="addcc2"),
 ]

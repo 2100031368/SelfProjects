@@ -1,0 +1,38 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>CourseCode</td>
+            <td>Sem1</td>
+            <td>Sem2</td>
+            <td>Lab1</td>
+            <td>Quiz1</td>
+            <td>Quiz2</td>
+            <td>Quiz3</td>
+            <td>Quiz4</td>
+            <td>SemEnd</td>
+            <td>LabEnd</td>
+            <td>GradePoints</td>
+            <td>Grade</td>
+        </tr>
+        {% for i in y %}
+        <tr>
+            <td>{{i.cc}}</td>
+            <td>{{i.sem1}}</td>
+            <td>{{i.sem2}}</td>
+            <td>{{i.lab1}}</td>
+            <td>{{i.quiz1}}</td>
+            <td>{{i.quiz2}}</td>
+            <td>{{i.quiz3}}</td>
+            <td>{{i.quiz4}}</td>
+            <td>{{i.semend}}</td>
+            <td>{{i.labend}}</td>
+            <td>{{i.grade_points}}</td>
+            <td>{{i.grade}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

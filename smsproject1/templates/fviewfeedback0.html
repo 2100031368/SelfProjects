@@ -1,0 +1,24 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>Subject</td>
+            <td>AcademicYear</td>
+            <td>Cycle</td>
+            <td>Semester</td>
+            <td>ViewAnalysis</td>
+        </tr>
+        {% for i in x %}
+        <tr>
+            <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
+            <td>{{i.course.academicyear}}</td>
+            <td>{{i.course.year}}</td>
+            <td>{{i.course.semester}}</td>
+            <td><a href="fviewfeedback1/{{i.course.coursecode}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.section}}">Get</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <form method="post", action="{% url 'sviewint0' %}">
+        {% csrf_token %}
+        <label>Academic Year</label>
+        <input type="text" name="ay" required /><br>
+
+        <label>Semester</label>
+        <input type="text" name="sem" required/><br>
+
+        <input type="submit" value="VIEW" />
+    </form>
+</center>
+{% endblock %}

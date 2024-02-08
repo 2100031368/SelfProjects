@@ -1,16 +1,20 @@
 {% extends 'facultyhome.html' %}
 
 {% block 'body' %}
+
 <center>
+
     <table border="1">
         <tr>
-            <td>Student ID</td>
-
+            <td>Student</td>
+            <td>Action</td>
         </tr>
-        <h3>hello</h3>
+
         {% for i in r %}
         <tr>
             <td>{{i.sid}}</td>
+            <td><a href="{% url 'fpostint2' i.sid i.sdept i.say i.syr i.ssem c ct sec %}">Post Internals</a></td>
+
         </tr>
         {% endfor %}
     </table>

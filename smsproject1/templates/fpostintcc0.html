@@ -1,0 +1,29 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+
+<center>
+    <table border="1">
+        <tr>
+            <td>CourseCode - Title</td>
+            <td>Academic Year</td>
+            <td>Cycle</td>
+            <td>Semester</td>
+            <td>Action</td>
+        </tr>
+        {% for i in x %}
+        <tr>
+            <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
+            <td>{{i.course.academicyear}}</td>
+            <td>{{i.course.year}}</td>
+            <td>{{i.course.semester}}</td>
+            <td>{{i.section}}</td>
+            <td>
+                <a href="fpostintcc1/{{i.course.id}}/{{i.course.coursecode}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.faculty.facultyid}}">Enable</a><br>
+                <a href="fpostint0/{{i.section}}/{{i.course.department}}/{{i.course.coursecode}}/{{i.course.id}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}">Upload Internals</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

@@ -66,35 +66,35 @@ class RegHistoryM(models.Model):
     f1 = models.BigIntegerField(blank=False)
     sec1=models.IntegerField(blank=False)
 
-    cc2 = models.CharField(blank=False)
-    s2 = models.CharField(blank=False)
-    f2 = models.BigIntegerField(blank=False)
-    sec2= models.IntegerField(blank=False)
+    cc2 = models.CharField(null=True,blank=False)
+    s2 = models.CharField(null=True,blank=False)
+    f2 = models.BigIntegerField(null=True,blank=False)
+    sec2= models.IntegerField(null=True,blank=False)
 
-    cc3 = models.CharField(blank=False)
-    s3 = models.CharField(blank=False)
-    f3 = models.BigIntegerField(blank=False)
-    sec3 = models.IntegerField(blank=False)
+    cc3 = models.CharField(null=True,blank=False)
+    s3 = models.CharField(null=True,blank=False)
+    f3 = models.BigIntegerField(null=True,blank=False)
+    sec3 = models.IntegerField(null=True,blank=False)
 
-    cc4 = models.CharField(blank=False)
+    cc4 = models.CharField(null=True,blank=False)
     s4 = models.CharField(null=True, blank=True)
     f4 = models.BigIntegerField(null=True, blank=True)
-    sec4 = models.IntegerField(blank=False)
+    sec4 = models.IntegerField(null=True,blank=False)
 
-    cc5 = models.CharField(blank=False)
+    cc5 = models.CharField(null=True,blank=False)
     s5 = models.CharField(null=True, blank=True)
     f5 = models.BigIntegerField(null=True, blank=True)
-    sec5 = models.IntegerField(blank=False)
+    sec5 = models.IntegerField(null=True,blank=False)
 
-    cc6 = models.CharField(blank=False)
+    cc6 = models.CharField(null=True,blank=False)
     s6 = models.CharField(null=True, blank=True)
     f6 = models.BigIntegerField(null=True, blank=True)
-    sec6 = models.IntegerField(blank=False)
+    sec6 = models.IntegerField(null=True,blank=False)
 
-    cc7 = models.CharField(blank=False)
+    cc7 = models.CharField(null=True,blank=False)
     s7 = models.CharField(null=True, blank=True)
     f7 = models.BigIntegerField(null=True, blank=True)
-    sec7 = models.IntegerField(blank=False)
+    sec7 = models.IntegerField(null=True,blank=False)
 
     class Meta:
         db_table="reg_history"
@@ -142,10 +142,9 @@ class FeedbackPosted(models.Model):
         ("Not-Satisfactory", "Not-Satisfactory"))
     fdb5 = models.CharField(blank=False, choices=fdb5_options)
 
-
-
     class Meta:
         db_table="feedback_posted"
     def __str__(self):
-        return str.sid
+        return str(self.sid)
+
 

@@ -1,0 +1,64 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+
+<form method="post" action="{% url 'fpostint3' %}">
+    {% csrf_token %}
+    <label>Department</label>
+    <input type="text" value="{{dept}}" name="dept" readonly />
+    <label>Academic year</label> <label>Year</label>
+     <input type="text" value="{{ay}}" name="ay" readonly/>
+     <input type="number" value="{{yr}}" name="yr" readonly/><br>
+
+    <label>Semester</label>
+    <input type="text" value="{{sem}}"  name="sem" readonly /><br>
+
+    <label>StudentId</label>
+    <input type="number" value="{{sid}}" name="sid" readonly/><br>
+
+     <label>Course Id</label> <label>CourseCode</label>
+     <input type="text" value="{{c}}"  name="c" readonly/>
+     <input type="text" value="{{ct}}" name="ct" readonly/><br>
+
+    <label>Section</label>
+    <input type="number" value="{{sec}}" name="sec" readonly />
+
+    <label>Sem1</label>
+    <input type="text" name="sem1" />
+
+    <label>Sem2</label>
+    <input type="text" name="sem2"/>
+
+    <label>Lab1</label>
+    <input type="text" name="lab1"/>
+
+    <label>Quiz1</label>
+    <input type="text" name="quiz1"/>
+
+      <label>Quiz2</label>
+    <input type="text" name="quiz2"/>
+
+    <label>Quiz3</label>
+    <input type="text" name="quiz3"/>
+
+    <label>Quiz4</label>
+    <input type="text" name="quiz4"/>
+
+    <label>Semend</label>
+    <input type="text" name="semend" />
+
+    <label>LabEnd</label>
+    <input type="text" name="labend"/>
+
+    <label>GradePoints</label>
+    <input type="text" name="gp"/>
+
+    <label>Grade</label>
+    <input type="text" name="g"/><br>
+    <input type="submit" value="POST" />
+
+
+</form>
+</center>
+{% endblock %}

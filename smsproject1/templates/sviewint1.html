@@ -1,0 +1,65 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>Course</td>
+            <td>Action</td>
+        </tr>
+        {% for i in x %}
+         {% if i.cc1 %}
+          <tr>
+              <td>{{i.s1}}</td>
+              <td><a href="/sviewint1/{{i.cc1}}">GET</a></td>
+          </tr>
+         {% endif %}
+
+          {% if i.cc2 %}
+          <tr>
+              <td>{{i.s2}}</td>
+              <td><a href="/sviewint1/{{i.cc2}}">GET</a></td>
+          </tr>
+          {% endif %}
+
+
+        {% if i.cc3 %}
+          <tr>
+              <td>{{i.s3}}</td>
+              <td><a href="/sviewint1/{{i.cc3}}">GET</a></td>
+          </tr>
+        {% endif %}
+
+        {% if i.cc4 %}
+          <tr>
+              <td>{{i.s4}}</td>
+              <td><a href="/sviewint1/{{i.cc4}}">GET</a></td>
+          </tr>
+        {% endif %}
+
+        {% if i.cc5 %}
+          <tr>
+              <td>{{i.s5}}</td>
+              <td><a href="/sviewint1/{{i.cc5}}">GET</a></td>
+          </tr>
+        {% endif %}
+
+        {% if i.cc6 %}
+          <tr>
+              <td>{{i.s6}}</td>
+              <td><a href="/sviewint1/{{i.cc6}}">GET</a></td>
+          </tr>
+        {% endif %}
+
+        {% if i.cc7 %}
+          <tr>
+              <td>{{i.s7}}</td>
+              <td><a href="/sviewint1/{{i.cc7}}">GET</a></td>
+          </tr>
+        {% endif %}
+
+        {% endfor %}
+    </table>
+</center>
+
+{% endblock %}

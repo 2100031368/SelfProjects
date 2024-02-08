@@ -1,0 +1,26 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table>
+        <tr>
+            <td>FacultyID - Name</td>
+            <td>CourseCode</td>
+            <td>Academic Year</td>
+            <td>Cycle</td>
+            <td>Semester</td>
+            <td>Action</td>
+        </tr>
+        {% for i in k %}
+        <tr>
+            <td>{{i.faculty.facultyid}}</td>
+            <td>{{i.course.coursecode}}</td>
+            <td>{{i.course.academicyear}}</td>
+            <td>{{i.course.year}}</td>
+            <td>{{i.course.semester}}</td>
+            <td><a href="addcc1/{{i.faculty.facultyid}}/{{i.course.id}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}">ADD</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

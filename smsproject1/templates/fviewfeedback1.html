@@ -1,0 +1,37 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+<table border="1">
+{% for i in y %}
+
+
+    <tr>
+        <td>{{i.q1}}</td>
+        <td><a href="{% url 'fviewfeedback2' '1' ay yr sem sfid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q2}}</td>
+        <td><a href="{% url 'fviewfeedback2' '2' ay yr sem sfid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q3}}</td>
+        <td><a href="{% url 'fviewfeedback2' '3' ay yr sem sfid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q4}}</td>
+        <td><a href="{% url 'fviewfeedback2' '4' ay yr sem sfid cc sec %}">GET</a></td>
+    </tr>
+    <tr>
+        <td>{{i.q5}}</td>
+        <td><a href="{% url 'fviewfeedback2' '5' ay yr sem sfid cc sec %}">GET</a></td>
+    </tr>
+
+
+{% endfor %}
+
+
+</table>
+</center>
+
+{% endblock %}

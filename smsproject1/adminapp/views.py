@@ -1,6 +1,14 @@
 from django.forms import modelform_factory
 from django.http import HttpResponse
+
+from urllib.parse import unquote
 from django.db.models import Q
+
+import matplotlib.pyplot as plt
+
+import json
+
+from django.db.models import Count
 
 from django.shortcuts import render, redirect
 
@@ -12,8 +20,7 @@ from django.shortcuts import render, redirect
 from regapp.models import RegM,RegHistoryM, FeedbackPosted
 from regapp.forms import AddRegForm
 
-import matplotlib.pyplot as plt
-import numpy as np
+from facultyapp.models import CC
 
 from django import forms
 
@@ -428,8 +435,104 @@ def aviewfeedback2(request, sid, fid, ay, yr, sem, cc, sec):
     z=FeedbackPosted.objects.get(Q(sid=sid)&Q(fid=fid)&Q(say=ay)&Q(syr=yr)&Q(ssem=sem)&Q(ccode=cc)&Q(section=sec))
     return render(request, "aviewfeedback2.html", {"z": z, "adminuname": auname})
 
-def aviewfeedback3(request):
+## view in form of graoh
+'''def aviewfeedback3(request, ay, yr, sem, dept, fid, cc,sec):
     auname = request.session["auname"]
+    a=FeedbackPosted.objects.filter(Q(say=ay)&Q(syr=int(yr))&Q(ssem=sem)&Q(sdept=dept)&Q(fid=fid)&Q(section=int(sec)))
+    for i in a:
+        b, c, d = i.q1, i.q2, i.q3
+    x=[b,c,d]
+    y=[a.fdb1, a.fdb2, a.fdb3]
+    plt.bar(x, y)
+    plt.show() '''
+
+
+def aviewfeedback3(request, ay, yr, sem, dept, fid, cc, sec):
+    auname = request.session.get("auname")
+    x = FeedbackPosted.objects.filter(Q(say=ay) & Q(syr=int(yr)) & Q(ssem=sem) & Q(sdept=dept) & Q(fid=fid) & Q(section=int(sec)))
+
+
+    #return HttpResponse("hi")
+    return render(request, "aviewfeedback3.html", {"ay": ay, "yr":yr, "sem":sem, "dept":dept, "fid":fid,"cc":cc, "sec":sec,"x":x, "adminuname": auname})
+def aviewfeedback4(request, q, ay, yr, sem, dept, fid, cc, sec):
+    auname = request.session.get("auname")
+    q = int(q)
+    mp={}
+    x = FeedbackPosted.objects.filter(Q(say=ay) & Q(syr=int(yr)) & Q(ssem=sem) & Q(sdept=dept) & Q(fid=fid) & Q(section=int(sec)))
+    for i in x:
+        if q==1:
+            for j in i.fdb1_options:
+                if j[0] == i.fdb1:
+                    mp[j[0]] = mp.get(j[0], 0)+1
+                else:
+                    mp[j[0]]=mp.get(j[0], 0)
+
+        elif q==2 :
+            for j in i.fdb2_options:
+                if j[0] == i.fdb2:
+                    mp[j[0]] = mp.get(j[0], 0) + 1
+                else:
+                    mp[j[0]] = mp.get(j[0], 0)
+
+        elif q==3 :
+            for j in i.fdb3_options:
+                if j[0] == i.fdb3:
+                    mp[j[0]] = mp.get(j[0], 0) + 1
+                else:
+                    mp[j[0]] = mp.get(j[0], 0)
+
+        elif q==4 :
+            for j in i.fdb4_options:
+                if j[0] == i.fdb4:
+                    mp[j[0]] = mp.get(j[0], 0) + 1
+                else:
+                    mp[j[0]] = mp.get(j[0], 0)
+
+        elif q==5 :
+            for j in i.fdb5_options:
+                if j[0] == i.fdb5:
+                    mp[j[0]] = mp.get(j[0], 0) + 1
+                else:
+                    mp[j[0]] = mp.get(j[0], 0)
+
+    feedbacks = list(mp.keys())
+    frequencies = list(mp.values())
+
+    plt.bar(feedbacks, frequencies)
+    plt.xlabel('Feedbacks')
+    plt.ylabel('Frequencies')
+    plt.title(q)
+    plt.show()
+    return render(request, "aviewfeedback3.html",{"ay": ay, "yr": yr, "sem": sem, "dept": dept, "fid": fid, "cc": cc, "sec": sec, "x": x, "adminuname": auname})
+    #return HttpResponse("hi")
+
+#### addin cc's to cc group #####
+
+def addcc0(request):
+    auname = request.session.get("auname")
+    k=FacultyCourseMapping.objects.filter(type=True)
+    return render(request, "addcc0.html", {"adminuname": auname, "k":k})
+
+def addcc1(request, fid, cc, ay, yr, sem):
+    auname = request.session.get("auname")
+    x=CC.objects.filter(Q(fid=fid)&Q(cc=cc)&Q(ay=ay)&Q(yr=yr)&Q(sem=sem))
+    if x:
+        return HttpResponse("already exist")
+    else:
+        return render(request, "addcc1.html",
+                      {"adminuname": auname, "fid": fid, "cc": cc, "ay": ay, "yr": yr, "sem": sem})
 
 
 
+def addcc2(request):
+    auname = request.session.get("auname")
+    a=request.POST["fid"]
+    k=Faculty.objects.get(facultyid=a)
+    b=request.POST["cc"]
+    l=Course.objects.get(id=b)
+    c=request.POST["ay"]
+    d=request.POST["yr"]
+    e=request.POST["sem"]
+    h=CC(fid=k, cc=l, ay=c, yr=int(d), sem=e)
+    CC.save(h)
+    return HttpResponse("added successfully")

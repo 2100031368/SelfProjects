@@ -19,4 +19,7 @@ urlpatterns = [
    path("sfeedback0", views.sfeedback0, name="sfeedback0"),
    path("sfeedback1/<str:cc>/<int:fid>/<int:sec>", views.sfeedback1, name="sfeedback1"),
    path("sfeedback2", views.sfeedback2, name="sfeedback2"),
+
+   path("sviewint0", views.sviewint0, name="sviewint0"),
+   path("sviewint1/<str:ccode>", views.sviewint1, name="sviewint1"),
 ]

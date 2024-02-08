@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'facultyapp',
     'studentapp',
     'regapp',
+
 ]
 
 MIDDLEWARE = [

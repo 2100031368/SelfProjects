@@ -1,0 +1,25 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <form method="post" action="{% url 'addcc2' %}" align="center">
+    {% csrf_token %}
+        <label>Faculty ID: </label>
+        <input type="text" value="{{fid}}"  name="fid" readonly /><br>
+
+        <label>CourseCode: </label>
+        <input type="text" value="{{cc}}" name="cc" readonly /><br>
+
+        <label>Academic Year: </label>
+        <input type="text" value="{{ay}}" name="ay" readonly /><br>
+
+        <label>Cycle: </label>
+        <input type="number" value="{{yr}}" name="yr" readonly /><br>
+
+        <label>Semester: </label>
+        <input type="text" value="{{sem}}" name="sem" readonly /><br>
+
+        <td><input type="submit"  value="Submit" class="addbutton"/></td>
+    </form>
+</center>
+{% endblock %}
