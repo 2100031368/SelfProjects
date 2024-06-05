@@ -2,14 +2,31 @@
 
 {% block 'body' %}
 
+<style>
+    .form-control {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 113, 255, 0.5);
+}
+
+</style>
+
 <center>
     <h2>MAP FACULTY-COURSE</h2>
     <h3 style="color:green">{{msg}}</h3>
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="ADD"/>
-        <input type="clear" value="CLEAR" />
+        <input type="submit" value="ADD" class="addbutton"/>
+        <input type="clear" value="CLEAR" class="addbutton"/>
     </form>
 </center>
 {% endblock %}

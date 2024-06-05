@@ -1,12 +1,10 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-
+<center>
 <h2 align="center">View Students Data</h2>
 <h4 align="center" style="color:green">{{msg}}</h4>
-Total no. of Students = {{count}}
- <input class="form-control" id="myInput" type="text" placeholder="Course Title">
-
+ <input class="form-control" id="myInput" type="text" placeholder="Search">
 <table border="2" class="table table-bordered table-striped">
   <thead>
     <tr bgcolor="lightblue">
@@ -42,16 +40,29 @@ Total no. of Students = {{count}}
 
     {% endfor %}
 </table>
-
+</center>
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
 });
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.getElementById("myTable").getElementsByTagName("tr");
+    for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+        for (let j = 0; j < cells.length; j++) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        rows[i].style.display = display;
+    }
+}
 </script>
 
 {% endblock %}

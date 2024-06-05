@@ -1,15 +1,18 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.files.storage import default_storage
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
-from adminapp.models import Faculty, FacultyCourseMapping, Course
+from adminapp.models import Faculty, FacultyCourseMapping, Course, Student
 
 
 import matplotlib.pyplot as plt
 from regapp.models import RegHistoryM, FeedbackPosted
 
-from .models import CourseContent, CC, Internals
+from .models import CourseContent, CC, Internals, Handout
+from .forms import HandoutForm
 
 from django.http import FileResponse, Http404
 from pathlib import Path
@@ -82,7 +85,6 @@ def fccontent1(request):
     sfid=request.session["fid"]
 
     ay = request.POST["ay"]
-    yr = request.POST["yr"]
     sem = request.POST["sem"]
     #c = Course.objects.filter(Q(academicyear=ay)&Q(year=yr)&Q(sem=sem))
 
@@ -90,7 +92,7 @@ def fccontent1(request):
     fcm = FacultyCourseMapping.objects.filter(faculty=int(sfid))
     fc = []
     for x in fcm:
-        if (x.course.academicyear == ay and x.course.year == int(yr) and x.course.semester == sem):
+        if (x.course.academicyear == ay  and x.course.semester == sem):
             fc.append(x)
 
         else:
@@ -167,9 +169,6 @@ def deltemyuploads1(request, cid):
 
 
 
-
-
-
 ######## view stu reg
 def viewfstudents1(request):
     sfid = request.session["fid"]
@@ -179,7 +178,7 @@ def viewfstudents2(request):
     sfid = request.session["fid"]
     ay=request.POST["ay"]
     dept=request.POST["dept"]
-    yr=request.POST["yr"]
+    pgm=request.POST["pgm"]
     sem=request.POST["sem"]
     sec=request.POST["sec"]
 
@@ -188,7 +187,7 @@ def viewfstudents2(request):
     x=FacultyCourseMapping.objects.all()
     r=[]
     for i in x:
-        if(i.course.department == dept and i.course.academicyear ==ay and i.course.semester == sem and i.course.year == int(yr) and i.faculty.facultyid == int(sfid) and i.section == int(sec)):
+        if(i.course.department == dept and i.course.academicyear ==ay and i.course.semester == sem and i.course.program == pgm and i.faculty.facultyid == int(sfid) and i.section == int(sec)):
             r.append(i)
     print(r)
     return render(request, "viewfstudents2.html", {"sfid":sfid, "r":r})
@@ -359,6 +358,7 @@ def fviewfeedback2(request, q, ay, yr, sem, fid, cc, sec):
     return render(request, "fviewfeedback1.html",{"y": y, "sfid": sfid, "ay": ay, "yr": yr, "sem": sem, "sec": sec, "cc": cc})
 
 
+
 ##### FACULTY POSTING INTERNALS #######
 def fpostintcc0(request):
     sfid=request.session["fid"]
@@ -373,7 +373,9 @@ def fpostintcc1(request, c,ccode, ayr,y, sm, ft):
         #return HttpResponse("hi")
         return render(request, "fpostintcc1.html", {"sfid":sfid, "c":c,"ccode":ccode, "ay":ayr, "yr": y, "sem":sm})
     else:
-        return HttpResponse("Only Course Cordinator are given access or you might not be ranted permission")
+        msg="Only Course Cordinator are given access or you might not be ranted permission"
+        return render(request, "facultyhome.html", {"msg": msg})
+
 
 
 def fpostintcc2(request):
@@ -386,8 +388,8 @@ def fpostintcc2(request):
     d=request.POST["y"]
     e=request.POST["sm"]
     CC.objects.filter(Q(cc=a)&Q(fid=sfid)&Q(ay=c)&Q(yr=int(d))&Q(sem=e)).update(post=p)
-
-    return HttpResponse("Updated")
+    msg="Posting Internals has been Updated"
+    return render(request, "facultyhome.html", {"msg":msg})
 
 def fpostint0(request,sec,dept,ctitle, c,  ayr, y, sm):
     sfid = request.session["fid"]
@@ -397,9 +399,11 @@ def fpostint0(request,sec,dept,ctitle, c,  ayr, y, sm):
             return redirect("fpostint1",sec=sec,  dept=dept, ct=ctitle, c=c, ay=ayr, yr=y, sem=sm)
             #return HttpResponse("granted")
         else:
-            return HttpResponse("Not Granted")
+            msg="CC need to Grant Access To Post Internals"
+            return render(request, "facultyhome.html", {"sfid":sfid, "msg":msg})
     else:
-        return HttpResponse("admin not undertaken issue")
+        msg = f'CC need to Grant Access To Post Internals'
+        return render(request, "facultyhome.html", {"sfid": sfid, "msg": msg})
 
 def fpostint1(request,sec,dept,ct, c,  ay, yr, sem):
     sfid = request.session["fid"]
@@ -439,10 +443,6 @@ def fpostint1(request,sec,dept,ct, c,  ay, yr, sem):
 
         elif (i.cc7 == ct and i.f7 == fid):
             r.append(i)
-    print("r")
-    for i in r:
-        print(i.sid)
-
     return render(request, "fpostint2.html", {"r":r, "sfid":sfid,"dept":dept, "ct":ct, "c":c, "ay":ay, "yr":yr, "sem":sem, "sec":sec})
 
 
@@ -450,22 +450,10 @@ def fpostint1(request,sec,dept,ct, c,  ay, yr, sem):
 
 def fpostint2(request,sid, dept, ay, yr, sem, c, ct, sec):
     sfid = request.session["fid"]
-
-    '''    print(type(sid))
-    print(type(dept))
-    print(type(ay))
-    print(type(yr))
-    print(type(sem))
-    print(type(c))
-    print(type(ct))
-    print(type(sec))
-    '''
-
     return render(request, "fpostint3.html",{"sfid": sfid,"sid":sid, "sec" :sec, "dept": dept, "ct": ct, "c": c, "ay": ay, "yr": yr, "sem": sem})
 
 
 def fpostint3(request):
-
     sfid = request.session["fid"]
     fid = int(sfid)
     dept = request.POST["dept"]
@@ -479,6 +467,7 @@ def fpostint3(request):
     it = Internals.objects.filter(Q(sid=sid) & Q(fid=fid) & Q(dept=dept) & Q(ay=ay) & Q(yr=yr) & Q(sem=sem) & Q(cid=c) & Q(cc=ct) & Q(sec=sec))
     x = Internals.objects.get(Q(sid=sid) & Q(fid=fid) & Q(dept=dept) & Q(ay=ay) & Q(yr=yr) & Q(sem=sem) & Q(cid=c) & Q(cc=ct) & Q(sec=sec))
 
+    print(sid)
     sem1 = request.POST["sem1"]
     if sem1:
         sem1 = float(sem1)
@@ -578,5 +567,89 @@ def fpostint3(request):
     else:
         x = Internals(sid=sid, fid=fid, dept=dept, ay=ay, yr=yr, sem=sem, cid=c, cc=ct, sec=sec, sem1=sem1, sem2=sem2, lab1=lab1, quiz1=quiz1, quiz2=quiz2, quiz3=quiz3, quiz4=quiz4, semend=semend, labend=labend, grade_points=gp, grade=g)
         x.save()
+    faculty_email = Faculty.objects.get(facultyid=fid).email
+    student_email = Student.objects.get(studentid=sid).email  # Assuming Student model has an email field
+    subject = "Internal Marks Posted"
+    message = f"Dear Student,\n\nYour internal marks for the course {ct} have been posted.\n\nBest regards,\nFaculty"
+    send_mail(subject, message, faculty_email, [student_email])
+    msg="Uploaded Internals Successfully ! "
+    return redirect('fpostintcc2/sec/dept/ct, c,  ay, yr, sem')
 
-    return HttpResponse("helo")
+
+#   product.update(name=pname, actual_price=cp, discount_price=dis, selling_price=sp, review=review, features=features, days=days)
+
+#############################################################################################
+
+## faculty handout
+
+def fhandout0(request):
+    sfid = request.session["fid"]
+    x=Faculty.objects.get(facultyid=sfid)
+    y=FacultyCourseMapping.objects.filter(faculty=x)
+    return render(request, "fhandout1.html", {"sfid":sfid, "y":y})
+
+def fhandoutadd(request, fid, cid, type):
+    sfid = request.session["fid"]
+    if(type == "True"):
+        cid=int(cid)
+        x=Faculty.objects.get(facultyid=fid)
+        y=Course.objects.get(id=cid)
+
+        try:
+            z=Handout.objects.get(Q(fid=x)&Q(cid=y))
+            msg="Already handout added"
+            return render(request, "facultyhome.html",{"msg":msg})
+        except Handout.DoesNotExist:
+            p=HandoutForm()
+            return render(request, "faddhandout.html",{"p":p, "sfid":sfid, "y":y})
+    else:
+        msg = "Only CC can add handout"
+        return render(request, "facultyhome.html", {"msg": msg, "sfid":sfid})
+
+def fhandoutadd1(request):
+    sfid = request.session["fid"]
+    if(request.method == "POST"):
+        x=request.POST["fid"]
+        y=request.POST["cid"]
+        a=Faculty.objects.get(facultyid=x)
+        b=Course.objects.get(id=y)
+        file = request.FILES["file"]
+        upload = Handout(fid=a, cid=b, hd=file)
+        upload.save()
+        msg="Uploaded File Successfully ! "
+        return render(request, "facultyhome.html", {"sfid":sfid, "msg":msg})
+
+
+###### to view handouts ######
+def fhandoutview(request, cid, fid):
+    sfid = request.session["fid"]
+    x = Faculty.objects.get(facultyid=fid)
+    y = Course.objects.get(id=cid)
+    try:
+        z=Handout.objects.get(fid=x, cid=y)
+        return render(request, "fhandoutview.html", {"z":z})
+    except ObjectDoesNotExist:
+        msg=f'No Handout Added for {y.coursecode} - {y.coursetitle} '
+        return render(request, "facultyhome.html", {"msg":msg, "sfid":sfid})
+
+def fhandoutdel(request, cid, fid):
+    sfid = request.session["fid"]
+    x=Faculty.objects.get(facultyid=fid)
+    y=Course.objects.get(id=cid)
+    p=FacultyCourseMapping.objects.get(Q(course=y)&Q(faculty=x))
+    if(p.type == True):
+        try:
+            z=Handout.objects.get(Q(fid=x)&Q(cid=y))
+            filepath=z.hd.path
+            print(filepath)
+            if(default_storage.exists(filepath)):
+                default_storage.delete(filepath)
+            z.delete()
+            msg="Handout deleted Successfully"
+            return render(request, "facultyhome.html", {"sfid":sfid, "msg":msg})
+        except ObjectDoesNotExist:
+            msg="No Handout Uploaded ! "
+            return render(request, "facultyhome.html", {"sfid":sfid, "msg":msg})
+    else:
+        msg="Only CC can modify the handout ! "
+        return render(request, "facultyhome.html", {"sfid": sfid, "msg": msg})

@@ -5,6 +5,8 @@ from django.db import models
 from adminapp.models import FacultyCourseMapping, Course
 
 class RegM(models.Model):
+    pgm_choices=(("BTECH", "BTECH"), ("MTECH", "MTECH"))
+    pgm=models.CharField(blank=False, choices=pgm_choices)
     dept_choices = (("CSE", "CSE"), ("ECE", "ECE"))
     dept = models.CharField(blank=False, choices=dept_choices)
     ay = models.CharField(blank=False, max_length=10)
@@ -45,6 +47,8 @@ class RegM(models.Model):
     f71 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE,null=True, blank=True, related_name="reg_f71")
     f72 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE,null=True, blank=True, related_name="reg_f72")
     f73 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE,null=True, blank=True, related_name="reg_f73")
+
+    access = models.BooleanField(blank=False)
     class Meta:
         db_table="academic_reg"
 

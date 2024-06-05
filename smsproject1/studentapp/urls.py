@@ -7,8 +7,9 @@ urlpatterns = [
    path("checkstudentlogin", views.checkstudentlogin, name="checkstudentlogin"),
    path("studentchangepwd", views.studentchangepwd, name="studentchangepwd"),
    path("studentupdtpwd", views.studentupdtpwd, name="studentupdtpwd"),
-   path("studentcourse",views.studentcourse, name="studentcourse"),
-   path("studentmycourse",views.studentmycourse, name="studentmycourse"),
+
+   path("studentcoursematview0",views.studentcoursematview0, name="studentcoursematview0"),
+   path("studentcoursematview1",views.studentcoursematview1, name="studentcoursematview1"),
    path("stmyccontent/<str:cc>/<int:fid>",views.stmyccontent, name="stmyccontent"),
 
    path("stmyprofile",views.stmyprofile, name="stmyprofile"),
@@ -22,4 +23,8 @@ urlpatterns = [
 
    path("sviewint0", views.sviewint0, name="sviewint0"),
    path("sviewint1/<str:ccode>", views.sviewint1, name="sviewint1"),
+
+   path("sviewhd0",views.sviewhd0, name="sviewhd0"),
+   path("sviewhd1",views.sviewhd1, name="sviewhd1"),
+   path("sviewhd2/<str:cc>",views.sviewhd2, name="sviewhd2"),
 ]

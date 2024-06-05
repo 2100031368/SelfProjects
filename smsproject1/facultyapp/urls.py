@@ -36,5 +36,10 @@ urlpatterns = [
    path("fpostint2/<int:sid>/<str:dept>/<str:ay>/<int:yr>/<str:sem>/<int:c>/<str:ct>/<int:sec>", views.fpostint2, name="fpostint2"),
    path("fpostint3", views.fpostint3,name="fpostint3"),
 
+   path("fhandout0", views.fhandout0, name='fhandout0'),
+   path("fhandoutadd/<int:fid>/<int:cid>/<str:type>", views.fhandoutadd, name='fhandoutadd'),
+   path("fhandoutadd1", views.fhandoutadd1, name='fhandoutadd1'),
+   path("fhandoutview/<int:cid>/<int:fid>", views.fhandoutview, name='fhandoutview'),
+   path("fhandoutdel/<int:cid>/<int:fid>", views.fhandoutdel, name='fhandoutdel'),
 
 ]

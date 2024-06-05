@@ -1,8 +1,18 @@
 {% extends 'adminhome.html' %}
-{% block  'body' %}
-<h2> Admin Module - Student</h2>
-<button class="button" ><a href="{% url 'viewstudents' %}">View Students </a></button>
-<button class="button" ><a href="{% url 'addstudent' %}" >ADD</a></button>
-<button class="button"><a href="{% url 'deletestudent' %}" >DELETE</a></button>
-<button class="button" ><a href="{% url 'updatestudent1' %}" >UPDATE</a></button>
+{% load static %}
+{% block 'body' %}
+      <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+<div id="header">
+    <h2>Admin - Student Module </h2>
+    <nav id="nav1">
+        <a href="{% url 'viewstudents' %}">ViewStudents</a>&nbsp&nbsp
+        <a href="{% url 'addstudent' %}">ADD</a>&nbsp&nbsp
+        <a href="{% url 'deletestudent' %}">DELETE</a>&nbsp&nbsp
+    </nav>
+</div>
+
+<div id="content">
+    <img src="{% static 'images/stubg1.jpg' %}" alt="Center Image" />
+</div>
 {% endblock %}

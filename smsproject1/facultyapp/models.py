@@ -28,7 +28,7 @@ class CC(models.Model):
 class Internals(models.Model):
     id = models.AutoField(primary_key=True)
     fid=models.BigIntegerField(blank=False)
-    sid=models.CharField(blank=False)
+    sid=models.BigIntegerField(blank=False)
     dept = models.CharField(blank=False, max_length=200)
     ay=models.CharField(blank=False, max_length=100)
     yr=models.IntegerField(blank=False)
@@ -50,4 +50,13 @@ class Internals(models.Model):
 
     class Meta:
         db_table = "internals_table"
+
+
+class Handout(models.Model):
+    id=models.AutoField(primary_key=True)
+    fid=models.ForeignKey(Faculty, blank=False, on_delete=models.CASCADE)
+    cid=models.ForeignKey(Course, blank=False, on_delete=models.CASCADE)
+    hd=models.FileField(blank=False, upload_to='handout/')
+    class Meta:
+        db_table="handoutposting"
 

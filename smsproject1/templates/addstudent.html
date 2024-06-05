@@ -1,13 +1,31 @@
 {% extends 'adminhome.html' %}
+{% load static %}
 
 {% block 'body' %}
+<style>
+    .form-control {
+    width: 40%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 113, 255, 0.5);
+}
+
+</style>
+
     <h3 align="center">ADD STUDENT</h3>
     <h4 style="color:red" align="center">{{msg}}</h4>
     <form align="center " method="post">
         {% csrf_token %}
 
-        {{form.as_p}}
-        <input type="submit" value="ADD"/>
-        <input type="clear" value="CLEAR" />
+        {{form.as_p}}<br>
+        <input type="submit" value="ADD" class="addbutton"/>
+        <input type="clear" value="CLEAR" class="addbutton"/>
     </form>
 {% endblock %}

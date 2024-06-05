@@ -1,43 +1,38 @@
 {% extends 'index.html' %}
 
+{% load static %}
+<link type="text/css" rel="stylesheet" href="{% static 'css/form1.css' %}" />
+
 {% block 'body' %}
-<h1 align="center"><u>Admin Login</u> </h1>
-<h4 align="center" style="color:red">{{msg}}</h4>
-<center>
-<form method="post" action="{% url 'checkadminlogin' %}" >
+<body style="background-image: url('{% static 'images/lg2.png' %}'); background-size: cover;">
+    <div class="login-container">
+        <h1 align="center"><u>Admin Login</u> </h1>
+        <h4 align="center" style="color:red">{{msg}}</h4>
+        <center>
+            <form method="post" action="{% url 'checkadminlogin' %}" >
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Enter Username: </td>
+                        <td><input type="text" name="uname" required/></td>
+                    </tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr><td></td></tr>
+                    <tr>
+                        <td>Enter Password: </td>
+                        <td><input type="password" name="pwd" required/></td>
+                    </tr>
 
-   {% csrf_token %}
-    <table>
-        <tr>
-            <td>Enter Username: </td>
-            <td><input type="text" name="uname" required/></td>
-        </tr>
-
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-
-         <tr>
-            <td>Enter Password: </td>
-            <td><input type="password" name="pwd" required/></td>
-        </tr>
-
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-
-        <tr align="center">
-            <td><input type="submit" value="Login" class="button"/> </td>
-            <td><input type="reset" value="Clear" class="button"/></td>
-        </tr>
-
-        <tr><td></td></tr>
-
-
-
-    </table>
-</form>
-</center>
+                    <tr align="center">
+                        <td><input type="submit" value="Login" class="button"/> </td>
+                        <td><input type="reset" value="Clear" class="button"/></td>
+                    </tr>
+                    <tr><td></td></tr>
+                </table>
+            </form>
+        </center>
+    </div>
+</body>
 {% endblock %}

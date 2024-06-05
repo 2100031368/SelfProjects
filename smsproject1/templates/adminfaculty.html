@@ -1,9 +1,21 @@
 {% extends 'adminhome.html' %}
+{% load static %}
 {% block 'body' %}
-<h2> Admin Module - Faculty</h2>
-<!--<button style="background-color:lightgreen; font-size=10px; border-color:lightgreen" ><a href="{% url 'viewfaculty' %}">View Faculty</a></button> -->
-<button class="button" ><a href="{% url 'viewfaculty' %}">View Faculties</a></button>
-<button class="button" ><a href="{% url 'addfaculty' %}" >ADD</a></button>
-<button class="button" ><a href="{% url 'deletefaculty' %}" >DELETE</a></button>
-<button class="button" ><a href="{% url 'updatefaculty1' %}" >UPDATE</a></button>
+     <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+
+<div id="header">
+    <h2>Admin - Faculty Module</h2>
+    <nav id="nav1">
+        <a href="{% url 'viewfaculty' %}">ViewFaculties</a>&nbsp&nbsp
+        <a href="{% url 'addfaculty' %}" >ADD</a>&nbsp&nbsp
+        <a href="{% url 'deletefaculty' %}" >DELETE</a>&nbsp&nbsp
+
+    </nav>
+</div>
+
+<div id="content">
+    <img src="{% static 'images/facultybg1.png' %}" style="widht:50px" alt="Center Image" />
+</div>
+
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+<center>
+    <form method="post" action="{% url 'viewfaculty' %}">
+        {% csrf_token %}
+        <label>Department</label>
+        <input type="text" name="dept" required /><br>
+
+        <label>Year of Joined</label>
+         <input type="text" name="ay"/><br>
+
+        <label>Fcaulty Id</label>
+        <input type="number" name="fid"/><br>
+
+        <input type="submit" value="GET"/>
+
+    </form>
+</center>
+
+{% endblock %}

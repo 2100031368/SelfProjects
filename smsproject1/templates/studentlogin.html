@@ -1,11 +1,15 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block 'body' %}
-<h1 align="center"><u>Student Login</u> </h1>
-<h4 align="center" style="color:red">{{msg}}</h4>
+<body style="background-image: url('{% static 'images/lg2.png' %}'); background-size: cover;">
+<center>
+<h1><u>Student Login</u> </h1>
+<h4>{{msg}}</h4>
+ </center>
 
 <center>
 <form method="post" action="{% url 'checkstudentlogin' %}">
+
 
    {% csrf_token %}
     <table>

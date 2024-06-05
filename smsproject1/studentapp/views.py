@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -8,7 +9,7 @@ from regapp.models import RegM, RegHistoryM, FeedbackPosted
 
 from regapp.forms import AddRegForm, FeedbackForm
 
-from facultyapp.models import CourseContent, Internals
+from facultyapp.models import CourseContent, Internals, Handout
 
 
 
@@ -57,20 +58,20 @@ def studentupdtpwd(request):
 
     return render(request, "studentchangepwd.html", {"ssid":ssid, "msg":msg})
 
-def studentcourse(request):
+def studentcoursematview0(request):
     ssid=request.session["sid"]
     return render(request, "studentcourse.html", {"ssid":ssid})
 
-def studentmycourse(request):
+def studentcoursematview1(request):
     ssid = request.session["sid"]
     ay = request.POST["ay"]
     sem= request.POST["sem"]
     s = Student.objects.get(studentid=ssid)
-    c=RegHistoryM.objects.get(Q(sid=ssid)&Q(say=ay)&Q(ssem=sem))
-
-
-    return render(request, "displaystudentcourse.html", {"ssid": ssid, "c": c})
-
+    try:
+        c=RegHistoryM.objects.get(Q(sid=ssid)&Q(say=ay)&Q(ssem=sem))
+        return render(request, "displaystudentcourse.html", {"ssid": ssid, "c": c})
+    except ObjectDoesNotExist:
+        return render(request, "stufilenotfound.html", {"ssid": ssid})
 def stmyccontent(request, cc,fid):
     ssid = request.session["sid"]
     y=Course.objects.get(coursecode=cc)
@@ -135,8 +136,7 @@ def stmyccontent(request, cc,fid):
 def stureg1(request):
     ssid = request.session["sid"]
     st=Student.objects.get(studentid=ssid)
-    ft=RegM.objects.all()
-    m=RegM.objects.get(Q(dept=st.department)&Q(ay=st.cur_ay)&Q(sem=st.cur_sem)&Q(yr=st.cur_yr))
+
 
     '''e = RegHistoryM.objects.get(
         Q(sid=st.studentid) & Q(sdept=st.department) & Q(say=st.cur_ay) & Q(syr=st.cur_yr) & Q(ssem=st.cur_sem))
@@ -145,6 +145,7 @@ def stureg1(request):
     e = RegHistoryM.objects.filter(
         Q(sid=st.studentid) & Q(sdept=st.department) & Q(say=st.cur_ay) & Q(syr=st.cur_yr) & Q(ssem=st.cur_sem)).first()
     if e is None:
+
 
         if request.method=="POST":
 
@@ -178,8 +179,8 @@ def stureg1(request):
 
                 exist.save()
                 return render(request, "stureg2.html", {"ssid":ssid})
-        else:
-            return render(request, "stureg1.html", {"m": m, "ssid": ssid})
+        m=RegM.objects.get(Q(dept=st.department)&Q(pgm=st.program)&Q(ay=st. cur_ay)&Q(sem=st.cur_sem))
+        return render(request, "stureg1.html", {"m":m, "ssid":ssid})
 
     else:
         return render(request, "stureg4.html", {"ssid":ssid})
@@ -254,4 +255,31 @@ def sviewint1(request, ccode):
         return render(request, "sviewint2.html", {"ssid":ssid, "y":y})
     else:
         return HttpResponse("No internals are posted yet. ")
+
+def sviewhd0(request):
+    ssid = request.session["sid"]
+    return render(request, "sviewhandout0.html", {"ssid": ssid})
+
+def sviewhd1(request):
+    ssid = request.session["sid"]
+    ay = request.POST["ay"]
+    sem = request.POST["sem"]
+    s = Student.objects.get(studentid=ssid)
+    try:
+        c = RegHistoryM.objects.get(Q(sid=ssid) & Q(say=ay) & Q(ssem=sem))
+        return render(request, "sviewhandout1.html", {"ssid": ssid, "c": c})
+    except ObjectDoesNotExist:
+        return render(request, "stufilenotfound.html", {"ssid": ssid})
+
+def sviewhd2(request, cc):
+    ssid = request.session["sid"]
+    y = Course.objects.get(coursecode=cc)
+    try:
+        x = Handout.objects.get(cid=y)
+        print(x.hd)
+        return render(request, "sviewhandout3.html", {"ssid": ssid, "x": x})
+
+    except ObjectDoesNotExist:
+        msg="No handout uploaded"
+        return render(request, "sviewhandout0.html", {"msg":msg})
 

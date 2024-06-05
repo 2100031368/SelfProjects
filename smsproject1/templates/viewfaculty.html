@@ -2,50 +2,65 @@
 
 {% block 'body' %}
 <h2 align="center">View Faculty Details</h2>
-Total no. of faculty = {{count}}
- <input class="form-control" id="myInput" type="text" placeholder=" ">
 
-<table border="2" class="table table-bordered table-striped">
-  <thead>
-    <tr bgcolor="lightblue">
-
-         <td>Faculty id</td>
-         <td>Full name</td>
-         <td>Gender</td>
-         <td>Department</td>
-         <td>Qualification</td>
-         <td>Designation</td>
-         <td>Password</td>
-         <td>Email</td>
-         <td>Contact</td>
-     </tr>
-    </thead>
-    {% for faculty in facultydata %}
-    <tbody id="myTable">
-    <tr align="center">
-        <td>{{faculty.facultyid}}</td>
-        <td>{{faculty.fullname}}</td>
-        <td>{{faculty.gender}}</td>
-        <td>{{faculty.department}}</td>
-        <td>{{faculty.qualification}}</td>
-        <td>{{faculty.designation}}</td>
-        <td>{{faculty.password}}</td>
-        <td>{{faculty.email}}</td>
-        <td>{{faculty.contact}}</td>
-    </tr>
-    </tbody>
-    {% endfor %}
-</table>
+<center>
+    <input class="form-control" id="myInput" type="text" placeholder="Search">
+    <table border="2" class="table table-bordered table-striped">
+        <thead>
+            <tr bgcolor="lightblue">
+                <td>Faculty id</td>
+                <td>Full name</td>
+                <td>Gender</td>
+                <td>Department</td>
+                <td>Qualification</td>
+                <td>Designation</td>
+                <td>Password</td>
+                <td>Email</td>
+                <td>Contact</td>
+                <td>Action</td>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for faculty in facultydata %}
+            <tr align="center">
+                <td>{{faculty.facultyid}}</td>
+                <td>{{faculty.fullname}}</td>
+                <td>{{faculty.gender}}</td>
+                <td>{{faculty.department}}</td>
+                <td>{{faculty.qualification}}</td>
+                <td>{{faculty.designation}}</td>
+                <td>{{faculty.password}}</td>
+                <td>{{faculty.email}}</td>
+                <td>{{faculty.contact}}</td>
+                <td><a href="/updatefaculty2/{{faculty.facultyid}}">Update</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</center>
 
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
 });
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.getElementById("myTable").getElementsByTagName("tr");
+    for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+        for (let j = 0; j < cells.length; j++) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        rows[i].style.display = display;
+    }
+}
 </script>
 
 {% endblock %}

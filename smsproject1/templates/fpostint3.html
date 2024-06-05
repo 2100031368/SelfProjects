@@ -5,56 +5,58 @@
 
 <form method="post" action="{% url 'fpostint3' %}">
     {% csrf_token %}
-    <label>Department</label>
-    <input type="text" value="{{dept}}" name="dept" readonly />
-    <label>Academic year</label> <label>Year</label>
-     <input type="text" value="{{ay}}" name="ay" readonly/>
+    <label>Department : </label>
+    <input type="text" value="{{dept}}" name="dept" readonly /><br>
+    <label>Academic year : </label>
+     <input type="text" value="{{ay}}" name="ay" readonly/><br>
+    <label>Year : </label>
      <input type="number" value="{{yr}}" name="yr" readonly/><br>
 
-    <label>Semester</label>
+    <label>Semester : </label>
     <input type="text" value="{{sem}}"  name="sem" readonly /><br>
 
-    <label>StudentId</label>
+    <label>StudentId : </label>
     <input type="number" value="{{sid}}" name="sid" readonly/><br>
 
-     <label>Course Id</label> <label>CourseCode</label>
-     <input type="text" value="{{c}}"  name="c" readonly/>
+     <label>Course Id : </label>
+     <input type="text" value="{{c}}"  name="c" readonly/><br>
+    <label>CourseCode : </label>
      <input type="text" value="{{ct}}" name="ct" readonly/><br>
 
-    <label>Section</label>
-    <input type="number" value="{{sec}}" name="sec" readonly />
+    <label>Section : </label>
+    <input type="number" value="{{sec}}" name="sec" readonly /><br>
 
-    <label>Sem1</label>
-    <input type="text" name="sem1" />
+    <label>Sem1 : </label>
+    <input type="text" name="sem1" /><br>
 
-    <label>Sem2</label>
-    <input type="text" name="sem2"/>
+    <label>Sem2 : </label>
+    <input type="text" name="sem2"/><br>
 
-    <label>Lab1</label>
-    <input type="text" name="lab1"/>
+    <label>Lab1 : </label>
+    <input type="text" name="lab1"/><br>
 
-    <label>Quiz1</label>
-    <input type="text" name="quiz1"/>
+    <label>Quiz1 : </label>
+    <input type="text" name="quiz1"/><br>
 
-      <label>Quiz2</label>
-    <input type="text" name="quiz2"/>
+      <label>Quiz2 : </label>
+    <input type="text" name="quiz2"/><br>
 
-    <label>Quiz3</label>
-    <input type="text" name="quiz3"/>
+    <label>Quiz3 : </label>
+    <input type="text" name="quiz3"/><br>
 
-    <label>Quiz4</label>
-    <input type="text" name="quiz4"/>
+    <label>Quiz4 : </label>
+    <input type="text" name="quiz4"/><br>
 
-    <label>Semend</label>
-    <input type="text" name="semend" />
+    <label>Semend : </label>
+    <input type="text" name="semend" /><br>
 
-    <label>LabEnd</label>
-    <input type="text" name="labend"/>
+    <label>LabEnd : </label>
+    <input type="text" name="labend"/><br>
 
-    <label>GradePoints</label>
-    <input type="text" name="gp"/>
+    <label>GradePoints : </label>
+    <input type="text" name="gp"/><br>
 
-    <label>Grade</label>
+    <label>Grade : </label>
     <input type="text" name="g"/><br>
     <input type="submit" value="POST" />
 

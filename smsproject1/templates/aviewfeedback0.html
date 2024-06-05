@@ -3,17 +3,18 @@
 {% block 'body' %}
 
 <center>
-    <table border="2" style="font-size:12px" >
+    <h3><u>FEEDBACKS</u></h3><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search">
+    <table border="2" style="font-size:13px">
         <tr>
-              <td>Academic Year</td>
+            <td>Academic Year</td>
             <td>Cycle - Year</td>
             <td>Semester</td>
             <td>Department</td>
-            <td>FcaultyID - Faculty Name</td>
+            <td>FacultyID - Faculty Name</td>
             <td>CourseCode - CourseTitle</td>
             <td>Section</td>
             <td>Action</td>
-
         </tr>
 
         {% for i in x %}
@@ -25,11 +26,37 @@
             <td>{{i.faculty.facultyid}} - {{i.faculty.fullname}}</td>
             <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
             <td>{{i.section}}</td>
-            <td><a href="aviewfeedback1/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">VIEW</a></td>
-           <td><a href="aviewfeedback3/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">Analyze</a></td>
+            <td>
+                <a href="aviewfeedback1/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">VIEW</a><br>
+                <a href="aviewfeedback3/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">Analyze</a>
+            </td>
         </tr>
         {% endfor %}
     </table>
 </center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("table tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
 
 {% endblock %}

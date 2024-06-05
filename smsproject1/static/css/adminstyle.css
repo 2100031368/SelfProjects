@@ -50,7 +50,7 @@ li {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: teal;
+  background-color: #87CEEB ;
   color: #fff;
 }
 
@@ -71,7 +71,7 @@ li {
 }
 
 .menu li:hover {
-  background-color: #4c9e9e;
+  background-color: #B0E0E6;
   border-radius: 5px;
   transition: 0.3s ease;
 }
@@ -92,7 +92,7 @@ li {
 
 
 .dropdown {
-  background-color: rgb(1, 139, 139);
+  background-color:#87CEEB ;
   padding: 1em 0;
   position: absolute;
   display: none;
@@ -113,5 +113,42 @@ li {
 }
 
 .dropdown a:hover {
-  background-color: #4c9e9e;
+  background-color: #B0E0E6;
+}
+
+.container {
+    position: relative;
+}
+
+.bg-image {
+    width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+.button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.b1 {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.b1 a {
+    color: white;
+    text-decoration: none;
 }

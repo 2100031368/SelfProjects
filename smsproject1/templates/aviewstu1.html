@@ -1,0 +1,57 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+<center>
+    <h3><b>Student Details</b></h3><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search"><br><br>
+    <table border="1">
+        <tr>
+            <td>StudentId</td>
+            <td>AcademicYear</td>
+            <td>Current AY</td>
+            <td>Cycle</td>
+            <td>Semester</td>
+            <td>Email</td>
+            <td>ContactNo.</td>
+            <td>Action</td>
+        </tr>
+        {% for i in st %}
+        <tr>
+            <td>{{i.studentid}}</td>
+            <td>{{i.ay}}</td>
+            <td>{{i.cur_ay}}</td>
+            <td>{{i.cur_yr}}</td>
+            <td>{{i.cur_sem}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.contact}}</td>
+            <td><a href="/updatestudent2/{{i.studentid}}">Update</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+        for (let j = 0; j < cells.length; j++) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        rows[i].style.display = display;
+    }
+}
+</script>
+
+{% endblock %}

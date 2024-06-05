@@ -1,0 +1,33 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1">
+        <tr>
+            <td>Academic Year</td>
+            <td>Semester</td>
+            <td>CourseCode -  CourseTitle</td>
+            <td>Component</td>
+            <td>Type</td>
+            <td>Section</td>
+            <td>Action</td>
+        </tr>
+        {% for i  in y %}
+        <tr>
+            <td>{{i.course.academicyear}}</td>
+            <td>{{i.course.semester}}</td>
+            <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
+
+             <td>{{i.component}}</td>
+            <td>{{i.type}}</td>
+            <td>{{i.section}}</td>
+            <td>
+                <a href="/fhandoutadd/{{i.faculty.facultyid}}/{{i.course.id}}/{{i.type}}">Add</a><br>
+                <a href="/fhandoutview/{{i.course.id}}/{{i.faculty.facultyid}}">View</a><br>
+                <a href="/fhandoutdel/{{i.course.id}}/{{i.faculty.facultyid}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+{% endblock %}

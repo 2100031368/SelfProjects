@@ -2,19 +2,41 @@
 
 {% block 'body' %}
 <center>
-    <label>Student ID: {{z.sid}}</label><br>
-    <label>Faculty ID: {{z.fid}}</label><br>
-    <label>{{z.q1}}</label>
-    <label>{{z.fdb1}}</label><br>
-    <label>{{z.q2}}</label>
-    <label>{{z.fdb2}}</label><br>
-    <label>{{z.q3}}</label>
-    <label>{{z.fdb3}}</label><br>
-    <label>{{z.q4}}</label>
-    <label>{{z.fdb4}}</label><br>
-    <label>{{z.q5}}</label>
-    <label>{{z.fdb5}}</label><br>
-
+    <h3><b>Student Feedback Details</b></h3>
+    <table border="1">
+    <tr style="text-align:center;">
+        <td><b>Questions</b></td>
+        <td><b>Answers</b></td>
+    </tr>
+    <tr>
+        <td>Student ID</td>
+        <td> {{z.sid}}</td>
+    </tr>
+    <tr>
+        <td>Faculty ID</td>
+        <td>{{z.fid}}</td>
+    </tr>
+    <tr>
+        <td>{{z.q1}}</td>
+        <td>{{z.fdb1}}</td>
+    </tr>
+   <tr>
+    <td>{{z.q2}}</td>
+    <td>{{z.fdb2}}</td><br>
+   </tr>
+   <tr>
+    <td>{{z.q3}}</td>
+    <td>{{z.fdb3}}</td><br>
+   </tr>
+   <tr>
+    <td>{{z.q4}}</td>
+    <td>{{z.fdb4}}</td><br>
+   </tr>
+   <tr>
+    <td>{{z.q5}}</td>
+    <td>{{z.fdb5}}</td><br>
+   </tr>
+</table>
 </center>
 
 {% endblock %}

@@ -1,25 +1,38 @@
 {% extends 'facultyhome.html' %}
 
 {% block 'body' %}
+
 <center>
-    <h3 style="color:green">{{msg}}</h3>
+   <h3 style="color:green">{{msg}}</h3>
     <form method ="post" action="{% url 'fccontent1'%}">
         {% csrf_token %}
+        <tr>
+            <td><label>Academic Year:</label></td>
+            <td>
+                <select name="ay" required>
+                    <option value="">--Select--</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2022-2023">2022-2023</option>
+                </select>
+            </td>
+        </tr><br><br>
 
+         <tr>
+            <td><label>Semester:</label></td>
+            <td>
+                <select name="sem" required>
+                    <option value="">--Select--</option>
+                    <option value="ODD">ODD</option>
+                    <option value="EVEN">EVEN</option>
+                </select>
+            </td>
+        </tr><br><br>
 
-    <label>Academic Year</label>
-    <input type="text" value="" name="ay" required/><br>
+        <tr>
+            <td><input type="submit"  value="Submit" class="addbutton"/></td>
+             <td><input type="reset"  value="Clear" class="addbutton"/></td>
+        </tr>
 
-    <label>Year</label>
-    <input type="number" value="" name="yr" required/><br>
-
-
-    <label>Semester</label>
-    <input type="text" value="" name="sem" required/><br>
-
-    <input type="submit" value="Get"/>
-    <input type="clear" value="Clear"/>
     </form>
 </center>
-
 {% endblock %}

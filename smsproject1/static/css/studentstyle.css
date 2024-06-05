@@ -23,12 +23,13 @@ body {
 
     /* Top Navbar */
     .topnavbar {
-      background-color: #4c9e9e;
+      background-color: #87CEEB ;
       text-align: center;
       height: 10%;
       display: flex;
        justify-content: space-between;
       padding: 1px;
+      margin-bottom:0px;
     }
 
     /* Vertical Navbar */
@@ -37,7 +38,7 @@ body {
       margin: 0;
       padding: 0;
       width: 120px;
-      background-color: #4c9e9e;
+      background-color: #87CEEB ;
       position: fixed;
       height: 100%;
 
@@ -54,22 +55,25 @@ body {
       color: white;
       padding: 5px 0;
       font-size: 14px;
+      font-family: Georgia, serif;
       text-decoration: none;
     }
 
     .vertical a:hover {
-      background-color: #111;
+      background-color:#B0E0E6;
     }
 
     /* Content */
     .content {
       margin-left: 60px; /* Adjust the margin based on your vertical navbar width */
       padding: 50px;
+      width:95%;
+      height:90%;
     }
 
  /* for border b/w vertical nav bar*/
 .vertical a{
-  border-bottom: 1px solid #bbb;
+  border-bottom: 1px solid black;
 }
 
 .vertical a:last-child {

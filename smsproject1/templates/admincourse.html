@@ -1,8 +1,22 @@
 {% extends 'adminhome.html' %}
+{% load static %}
 {% block 'body' %}
+   <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+
+<div id="content">
+
+<div id="header">
 <h2> Admin Module - Courses</h2>
-<button class="button" ><a href="{% url 'viewcourses' %}">View Courses</a></button>
-<button class="button" ><a href="{% url 'addcourse' %}">ADD</a></button>
-<button class="button"><a href="{% url 'deletecourse' %}" >DELETE</a></button>
-<button class="button"><a href="{% url 'updatecourse1' %}" >UPDATE</a></button>
+    <nav id="nav1">
+
+<a href="{% url 'viewcourses' %}">ViewCourses</a>&nbsp&nbsp
+<a href="{% url 'addcourse' %}">ADD</b></a>&nbsp&nbsp
+<a href="{% url 'deletecourse' %}" >DELETE</a>&nbsp&nbsp
+<a href="{% url 'updatecourse1' %}" >UPDATE</a>
+        </nav>
+</div>
+
+
+</div>
 {% endblock %}

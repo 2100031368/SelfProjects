@@ -12,7 +12,12 @@ class AddStudentForm(forms.ModelForm):
     class Meta:
         model=Student
         fields="__all__"
-        labels ={"studentid": "Give Student Id", "fullname":"Full Name"}
+        labels ={"studentid": "Give Student Id ", "fullname":"Full Name ", "ay":"Academic Year Joining ","cur_ay":"Current Academic Year ", "cur_yr":"Current Year ","cur_sem":"Current Semester" }
+
+    def __init__(self, *args, **kwargs):
+        super(AddStudentForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 
 
 class StudentUpdateForm(forms.ModelForm):
@@ -32,3 +37,8 @@ class FacultyCourseMappingForm(forms.ModelForm):
     class Meta:
         model=FacultyCourseMapping
         fields="__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(FacultyCourseMappingForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'

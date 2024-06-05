@@ -1,0 +1,21 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <table border="1" style="font-size:12px">
+        <tr>
+            <td>Course Code</td>
+            <td>Course Title</td>
+            <td>File</td>
+        </tr>
+
+        <tr>
+            <td>{{x.cid.coursecode}}</td>
+            <td>{{x.cid.coursetitle}}</td>
+            <td><a href="/media/{{x.hd}}">View Handout</a></td>
+        </tr>
+
+    </table>
+</center>
+
+{% endblock %}

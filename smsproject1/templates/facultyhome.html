@@ -25,6 +25,7 @@
            <li><a href="{% url 'facultycourse' %}">My Courses</a></li>
            <li><a href="{% url 'fccontent0' %}">Material</a></li>
            <li><a href="{% url 'fpostintcc0' %}">Internals</a></li>
+           <li><a href="{% url 'fhandout0' %}">HandOut</a></li>
 
        </ul>
     </li>
@@ -36,7 +37,7 @@
 </div>
 
 
-<div class="content">
+<div class="content" style="background-image: url('{% static 'images/clgbg1.jpg' %}'); width:100%; height:100%;">
   <!-- Your page content goes here -->
    {% block 'body' %}
      <center>

@@ -1,0 +1,23 @@
+{% extends 'adminhome.html' %}
+
+{% block 'body' %}
+
+
+
+<center>
+    <form method="post" action="{% url 'viewcourses' %}">
+        {% csrf_token %}
+        <label>Department</label>
+        <input type="text" name="dept" required /><br>
+
+        <label>Academic Year</label>
+        <input type="text" name="ay"/><br>
+
+        <label>Course Code</label>
+        <input type="text" name="sid"/><br>
+
+        <input type="submit" value="GET"/>
+
+    </form>
+</center>
+{% endblock %}

@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from urllib.parse import unquote
 from django.db.models import Q
+from django.contrib.auth import logout
 
 import matplotlib.pyplot as plt
 
@@ -33,7 +34,6 @@ from django import forms
 def regadmin1(requset):
     auname = requset.session["auname"]
     a = RegM.objects.all()
-
     return render(requset, "regadmin1.html", {"adminuname": auname, "a": a})
 
 
@@ -104,14 +104,10 @@ def regalloted3(request):
         )
 '''
 
-
-
-
+###############################################
 def adminhome(request):
     auname = request.session["auname"]
     return render(request, "adminhome.html", {"adminuname": auname})
-
-
 
 def adminchangepwd(request):
     return render(request, "adminchangepwd.html")
@@ -121,11 +117,7 @@ def adminpwdupdt(request):
     an = request.session["auname"]
     oldpwd = request.POST["opwd"]
     newpwd = request.POST["npwd"]
-    records = Admin.objects.all();
-    '''for x in records:
-        if x.username == an:
-            if(x.password == oldpwd):'''
-
+    records = Admin.objects.all()
     flag = Admin.objects.filter(Q(username=an) & Q(password=oldpwd))
     if (flag):
         if (Admin.objects.filter(password=newpwd)):
@@ -139,54 +131,95 @@ def adminpwdupdt(request):
 
 
 def adminLogOut(request):
+    logout(request)
     return render(request, "login.html")
 
 
 def checkadminlogin(request):
-    '''if request.method == "POST":
-        adminuname = request.POST["uname"] #if it is get then write request.GET
-        adminpwd = request.POST["pwd"
-    else:
-        adminuname = request.GET["uname"]  # if it is get then write request.GET
-        adminpwd = request.GET["pwd"]
-    data = adminuname +" "+ adminpwd
-   # return HttpResponse(adminuname, adminpwd) takes only one argu so prints only uname
-    return HttpResponse(data)'''
-    adminuname = request.POST["uname"]  # if it is get then write request.GET
-    adminpwd = request.POST["pwd"]
+    if request.method == "POST":
 
-    flag = Admin.objects.filter(Q(username=adminuname) & Q(password=adminpwd))
+        adminuname = request.POST["uname"]  # if it is get then write request.GET
+        adminpwd = request.POST["pwd"]
+        flag = Admin.objects.filter(Q(username=adminuname) & Q(password=adminpwd))
 
-    if (flag):
-        # return HttpResponse("Login Success")
-        print("login success")  # prints in terminal
-        request.session["auname"] = adminuname  # session is created
-        return render(request, "adminhome.html", {"adminuname": adminuname})
+        if (flag):
+            # return HttpResponse("Login Success")
+            print("login success")  # prints in terminal
+            request.session["auname"] = adminuname  # session is created
+            return render(request, "adminhome.html", {"adminuname": adminuname})
+        else:
+            msg = "Login Failed"
+            return render(request, "login.html", {"msg": msg})
     else:
-        msg = "Login Failed"
-        return render(request, "login.html", {"msg": msg})
+        return render(request, "login.html")
+
+
+########################################################################################################
+
+from django.db.models import Q
 
 
 def viewstudents(request):
-    students = Student.objects.all()
-    count = Student.objects.count()
     auname = request.session["auname"]
-    return render(request, "viewstudents.html", {"studentsdata": students, "count": count, "adminuname": auname})
+    if(request.method == "POST"):
+        pgm=request.POST["pgm"]
+        dept=request.POST["dept"]
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay)&Q(semester=sem))
+        return render(request, "aviewstu1.html", {"st": x, "adminuname": auname})
+    else:
+        return render(request, "filter.html", {"adminuname": auname})
 
 
 def viewcourses(request):
-    courses = Course.objects.all()
-    count = Course.objects.count()
     auname = request.session["auname"]
-    return render(request, "viewcourses.html", {"coursesdata": courses, "count": count, "adminuname": auname})
+    if (request.method == "POST"):
+        dept = request.POST["dept"]
+        ay = request.POST["ay"]
+        sem = request.POST["sem"]
+        x=Course.objects.filter(Q(department=dept)&Q(academicyear=ay)&Q(semester=sem))
+        return render(request, "viewcourses.html", {"coursesdata" : x, "adminuname": auname})
+    else:
+        return render(request, "filter.html", {"adminuname": auname})
+
+
+    '''if request.method == "POST":
+
+        b = request.POST["dept"]
+        c = request.POST["ay"]
+        e = request.POST["sid"]
+
+        # to lower case
+        b = b.upper()
+        c = c.upper()
+        e = e.upper()
+
+        x = Course.objects.filter(department__iexact=b)
+
+        if (c is not None and e is not None):
+            x = Course.objects.filter(Q(department__iexact=b) & Q(academicyear__iexact=c) & Q(coursecode__iexact=e))
+
+        elif (c is not None):
+            x = Course.objects.filter(Q(department__iexact=b) & Q(academicyear__iexact=c))
+
+        elif (e is not None):
+            x = Course.objects.filter(Q(department__inexact=b) & Q(coursecode__iexact=e))
+        print(x)
+        for i in x:
+            print(x.coursecode)
+        return render(request, "viewcourses.html", {"coursesdata" : x, "adminuname": auname})
+    else:
+        return render(request, "aviewcourse0.html", {"adminuname": auname})
+    '''
 
 
 def viewfaculty(request):
-    faculty = Faculty.objects.all()
-    count = Faculty.objects.count()
     auname = request.session["auname"]
-    return render(request, "viewfaculty.html", {"facultydata": faculty, "count": count, "adminuname": auname})
+    x=Faculty.objects.all()
+    return render(request, "viewfaculty.html", {"facultydata": x, "adminuname": auname})
 
+##################################################################################################
 
 def admincourse(request):
     auname = request.session["auname"]
@@ -290,7 +323,6 @@ def addfaculty(request):
 
     return render(request, "addfaculty.html", {"form": form})
 
-
 def deletefaculty(request):
     auname = request.session["auname"]
     faculty = Faculty.objects.all()
@@ -321,11 +353,7 @@ def addfacultycourse(request):
     return render(request, "addfacultycourse.html", {"adminuname": auname, "form": form})
 
 
-def updatefaculty1(request):
-    auname = request.session["auname"]
-    f = Faculty.objects.all()
-    return render(request, "updatefaculty1.html", {"adminuname": auname, "f": f})
-
+#############################################################################################3
 
 def updatefaculty2(request, fid):
     auname = request.session["auname"]
@@ -364,20 +392,38 @@ def addstudent(request):
 
 def deletestudent(request):
     auname = request.session["auname"]
-    student = Student.objects.all()
-    count = Student.objects.count()
-    return render(request, "deletestudent.html", {"student": student, "adminuname": auname})
+
+    if request.method == "POST":
+        w = request.POST["prgm"]
+        x = request.POST["dept"]
+        y = request.POST["ay"]
+        z = request.POST["sem"]
+
+        # to lower case
+        w = w.lower()
+        x = x.lower()
+        y = y.lower()
+        z = z.lower()
+
+        if y and z:
+            st = Student.objects.filter(
+                Q(department__iexact=x) & Q(ay__iexact=y) & Q(semester__iexact=z) & Q(program__iexact=w))
+        elif y:
+            st = Student.objects.filter(Q(department__iexact=x) & Q(ay__iexact=y) & Q(program__iexact=w))
+
+        else:
+            st = Student.objects.filter(Q(department__iexact=x) & Q(semester__iexact=z) & Q(program__iexact=w))
+
+        return render(request, "deletestudent.html", {"student": st, "adminuname": auname})
+
+    else:
+        return render(request, "adelstu0.html", {"adminuname": auname})
 
 
 def studentdeletion(request, sid):
-    Student.objects.filter(id=sid).delete()
-    return redirect("deletestudent")
-
-
-def updatestudent1(request):
     auname = request.session["auname"]
-    studentdata = Student.objects.all()
-    return render(request, "updatestudent1.html", {"adminuname": auname, "studentsdata": studentdata})
+    Student.objects.filter(studentid=sid).delete()
+    return redirect("adminhome")
 
 
 def updatestudent2(request, sid):
@@ -536,3 +582,16 @@ def addcc2(request):
     h=CC(fid=k, cc=l, ay=c, yr=int(d), sem=e)
     CC.save(h)
     return HttpResponse("added successfully")
+
+##EFC050;
+
+################################################################3
+#modifying faculty course mapping
+def admodifyfcm(request, dept, pgm,ay,sem, fid, cid, fcmid):
+
+   fcm=FacultyCourseMapping.objects.get(mappingid=fcmid)
+   course=fcm.course.coursecode
+   faculty=fcm.faculty.facultyid
+   print(course)
+   print(faculty)
+   return HttpResponse('hi')

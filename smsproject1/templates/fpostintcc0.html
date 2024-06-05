@@ -3,12 +3,14 @@
 {% block 'body' %}
 
 <center>
-    <table border="1">
+     <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
+     <table border="2" class="table table-bordered table-striped">
         <tr>
             <td>CourseCode - Title</td>
             <td>Academic Year</td>
             <td>Cycle</td>
             <td>Semester</td>
+            <td>Section</td>
             <td>Action</td>
         </tr>
         {% for i in x %}
@@ -26,4 +28,30 @@
         {% endfor %}
     </table>
 </center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
+
+
 {% endblock %}

@@ -4,13 +4,37 @@
 <center>
     <form method="post", action="{% url 'sviewint0' %}">
         {% csrf_token %}
-        <label>Academic Year</label>
-        <input type="text" name="ay" required /><br>
+        <table width="30%" height="30%" >
 
-        <label>Semester</label>
-        <input type="text" name="sem" required/><br>
+        <tr>
+            <td><label>Academic Year:</label></td>
+            <td>
+                <select name="ay" required>
+                    <option value="">--Select--</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2022-2023">2022-2023</option>
+                </select>
+            </td>
+        </tr>
 
-        <input type="submit" value="VIEW" />
+         <tr>
+            <td><label>Semester:</label></td>
+            <td>
+                <select name="sem" required>
+                    <option value="">--Select--</option>
+                    <option value="ODD">ODD</option>
+                    <option value="EVEN">EVEN</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><input type="submit"  value="Submit" class="addbutton"/></td>
+             <td><input type="reset"  value="Clear" class="addbutton"/></td>
+        </tr>
+
+    </table>
+
     </form>
 </center>
 {% endblock %}

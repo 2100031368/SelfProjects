@@ -1,0 +1,86 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<h2 align="center"><u>View Course Details</u></h2>
+
+
+<center>
+<table border="2" class="table table-bordered table-striped">
+    <thead>
+    <tr bgcolor="lightblue">
+        <td>CourseCode</td>
+        <td>Course Title</td>
+        <td>Action</td>
+    </tr>
+    </thead>
+    <tbody id="myTable">
+     <tr align="center">
+         {% if c.s1 %}
+         <td>{{c.cc1}}</td>
+         <td>{{c.s1}}</td>
+         <td><a href="sviewhd2/{{c.cc1}}">Handout</a></td>
+         {% endif %}
+     </tr>
+
+     <tr align="center">
+         {% if c.s2 %}
+          <td>{{c.cc2}}</td>
+         <td>{{c.s2}}</td>
+         <td><a href="sviewhd2/{{c.cc2}}">Handout</a></td>
+         {% endif %}
+     </tr>
+
+     <tr align="center">
+         {% if c.s3 %}
+          <td>{{c.cc3}}</td>
+         <td>{{c.s3}}</td>
+           <td><a href="sviewhd2/{{c.cc3}}">Handout</a></td>
+         {% endif %}
+     </tr>
+
+    <tr align="center">
+         {% if c.s4 %}
+         <td>{{c.cc4}}</td>
+        <td>{{c.s4}}</td>
+          <td><a href="sviewhd2/{{c.cc4}}">Handout</a></td>
+        {% endif %}
+     </tr>
+
+     <tr align="center">
+         {% if c.s5 %}
+          <td>{{c.cc5}}</td>
+         <td>{{c.s5}}</td>
+           <td><a href="sviewhd2/{{c.cc5}}">Handout</a></td>
+         {% endif %}
+     </tr>
+
+     <tr align="center">
+         {% if c.s6 %}
+          <td>{{c.cc6}}</td>
+         <td>{{c.s6}}</td>
+           <td><a href="sviewhd2/{{c.cc6}}">Handout</a></td>
+         {% endif %}
+     </tr>
+
+     <tr align="center">
+         {% if c.s7 %}
+          <td>{{c.cc7}}</td>
+         <td>{{c.s7}}</td>
+           <td><a href="sviewhd2/{{c.cc7}}">Handout</a></td>
+         {% endif %}
+     </tr>
+     </tbody>
+
+</table>
+</center>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+{% endblock %}

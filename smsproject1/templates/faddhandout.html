@@ -1,0 +1,18 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+   <h3>Upload Material for Course : {{y.coursecode}} - {{y.coursetitle}}</h3> <br><br>
+   <form method="post" action="{% url 'fhandoutadd1' %}" enctype="multipart/form-data">
+       {% csrf_token %}
+       <label>Faculty Id: </label>
+       <input type="number" value="{{sfid}}" name="fid" readonly /><br><br>
+       <label>Course Id: </label>
+       <input type="text" value="{{y.id}}" name="cid" readonly/><br><br>
+       <label>Upload Handout: </label>
+       <input type="file" name="file" required /><br><br>
+       <input type="submit" value="Upload"/>&nbsp&nbsp
+       <input type="reset" value="Clear"/>
+   </form>
+</center>
+{% endblock %}

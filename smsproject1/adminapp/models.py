@@ -37,7 +37,7 @@ class Course(models.Model):
     class Meta:
         db_table = "course_table"
     def __str__(self):
-        return self.coursetitle
+        return f"{self.coursecode} - {self.coursetitle}"
 
 class Student(models.Model):
     #id = models.AutoField(primary_key=True)
@@ -68,7 +68,7 @@ class Student(models.Model):
 
     cur_ay=models.CharField(blank=False, max_length=10)
 
-    cur_yr=models.IntegerField(blank=False)
+    cur_yr=models.IntegerField(default=1, blank=False)
     sem_choices = (("ODD", "ODD"), ("EVEN", "EVEN"))
     cur_sem = models.CharField(max_length=10, blank=False, choices=sem_choices)
 
@@ -89,6 +89,7 @@ class Faculty(models.Model):
     department_choices = (("CSE", "CSE"), ("ECE", "ECE"))
     department = models.CharField(max_length=30, blank=False, choices=department_choices)
 
+    ay = models.CharField(blank=False)
 
     qualification_choices = (("PHD", "PHD"), ("MTECH", "MTECH"))
     qualification=models.CharField(max_length=100, blank=False, choices=qualification_choices)
@@ -104,9 +105,7 @@ class Faculty(models.Model):
      db_table ="faculty_table"
 
     def __str__(self):
-            return str(self.fullname + "-"+self.department)
-
-
+            return f"{self.facultyid}  - {self.fullname}  - {self.department}"
 
 class FacultyCourseMapping(models.Model):
     mappingid = models.AutoField(primary_key=True)
@@ -121,7 +120,7 @@ class FacultyCourseMapping(models.Model):
     class Meta:
         db_table="facultycousemapping_table"
     def __str__(self):
-        return f'{self.faculty.facultyid}'
+        return f'{self.faculty.facultyid} - {self.course.coursecode}'
 
     '''
          for above type -- in db it will be as type, so in django admin if u want it to be as

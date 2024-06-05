@@ -2,7 +2,7 @@
 
 {% block 'body' %}
 <h3 align="center">View Student Details</h3>
-    <table border="2" class="table table-bordered table-striped">
+    <table border="2" class="table table-bordered table-striped" style="font-size=10px;">
     <thead>
     <tr bgcolor="lightblue">
         <td>SNO</td>
@@ -33,7 +33,7 @@
             <td>{{s.email}}</td>
             <td>{{s.contact}}</td>
             <td>
-                <a href="/studentdeletion/{{s.id}}">DELETE</a>
+                <a href="/studentdeletion/{{s.studentid}}">DELETE</a>
             </td>
         </tr>
         </tbody>

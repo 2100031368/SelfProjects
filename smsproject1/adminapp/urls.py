@@ -14,7 +14,6 @@ urlpatterns = [
    path("addstudent", views.addstudent, name="addstudent"),
    path("deletestudent", views.deletestudent, name="deletestudent"),
    path("studentdeletion/<int:sid>", views.studentdeletion, name="studentdeletion"),
-   path("updatestudent1", views.updatestudent1, name="updatestudent1"),
    path("updatestudent2/<slug:sid>", views.updatestudent2, name="updatestudent2"),
 
    path("admincourse", views.admincourse, name="admincourse"),
@@ -29,6 +28,7 @@ urlpatterns = [
 
    path("facultycoursemapping", views.facultycoursemapping, name="facultycoursemapping"),
    path("addfacultycourse", views.addfacultycourse, name="addfacultycourse"),
+   path("admodifyfcm/<str:dept>/<str:pgm>/<str:ay>/<str:sem>/<int:cid>/<int:fid>/<int:fcmid>", views.admodifyfcm, name='admodifyfcm'),
 
 
    path("adminfaculty", views.adminfaculty, name="adminfaculty"),
@@ -36,7 +36,6 @@ urlpatterns = [
    path("addfaculty", views.addfaculty, name="addfaculty"),
    path("deletefaculty", views.deletefaculty, name="deletefaculty"),
    path("facultydeletion/<int:fid>", views.facultydeletion, name="facultydeletion"),
-   path("updatefaculty1", views.updatefaculty1, name="updatefaculty1"),
    path("updatefaculty2/<slug:fid>", views.updatefaculty2, name="updatefaculty2"),
 
    path("regadmin1", views.regadmin1, name="regadmin1"),

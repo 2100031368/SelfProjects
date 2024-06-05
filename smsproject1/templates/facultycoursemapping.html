@@ -1,64 +1,78 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><u>Faculty Mapping Courses</u></h2>
-Total no. of courses assigned = {{count}}
- <input class="form-control" id="myInput" type="text" placeholder="Course Title">
+<h2 align="center"><b> --- Faculty Courses Mapping --- </b></h2><br>
 
-<a href="{% url 'addfacultycourse'%}">ADD</a>
-<table border="2" class="table table-bordered table-striped">
-    <thead>
-    <tr bgcolor="lightblue">
-        <td>Department</td>
-        <td>Program</td>
-        <td>Academic Year</td>
-        <td>Semester</td>
-        <td>Year</td>
-        <td>Course Code</td>
-        <td>Course Title</td>
-        <td>Fcaulty</td>
-        <td>Component</td>
-        <td>Section</td>
-        <td>Faculty Type</td>
-    </tr>
-    </thead>
-    {% for y in fcm %}
-    <tbody id="myTable">
-     <tr align="center">
-         <td>{{y.course.department}}</td>
-         <td>{{y.course.program}}</td>
-         <td>{{y.course.academicyear}}</td>
-         <td>{{y.course.semester}}</td>
-         <td>{{y.course.year}}</td>
-         <td>{{y.course.coursecode}}</td>
-         <td>{{y.course.coursetitle}}</td>
-         <td>{{y.faculty}}</td>
-         <td>{{y.component}}</td>
-         <td>{{y.section}}</td>
-         <!-- <td>{{y.type}}</td>   displays either False or True   -->
-         <td>
-             {% if y.type is True %}
-              Course Coordinator
-             {% endif %}
-             {% if y.type is False %}
-             Instructor
-             {% endif %}
+<center>
+    <input class="form-control" id="myInput" type="text" placeholder="Search ..">
+    <a href="{% url 'addfacultycourse'%}">ADD</a><br><br>
+    <table border="2" class="table table-bordered table-striped" style="font-size: 11px;">
+        <thead>
+            <tr bgcolor="lightblue">
+                <td>Department</td>
+                <td>Program</td>
+                <td>Academic Year</td>
+                <td>Semester</td>
+                <td>Year</td>
+                <td>Course Code</td>
+                <td>Course Title</td>
+                <td>Faculty</td>
+                <td>Component</td>
+                <td>Section</td>
+                <td>Faculty Type</td>
 
-         </td>
+            </tr>
+        </thead>
+        {% for y in fcm %}
+        <tbody>
+            <tr align="center">
+                <td>{{y.course.department}}</td>
+                <td>{{y.course.program}}</td>
+                <td>{{y.course.academicyear}}</td>
+                <td>{{y.course.semester}}</td>
+                <td>{{y.course.year}}</td>
+                <td>{{y.course.coursecode}}</td>
+                <td>{{y.course.coursetitle}}</td>
+                <td>{{y.faculty}}</td>
+                <td>{{y.component}}</td>
+                <td>{{y.section}}</td>
+                <td>
+                    {% if y.type %}
+                    Course Coordinator
+                    {% else %}
+                    Instructor
+                    {% endif %}
+                </td>
+               <!-- <td><a href="/admodifyfcm/{{y.course.department}}/{{y.course.program}}/{{y.course.academicyear}}/{{y.course.semester}}/{{y.course.id}}/{{y.faculty.facultyid}}/{{y.mappingid}}">MODIFY</a></td> -->
+            </tr>
 
-     </tr>
-     </tbody>
-    {% endfor %}
+        </tbody>
+        {% endfor %}
+    </table>
+</center>
 
-</table>
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
 });
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
 </script>
+
 {% endblock %}
