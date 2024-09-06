@@ -2,15 +2,18 @@
 
 {% block 'body' %}
 <center>
-    <table border="1">
-        <tr>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
             <td>Student ID</td>
-
+            <td>Email</td>
+            <td>Contact Number</td>
         </tr>
 
         {% for i in r %}
         <tr>
-            <td>{{i.sid}}</td>
+            <td>{{i.sid.studentid}}</td>
+            <td>{{i.sid.email}}</td>
+            <td>{{i.sid.contact}}</td>
         </tr>
         {% endfor %}
     </table>

@@ -2,12 +2,15 @@
 
 {% block 'body' %}
 <center>
+    <h3 style="font-family: 'Times New Roman', Times, serif; color:lightgreen;">{{msg}}</h3>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Enter Details &#x25BC;</b></h2><br>
+    <div class="box">
     <form method="post">
         {% csrf_token %}
         <table width="30%" height="30%" >
 
         <tr>
-            <td><label>Program : </label></td>
+            <td><label><b>Program : </b></label></td>
             <td>
                 <select name="pgm">
                     <option value="">--Select--</option>
@@ -17,8 +20,9 @@
             </td>
         </tr>
 
+         <tr><td>&nbsp;</td></tr>
         <tr>
-            <td><label>Department:</label></td>
+            <td><label><b>Department:</b></label></td>
             <td>
                 <select name="dept" required>
                     <option value="">--Select--</option>
@@ -27,10 +31,10 @@
                 </select>
             </td>
         </tr>
-
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><label>Academic Year:</label></td>
+            <td><label><b>Academic Year:</b></label></td>
             <td>
                 <select name="ay" required>
                     <option value="">--Select--</option>
@@ -39,9 +43,10 @@
                 </select>
             </td>
         </tr>
+          <tr><td>&nbsp;</td></tr>
 
          <tr>
-            <td><label>Semester:</label></td>
+            <td><label><b>Semester:</b></label></td>
             <td>
                 <select name="sem" required>
                     <option value="">--Select--</option>
@@ -50,14 +55,17 @@
                 </select>
             </td>
         </tr>
+            <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><input type="submit"  value="Submit" class="addbutton"/></td>
-             <td><input type="reset"  value="Clear" class="addbutton"/></td>
+            <td><input type="submit"  value="SUBMIT" class="addbutton"/></td>
+            <td>&nbsp;</td>
+             <td><input type="reset"  value="CLEAR" class="addbutton"/></td>
         </tr>
 
     </table>
 
     </form>
+    </div>
 </center>
 {% endblock %}

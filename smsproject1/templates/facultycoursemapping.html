@@ -1,25 +1,24 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><b> --- Faculty Courses Mapping --- </b></h2><br>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; Faculty Courses Mapping &#11013;</b></h2><br>
 
 <center>
     <input class="form-control" id="myInput" type="text" placeholder="Search ..">
     <a href="{% url 'addfacultycourse'%}">ADD</a><br><br>
-    <table border="2" class="table table-bordered table-striped" style="font-size: 11px;">
+    <table border="2" class="table table-bordered table-striped" style="font-size: 13px;font-family: 'Times New Roman', Times, serif;">
         <thead>
             <tr bgcolor="lightblue">
-                <td>Department</td>
-                <td>Program</td>
-                <td>Academic Year</td>
-                <td>Semester</td>
-                <td>Year</td>
-                <td>Course Code</td>
-                <td>Course Title</td>
-                <td>Faculty</td>
-                <td>Component</td>
-                <td>Section</td>
-                <td>Faculty Type</td>
+                <td><b>Department</b></td>
+                <td><b>Program</b></td>
+                <td><b>Academic Year</b></td>
+                <td><b>Semester</b></td>
+                <td><b>Year</b></td>
+                <td><b>Course Code</b></td>
+                <td><b>Course Title</b></td>
+                <td><b>Faculty</b></td>
+                <td><b>Section</b></td>
+                <td><b>Faculty Type</b></td>
 
             </tr>
         </thead>
@@ -34,7 +33,6 @@
                 <td>{{y.course.coursecode}}</td>
                 <td>{{y.course.coursetitle}}</td>
                 <td>{{y.faculty}}</td>
-                <td>{{y.component}}</td>
                 <td>{{y.section}}</td>
                 <td>
                     {% if y.type %}

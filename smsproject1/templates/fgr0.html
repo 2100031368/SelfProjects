@@ -1,0 +1,21 @@
+{% extends 'facultyhome.html' %}
+
+{% load static %}
+{% block 'body' %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+<div id="header">
+    <h2 style="align:center;">Student - Grievances Module </h2>
+    <nav id="nav1">
+      <button class="button" onclick="window.location.href='{% url 'fgrievance1' %}'"><b>POST</b></button>&nbsp;&nbsp;
+      <button class="button" onclick="window.location.href='{% url 'fgrievance2' %}'"><b>MY_GRIEVANCES</b></button>
+      <button class="button" onclick="window.location.href='{% url 'fgroth' %}'"><b>OTHERS_ISSUES</b></button>
+    </nav>
+</div>
+
+<div id="content">
+     <h4 style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4><br>
+    <img src="{% static 'images/grievance.png' %}" alt="Center Image" />
+</div>
+
+{% endblock %}

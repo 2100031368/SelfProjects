@@ -1,0 +1,76 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+
+<style>
+    #customers tr:nth-child(even){background-color: #d9d9d9;}
+</style>
+<h4 align="center" style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; View Faculty Details &#x25BC; </b></h2>
+
+<center>
+    <input class="form-control" id="myInput" type="text" placeholder="Search">
+    <table border="2" class="table table-bordered table-striped" style="font-family: 'Times New Roman', Times, serif;" id="customers">
+        <thead>
+
+            <tr bgcolor="lightblue">
+                <td><b>Faculty id</b></td>
+                <td><b>Full name</b></td>
+                <td><b>Gender</b></td>
+                <td><b>Department</b></td>
+                <td><b>Academic Year Joined</b></td>
+                <td><b>Qualification</b></td>
+                <td><b>Designation</b></td>
+                <td><b>Password</b></td>
+                <td><b>Email</b></td>
+                <td><b>Contact</b></td>
+                <td><b>Action</b></td>
+            </tr>
+         </thead>
+
+            {% for faculty in facultydata %}
+
+            <tr align="center">
+                <td>{{faculty.facultyid}}</td>
+                <td>{{faculty.fullname}}</td>
+                <td>{{faculty.gender}}</td>
+                <td>{{faculty.department}}</td>
+                <td>{{faculty.ay}}</td>
+                <td>{{faculty.qualification}}</td>
+                <td>{{faculty.designation}}</td>
+                <td>{{faculty.password}}</td>
+                <td>{{faculty.email}}</td>
+                <td>{{faculty.contact}}</td>
+                <td><a href="/fupdatefaculty/{{faculty.facultyid}}">Update</a></td>
+            </tr>
+
+            {% endfor %}
+
+    </table>
+</center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
+
+{% endblock %}

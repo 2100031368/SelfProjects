@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-from adminapp.models import FacultyCourseMapping, Course
+from adminapp.models import FacultyCourseMapping, Course, Student, Faculty
 
 class RegM(models.Model):
     pgm_choices=(("BTECH", "BTECH"), ("MTECH", "MTECH"))
@@ -53,11 +53,11 @@ class RegM(models.Model):
         db_table="academic_reg"
 
     def __str__(self):
-        return self.sem
+        return str(self.sem)
 
 class RegHistoryM(models.Model):
     id=models.AutoField(primary_key=True)
-    sid=models.CharField(blank=False)
+    sid=models.ForeignKey(Student, on_delete=models.CASCADE, null=True, blank=True,)
     sname=models.CharField(blank=False)
     sprogram=models.CharField(blank=False)
     sdept=models.CharField(blank=False)
@@ -65,46 +65,32 @@ class RegHistoryM(models.Model):
     syr=models.IntegerField(blank=False)
     ssem=models.CharField(blank=False)
 
-    cc1=models.CharField(blank=False)
-    s1 = models.CharField(blank=False)
-    f1 = models.BigIntegerField(blank=False)
-    sec1=models.IntegerField(blank=False)
+    cc1=models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course1",  null=True, blank=True)
+    fcm1=models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map1", null=True, blank=True)
 
-    cc2 = models.CharField(null=True,blank=False)
-    s2 = models.CharField(null=True,blank=False)
-    f2 = models.BigIntegerField(null=True,blank=False)
-    sec2= models.IntegerField(null=True,blank=False)
+    cc2 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course2", null=True, blank=True)
+    fcm2 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map2", null=True, blank=True)
 
-    cc3 = models.CharField(null=True,blank=False)
-    s3 = models.CharField(null=True,blank=False)
-    f3 = models.BigIntegerField(null=True,blank=False)
-    sec3 = models.IntegerField(null=True,blank=False)
+    cc3 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course3", null=True, blank=True)
+    fcm3 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map3", null=True, blank=True)
 
-    cc4 = models.CharField(null=True,blank=False)
-    s4 = models.CharField(null=True, blank=True)
-    f4 = models.BigIntegerField(null=True, blank=True)
-    sec4 = models.IntegerField(null=True,blank=False)
+    cc4 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course4", null=True, blank=True)
+    fcm4 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map4", null=True, blank=True)
 
-    cc5 = models.CharField(null=True,blank=False)
-    s5 = models.CharField(null=True, blank=True)
-    f5 = models.BigIntegerField(null=True, blank=True)
-    sec5 = models.IntegerField(null=True,blank=False)
+    cc5 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course5", null=True, blank=True)
+    fcm5 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map5",  null=True, blank=True)
 
-    cc6 = models.CharField(null=True,blank=False)
-    s6 = models.CharField(null=True, blank=True)
-    f6 = models.BigIntegerField(null=True, blank=True)
-    sec6 = models.IntegerField(null=True,blank=False)
+    cc6 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course6",  null=True, blank=True)
+    fcm6 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map6",  null=True, blank=True)
 
-    cc7 = models.CharField(null=True,blank=False)
-    s7 = models.CharField(null=True, blank=True)
-    f7 = models.BigIntegerField(null=True, blank=True)
-    sec7 = models.IntegerField(null=True,blank=False)
+    cc7 = models.ForeignKey(Course, on_delete=models.CASCADE, related_name="course7",  null=True, blank=True)
+    fcm7 = models.ForeignKey(FacultyCourseMapping, on_delete=models.CASCADE, related_name="map7",  null=True, blank=True)
 
     class Meta:
         db_table="reg_history"
 
     def __str__(self):
-        return self.sid
+        return str(self.sid)
 
 class FeedbackPosted(models.Model):
     id = models.AutoField(primary_key=True)

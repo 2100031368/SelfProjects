@@ -4,11 +4,10 @@
       <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
 
 <div id="header">
-    <h2>Admin - Student Module </h2>
+    <h2 style="align:center;">Admin - Student Module </h2>
     <nav id="nav1">
-        <a href="{% url 'viewstudents' %}">ViewStudents</a>&nbsp&nbsp
-        <a href="{% url 'addstudent' %}">ADD</a>&nbsp&nbsp
-        <a href="{% url 'deletestudent' %}">DELETE</a>&nbsp&nbsp
+      <button class="button" onclick="window.location.href='{% url 'viewstudents' %}'"><b>VIEW</b></button>&nbsp;&nbsp;
+      <button class="button" onclick="window.location.href='{% url 'addstudent' %}'"><b>ADD</b></button>
     </nav>
 </div>
 

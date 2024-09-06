@@ -2,12 +2,13 @@
 
 {% block 'body' %}
 <center>
-<h2><u>View Course Details</u></h2>
+<h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; View Course Details &#x25BC;</b></h2>
 <!--Total no. of courses assigned = {{count}} -->
  <input class="form-control" id="myInput" type="text" placeholder="Search ..">
 
- <table border="2" class="table table-bordered table-striped" style="font-size: 12px;">
-    <thead>
+ <table border="1" class="table table-bordered table-striped" style="font-size: 14px; font-family: 'Times New Roman', Times, serif; margin-left:50px;" align="center">
+     <thead>
+
     <tr bgcolor="lightblue">
         <td>Department</td>
         <td>Program</td>
@@ -18,11 +19,11 @@
         <td>Course Title</td>
         <td>LTPS</td>
         <td>Course Credits</td>
-        <td>Component</td>
         <td>Section</td>
         <td>Faculty Type</td>
     </tr>
-    </thead>
+     </thead>
+
     {% for y in fc %}
     <tbody id="myTable">
      <tr align="center">
@@ -35,7 +36,6 @@
          <td>{{y.course.coursetitle}}</td>
          <td>{{y.course.ltps}}</td>
          <td>{{y.course.credits}}</td>
-         <td>{{y.component}}</td>
          <td>{{y.section}}</td>
          <!-- <td>{{y.type}}</td> displays either False or True -->
          <td>
@@ -53,6 +53,9 @@
     {% endfor %}
 
 </table>
+</center>
+
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const input = document.getElementById("myInput");
@@ -76,6 +79,4 @@ function filterTable() {
     });
 }
 </script>
-
-    </center>
 {% endblock %}

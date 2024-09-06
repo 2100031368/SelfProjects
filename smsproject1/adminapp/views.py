@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 from django.forms import modelform_factory
 from django.http import HttpResponse
 
@@ -6,22 +8,24 @@ from django.db.models import Q
 from django.contrib.auth import logout
 
 import matplotlib.pyplot as plt
+from django.shortcuts import redirect
 
 import json
+from django.core.mail import send_mail
 
 from django.db.models import Count
 
 from django.shortcuts import render, redirect
 
 from .forms import AddFacultyForm, AddStudentForm, StudentUpdateForm, FacultyUpdateForm, FacultyCourseMappingForm
-from .models import Admin, Student, Course, Faculty, FacultyCourseMapping
+from .models import Admin, Student, Course, Faculty, FacultyCourseMapping, Grievance
 
 from django.shortcuts import render, redirect
 
 from regapp.models import RegM,RegHistoryM, FeedbackPosted
 from regapp.forms import AddRegForm
 
-from facultyapp.models import CC
+from facultyapp.models import CC, Internals
 
 from django import forms
 
@@ -115,19 +119,28 @@ def adminchangepwd(request):
 
 def adminpwdupdt(request):
     an = request.session["auname"]
-    oldpwd = request.POST["opwd"]
-    newpwd = request.POST["npwd"]
-    records = Admin.objects.all()
-    flag = Admin.objects.filter(Q(username=an) & Q(password=oldpwd))
-    if (flag):
-        if (Admin.objects.filter(password=newpwd)):
-            msg = "Old and New passwords are same"
+    if(request.method == "POST"):
+        oldpwd = request.POST["opwd"]
+        newpwd = request.POST["npwd"]
+        records = Admin.objects.all()
+        flag = Admin.objects.filter(Q(username=an) & Q(password=oldpwd))
+        if (flag):
+            if (Admin.objects.filter(password=newpwd)):
+                msg = "Old and New passwords are same"
+            else:
+                Admin.objects.filter(username=an).update(password=newpwd)
+                subject = "ERP PASSWORD UPDATION"
+                message = f'Dear Admin,\n Your Password has been Updated.If not Youas you are having super-user credentials update your password immediately.\nThankYou.'
+                email=settings.EMAIL_HOST_USER
+                recipient=[]
+                send_mail(subject, message, email, recipient)
+                msg = "Password Updated Successfully"
         else:
-            Admin.objects.filter(username=an).update(password=newpwd)
-            msg = "Password Updated Successfully"
+            msg = "Old Password is not matching"
+        return render(request, "adminchangepwd.html", {"msg": msg})
     else:
-        msg = "Old Password is not matching"
-    return render(request, "adminchangepwd.html", {"msg": msg})
+        return render(request, "adminchangepwd.html")
+
 
 
 def adminLogOut(request):
@@ -158,18 +171,6 @@ def checkadminlogin(request):
 
 from django.db.models import Q
 
-
-def viewstudents(request):
-    auname = request.session["auname"]
-    if(request.method == "POST"):
-        pgm=request.POST["pgm"]
-        dept=request.POST["dept"]
-        ay=request.POST["ay"]
-        sem=request.POST["sem"]
-        x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay)&Q(semester=sem))
-        return render(request, "aviewstu1.html", {"st": x, "adminuname": auname})
-    else:
-        return render(request, "filter.html", {"adminuname": auname})
 
 
 def viewcourses(request):
@@ -214,10 +215,6 @@ def viewcourses(request):
     '''
 
 
-def viewfaculty(request):
-    auname = request.session["auname"]
-    x=Faculty.objects.all()
-    return render(request, "viewfaculty.html", {"facultydata": x, "adminuname": auname})
 
 ##################################################################################################
 
@@ -234,9 +231,38 @@ def adminfaculty(request):
 def adminstudent(request):
     auname = request.session["auname"]
     return render(request, "adminstudent.html", {"adminuname": auname})
+def viewstudents(request):
+    auname = request.session["auname"]
+    if(request.method == "POST"):
+        pgm=request.POST["pgm"]
+        dept=request.POST["dept"]
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay)&Q(semester=sem))
+        return render(request, "aviewstu1.html", {"x": x, "adminuname": auname})
+    else:
+        return render(request, "filter.html", {"adminuname": auname})
 
 
-###############################################################3
+def updatestudent2(request, sid):
+    auname = request.session["auname"]
+    s = Student.objects.get(studentid=sid)
+    if (request.method == "POST"):
+        form1 = StudentUpdateForm(request.POST, instance=s)
+        if form1.is_valid():
+            form1.save()
+            msg = "Updated successfully"
+        else:
+            msg = "Invalid"
+        x = Student.objects.filter(Q(program=s.program) & Q(department=s.department) & Q(ay=s.ay) & Q(semester=s.semester))
+        return render(request, "aviewstu1.html", {"msg": msg, "adminuname": auname, "x":x})
+
+    else:
+        form = StudentUpdateForm(instance=s)
+        return render(request, "updatestudent2.html", {"form": form, "adminuname": auname, "s": s})
+
+
+###############################################################
 
 def addcourse(request):
     auname = request.session["auname"]
@@ -266,47 +292,117 @@ def insertcourse(request):
 def deletecourse(request):
     auname = request.session["auname"]
     courses = Course.objects.all()
-    count = Course.objects.count()
-    return render(request, "deletecourse.html", {"coursesdata": courses, "count": count, "adminuname": auname})
+    #count = Course.objects.count()
+    return render(request, "deletecourse.html", {"coursesdata": courses, "adminuname": auname})
 
 
-def coursedeletion(request, cid):
-    Course.objects.filter(id=cid).delete()
+def coursedeletion(request, ccode):
+    course=Course.objects.get(coursecode = ccode)
+    x=RegHistoryM.objects.filter(Q(sprogram=course.program)&Q(sdept=course.department)&Q(say=course.academicyear)&Q(syr=course.year)&Q(ssem=course.semester))
+    if x is not None:
+        for r in x:
+            for i in range(1, 8):
+                cc_field = f'cc{i}'
+                if getattr(r, cc_field) == ccode:
+                    setattr(r, cc_field, "")
+                    setattr(r, f's{i}', "")
+                    setattr(r, f'f{i}', 0)
+                    setattr(r, f'sec{i}', 0)
+            r.save()
+            email = Student.objects.get(studentid=r.sid.studentid).email
+
+            subject = "Course Deletion from your Registered Courses."
+            message = f'Dear {r.sname} from your Registered Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.\n Thank You.\n Team SCMS.'
+            sender = settings.EMAIL_HOST_USER
+            rec = [email]
+            send_mail(subject, message, sender, rec)
+    fcm = FacultyCourseMapping.objects.filter(course=course)
+    if fcm is not None:
+        for i in fcm:
+            fid = i.faculty.facultyid
+            email = i.faculty.email
+
+            subject = "Course Deletion from your Allotted Courses."
+            message = f'Dear {i.faculty.fullname} from your Allotted Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.For more details verify ERP.\n Thank You.\nTeam SCMS.'
+            sender = settings.EMAIL_HOST_USER
+            rec = [email]
+            send_mail(subject, message, sender, rec)
+
+    Course.objects.filter(coursecode=ccode).delete()
+    msg="Delete Course Successfully"
     # return HttpResponse("deleted successfully")
-    return redirect("deletecourse")
+    return render(request, "admincourse.html", {"msg":msg})
 
 
-def updatecourse1(request):
+
+
+def updatecourse1(request, ccode):
     auname = request.session["auname"]
-    return render(request, "updatecourse1.html", {"adminuname": auname})
+    c = Course.objects.get(coursecode=ccode)
+    return render(request, "updatecourse2.html", {"c": c, "adminuname": auname})
 
 
 def updatecourse2(request):
     auname = request.session["auname"]
-    key = request.POST["key"]
-    c = Course.objects.get(coursecode=key)
-    return render(request, "updatecourse2.html", {"c": c, "adminuname": auname})
+    if(request.method =="POST"):
+        ccode = request.POST["ccode"]
+        dep = request.POST["dept"]
+        prgm = request.POST["program"]
+        ay = request.POST["ay"]
+        sem = request.POST["sem"]
+        yr = request.POST["year"]
+        ltps = request.POST["ltps"]
+        credits = request.POST["credits"]
+        # course = Course(department=dep, program=prgm, academicyear=ay, semester=sem, year=yr,coursetitle=ctitle, ltps=ltps, credits=credits)
+        course=Course.objects.get(coursecode=ccode)
+        x=RegHistoryM.objects.filter(Q(sprogram=course.program)&Q(sdept=course.department)&Q(say=course.academicyear)&Q(syr=course.year)&Q(ssem=course.semester))
+        if x is not None:
+            for r in x:
+                if(course.program != prgm or course.department != dep or course.academicyear != ay or course.year != yr or course.semester != sem):
+                       for i in range(1, 8):
+                           cc_field = f'cc{i}'
+                           if getattr(r, cc_field) == ccode:
+                               setattr(r, cc_field, "")
+                               setattr(r, f's{i}', "")
+                               setattr(r, f'f{i}', 0)
+                               setattr(r, f'sec{i}', 0)
+                       r.save()
+                       email=Student.objects.get(studentid=r.sid.studentid).email
+
+                       subject="Course Deletion from your Registered Courses."
+                       message=f'Dear {r.sname} from your Registered Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.\n Thank You.\n Team SCMS.'
+                       sender=settings.EMAIL_HOST_USER
+                       rec=[email]
+                       send_mail(subject, message, sender, rec)
+
+        course=Course.objects.get(coursecode=ccode)
+        fcm= FacultyCourseMapping.objects.filter(course=course)
+        if fcm is not None:
+            for i in fcm:
+                fid=i.faculty.facultyid
+                email=i.faculty.email
+
+                subject = "Course Details Updation from your Allotted Courses."
+                message = f'Dear {i.faculty.fullname} from your Allotted Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been updated by the administration.For more details verify ERP.\n Thank You.\nTeam SCMS.'
+                sender = settings.EMAIL_HOST_USER
+                rec = [email]
+                send_mail(subject, message, sender, rec)
 
 
-def updatecourse3(request):
-    auname = request.session["auname"]
-    ccode = request.POST["ccode"]
-    dep = request.POST["dept"]
-    prgm = request.POST["program"]
-    ay = request.POST["ay"]
-    sem = request.POST["sem"]
-    yr = request.POST["year"]
-    ltps = request.POST["ltps"]
-    credits = request.POST["credits"]
-    # course = Course(department=dep, program=prgm, academicyear=ay, semester=sem, year=yr,coursetitle=ctitle, ltps=ltps, credits=credits)
+        Course.objects.filter(coursecode=ccode).update(department=dep, program=prgm, academicyear=ay, semester=sem, year=yr,
+                                                       ltps=ltps, credits=credits)
+        msg = "Updated successfully"
+        return render(request, "filter.html", {"msg": msg, "adminuname": auname})
 
-    Course.objects.filter(coursecode=ccode).update(department=dep, program=prgm, academicyear=ay, semester=sem, year=yr,
-                                                   ltps=ltps, credits=credits)
-    msg = "Updated successfully"
-    return render(request, "updatecourse1.html", {"msg": msg, "adminuname": auname})
 
 
 ###################################
+
+def viewfaculty(request):
+    auname = request.session["auname"]
+    x=Faculty.objects.all()
+    return render(request, "viewfaculty.html", {"facultydata": x, "adminuname": auname})
+
 def addfaculty(request):
     auname = request.session["auname"]
 
@@ -353,7 +449,6 @@ def addfacultycourse(request):
     return render(request, "addfacultycourse.html", {"adminuname": auname, "form": form})
 
 
-#############################################################################################3
 
 def updatefaculty2(request, fid):
     auname = request.session["auname"]
@@ -362,10 +457,11 @@ def updatefaculty2(request, fid):
         form = FacultyUpdateForm(request.POST, instance=f)
         if form.is_valid():
             form.save()
-            msg = "Updated Successfully"
+            msg="Updated Successfully"
         else:
             msg = "Failed Updating"
-        return render(request, "updatefaculty1.html", {"msg": msg, "adminuname": auname})
+        x = Faculty.objects.all()
+        return render(request, "viewfaculty.html", {"msg":msg, "facultydata":x})
     else:
         form = FacultyUpdateForm(instance=f)
         return render(request, "updatefaculty2.html", {"form": form, "adminuname": auname, "f": f})
@@ -375,6 +471,7 @@ def updatefaculty2(request, fid):
 
 def addstudent(request):
     auname = request.session["auname"]
+
     form = AddStudentForm()
 
     if request.method == "POST":
@@ -388,59 +485,6 @@ def addstudent(request):
             return render(request, "addstudent.html", {"msg": msg})
 
     return render(request, "addstudent.html", {"form": form})
-
-
-def deletestudent(request):
-    auname = request.session["auname"]
-
-    if request.method == "POST":
-        w = request.POST["prgm"]
-        x = request.POST["dept"]
-        y = request.POST["ay"]
-        z = request.POST["sem"]
-
-        # to lower case
-        w = w.lower()
-        x = x.lower()
-        y = y.lower()
-        z = z.lower()
-
-        if y and z:
-            st = Student.objects.filter(
-                Q(department__iexact=x) & Q(ay__iexact=y) & Q(semester__iexact=z) & Q(program__iexact=w))
-        elif y:
-            st = Student.objects.filter(Q(department__iexact=x) & Q(ay__iexact=y) & Q(program__iexact=w))
-
-        else:
-            st = Student.objects.filter(Q(department__iexact=x) & Q(semester__iexact=z) & Q(program__iexact=w))
-
-        return render(request, "deletestudent.html", {"student": st, "adminuname": auname})
-
-    else:
-        return render(request, "adelstu0.html", {"adminuname": auname})
-
-
-def studentdeletion(request, sid):
-    auname = request.session["auname"]
-    Student.objects.filter(studentid=sid).delete()
-    return redirect("adminhome")
-
-
-def updatestudent2(request, sid):
-    auname = request.session["auname"]
-    s = Student.objects.get(studentid=sid)
-    if (request.method == "POST"):
-        form1 = StudentUpdateForm(request.POST, instance=s)
-        if form1.is_valid():
-            form1.save()
-            msg = "Updated successfully"
-        else:
-            msg = "Invalid"
-        return render(request, "updatestudent1.html", {"msg": msg, "adminuname": auname})
-
-    else:
-        form = StudentUpdateForm(instance=s)
-        return render(request, "updatestudent2.html", {"form": form, "adminuname": auname, "s": s})
 
 
 ############  Regarding FEEDBACK ##############
@@ -457,49 +501,64 @@ def aviewfeedback1(request, ay, yr, sem, dept, fid, cc, sec):
     print(p)
     y=RegHistoryM.objects.filter(Q(say=ay)&Q(syr=yr)&Q(ssem=sem)&Q(sdept=dept))
     a=[]
+    c1=c2=0
     for i in y:
-        if(i.cc1==cc and i.f1==fid and i.sec1==sec):
+        if(i.cc1 is not None and i.cc1.coursecode==cc and i.fcm1.faculty.facultyid==fid and i.fcm1.section==sec):
+            c1=c1+1
             a.append(i)
-        elif(i.cc2==cc and i.f2==fid and i.sec2==sec):
+        elif(i.cc2 is not None and i.cc2.coursecode==cc and i.fcm2.faculty.facultyid==fid and i.fcm2.section==sec):
+            c1 = c1 + 1
             a.append(i)
-        elif (i.cc3 == cc and i.f3 == fid and i.sec3 == sec):
+        elif (i.cc3 is not None and i.cc3.coursecode == cc and i.fcm3.faculty.facultyid == fid and i.fcm3.section == sec):
+            c1 = c1 + 1
             a.append(i)
-        elif (i.cc4 == cc and i.f4 == fid and i.sec4 == sec):
+        elif (i.cc4 is not None and i.cc4.coursecode == cc and i.fcm4.faculty.facultyid == fid and i.fcm4.section == sec):
+            c1 = c1 + 1
             a.append(i)
-        elif (i.cc5 == cc and i.f5 == fid and i.sec5 == sec):
+        elif (i.cc5 is not None and i.cc5.coursecode == cc and i.fcm5.faculty.facultyid == fid and i.fcm5.section == sec):
+            c1 = c1 + 1
             a.append(i)
-        elif (i.cc6 == cc and i.f6 == fid and i.sec6 == sec):
+        elif (i.cc6 is not None and i.cc6.coursecode == cc and i.fcm6.faculty.facultyid == fid and i.fcm6.section == sec):
+            c1 = c1 + 1
             a.append(i)
-        elif (i.cc7 == cc and i.f7 == fid and i.sec7 == sec):
+        elif (i.cc7 is not None and i.cc7.coursecode == cc and i.fcm7.faculty.facultyid == fid and i.fcm7.section == sec):
+            c1 = c1 + 1
             a.append(i)
+    z=FeedbackPosted.objects.filter(Q(fid=fid)&Q(say=ay)&Q(syr=yr)&Q(ssem=sem)&Q(ccode=cc)&Q(section=sec))
+    c2=len(z)
 
-
-    return render(request, "aviewfeedback1.html", {"a": a,"p":p, "adminuname": auname})
+    return render(request, "aviewfeedback1.html", {"a": a,"p":p, "adminuname": auname, "c1":c1, "c2":c2})
 
 def aviewfeedback2(request, sid, fid, ay, yr, sem, cc, sec):
     auname = request.session["auname"]
     z=FeedbackPosted.objects.get(Q(sid=sid)&Q(fid=fid)&Q(say=ay)&Q(syr=yr)&Q(ssem=sem)&Q(ccode=cc)&Q(section=sec))
     return render(request, "aviewfeedback2.html", {"z": z, "adminuname": auname})
 
-## view in form of graoh
-'''def aviewfeedback3(request, ay, yr, sem, dept, fid, cc,sec):
-    auname = request.session["auname"]
-    a=FeedbackPosted.objects.filter(Q(say=ay)&Q(syr=int(yr))&Q(ssem=sem)&Q(sdept=dept)&Q(fid=fid)&Q(section=int(sec)))
-    for i in a:
-        b, c, d = i.q1, i.q2, i.q3
-    x=[b,c,d]
-    y=[a.fdb1, a.fdb2, a.fdb3]
-    plt.bar(x, y)
-    plt.show() '''
-
 
 def aviewfeedback3(request, ay, yr, sem, dept, fid, cc, sec):
     auname = request.session.get("auname")
     x = FeedbackPosted.objects.filter(Q(say=ay) & Q(syr=int(yr)) & Q(ssem=sem) & Q(sdept=dept) & Q(fid=fid) & Q(section=int(sec)))
+    y = RegHistoryM.objects.filter(Q(say=ay) & Q(syr=yr) & Q(ssem=sem) & Q(sdept=dept))
 
+    c1 = c2 = 0
+    for i in y:
+        if (i.cc1 is not None and i.cc1.coursecode == cc and i.fcm1.faculty.facultyid == fid and i.fcm1.section == sec):
+            c1 = c1 + 1
+        elif (i.cc2 is not None and i.cc2.coursecode == cc and i.fcm2.faculty.facultyid == fid and i.fcm2.section == sec):
+            c1 = c1 + 1
 
-    #return HttpResponse("hi")
-    return render(request, "aviewfeedback3.html", {"ay": ay, "yr":yr, "sem":sem, "dept":dept, "fid":fid,"cc":cc, "sec":sec,"x":x, "adminuname": auname})
+        elif (i.cc3 is not None and i.cc3.coursecode == cc and i.fcm3.faculty.facultyid == fid and i.fcm3.section == sec):
+            c1 = c1 + 1
+        elif (i.cc4 is not None and i.cc4.coursecode == cc and i.fcm4.faculty.facultyid == fid and i.fcm4.section == sec):
+            c1 = c1 + 1
+        elif (i.cc5 is not None and i.cc5.coursecode == cc and i.fcm5.faculty.facultyid == fid and i.fcm5.section == sec):
+            c1 = c1 + 1
+        elif (i.cc6 is not None and i.cc6.coursecode == cc and i.fcm6.faculty.facultyid == fid and i.fcm6.section == sec):
+            c1 = c1 + 1
+        elif (i.cc7 is not None and i.cc7.coursecode == cc and i.fcm7.faculty.facultyid == fid and i.fcm7.section == sec):
+            c1 = c1 + 1
+    c2=len(x)
+    return render(request, "aviewfeedback3.html", {"ay": ay, "yr":yr, "sem":sem, "dept":dept, "fid":fid,"cc":cc, "sec":sec,"x":x, "adminuname": auname, "c1":c1, "c2":c2})
 def aviewfeedback4(request, q, ay, yr, sem, dept, fid, cc, sec):
     auname = request.session.get("auname")
     q = int(q)
@@ -588,10 +647,113 @@ def addcc2(request):
 ################################################################3
 #modifying faculty course mapping
 def admodifyfcm(request, dept, pgm,ay,sem, fid, cid, fcmid):
-
+   auname = request.session.get("auname")
    fcm=FacultyCourseMapping.objects.get(mappingid=fcmid)
    course=fcm.course.coursecode
    faculty=fcm.faculty.facultyid
    print(course)
    print(faculty)
    return HttpResponse('hi')
+
+########## giving access to other faculty
+def agiveaccess0(request):
+    auname = request.session.get("auname")
+    x=Faculty.objects.all()
+    auname = request.session.get("auname")
+    return render(request, "agiveaccess0.html", {"facultydata":x, "adminuname":auname})
+
+from django.http import JsonResponse
+
+def agiveaccess1(request):
+    auname = request.session.get("auname")
+    x = x = Faculty.objects.all()
+    if request.method == 'POST':
+        hidden_data = request.POST.get('hiddenData', '[]')
+
+        try:
+            faculty_data = json.loads(hidden_data)
+
+            for faculty in faculty_data:
+                fid = faculty.get('facultyid')
+                access = int(faculty.get('access', 0))
+                a = Faculty.objects.get(facultyid=fid)
+                a.access=access
+                a.save()
+            msg="Accesses have been Modified"
+            return render(request, "agiveaccess0.html", {"facultydata":x, "msg":msg, "adminuname":auname})
+        except json.JSONDecodeError as e:
+            print(f"JSONDecodeError: {str(e)}")
+            return HttpResponse("Error: Invalid JSON data received.", status=400)
+
+    return render(request, "agiveaccess0.html", {"facultydata": x,  "adminuname":auname})
+
+######### view student internals
+def astuinternals(request,sid, ay, sem, pgm,dept):
+    auname = request.session.get("auname")
+    x=Internals.objects.filter(Q(sid=sid)&Q(ay=ay)&Q(sem=sem))
+    if x is not None:
+        return render(request, "astuinternals.html", {"adminuname":auname, "x":x, "sid":sid, "ay":ay, "sem":sem})
+    else:
+        x = Student.objects.filter(Q(program=pgm) & Q(department=dept) & Q(ay=ay) & Q(semester=sem))
+        return render(request, "aviewstu1.html", {"x": x, "adminuname": auname})
+
+def aviewgrievance0(request):
+    auname = request.session.get("auname")
+    return render(request, "aviewgr0.html", {"adminuname":auname})
+def aviewgrievance1(request):
+    auname = request.session.get("auname")
+    gr = Grievance.objects.all()
+    lt=[]
+    if gr:
+        for i in gr:
+            id=i.pid
+            try:
+                x=Faculty.objects.get(facultyid=id)
+                lt.append(i)
+            except ObjectDoesNotExist:
+                pass
+        return render(request, "aviewgr1.html",{"adminuname":auname, "lt":lt})
+    else:
+        msg="No Grievances Posted"
+        return render(request, "aviewgr0.html", {"adminuname":auname, "msg":msg})
+
+
+def aviewgrievance2(request):
+    auname = request.session.get("auname")
+    gr = Grievance.objects.all().order_by('-date')
+    lt=[]
+    if gr:
+      for i in gr:
+            id=i.pid
+            try:
+                x=Student.objects.get(studentid=id)
+                lt.append(i)
+            except ObjectDoesNotExist:
+                pass
+      return render(request, "aviewgr1.html",{"adminuname":auname, "lt":lt})
+    else:
+        msg="No Grievances Posted"
+        return render(request, "aviewgr0.html", {"adminuname":auname, "msg":msg})
+
+def aviewgrissuestu(request, id):
+    auname = request.session.get("auname")
+    x=Grievance.objects.get(id=id)
+    x.status=1
+    x.save()
+    return render(request, "aviewgrissuestu.html", {"adminuname":auname, "x":x})
+
+def update_issue_status(request, id):
+    auname = request.session.get("auname")
+    x=Grievance.objects.get(id=id)
+    if x.status ==1:
+      x.solved=1
+      x.solvedby=1
+      x.save()
+      subject="Grievance Posted Has Been Solved"
+      message=f'Dear {x.name},\nThe issue which has been posted by you regarding "{x.category}", - "{x.issue}" at {x.date} has been solved by the university team. If it has not been solved and marked as solved you can contact adminstration team at room no:C325.\nThankYou\nTeam SCMS.'
+      email=settings.EMAIL_HOST_USER
+      rec={x.email}
+      send_mail(subject, message, email, rec)
+
+    referer = request.META.get('HTTP_REFERER')
+    return redirect(referer)

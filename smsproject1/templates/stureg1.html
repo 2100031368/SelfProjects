@@ -2,126 +2,116 @@
 
 {% block 'body' %}
 <center>
-    <h3 style="color:darkcyan">Enter Details to perform Registrations</h3>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#x2B06; Enter Details to perform Registrations &#x2B06; </b></h2><br>
+
     <form method="post">
         {% csrf_token %}
-
-        <table >
-            <tr>
-                {% if m.c1 %}<td bgcolor="lightpink" ><input type="text" value="{{m.c1}}"  name="c1" readonly style="width:280%"/></td>
+        <table style="font-family: 'Times New Roman', Times, serif; width: 80%;" class="table table-bordered table-striped" align="center" border="1">
+            <tr bgcolor="lightblue">
+              <td style="width=80%;" align="center">Courses</td>
+              <td align="center">Faculty</td>
             </tr>
+            {% if m.c1 %}
             <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c1.coursecode}}" name="c1" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c1.coursetitle}}" readonly style="width: 100%;" /></td>
                 <td>
-                    <select name="faculty_c1">
-                       <option value="">--Select--</option>
-                        {% if m.f11 %}<option >{{m.f11}}</option>{% endif %}
-                        {% if m.f12 %}<option >{{m.f12}}</option>{% endif %}
-                        {% if m.f13 %}<option >{{m.f13}}</option>{% endif %}
+                    <select name="faculty_c1" style="width: 100%;">
+                        <option value="">--Select--</option>
+                          {% if m.f11 %}<option value="{{m.f11.mappingid}}">{{m.f11}}</option>{% endif %}
+                          {% if m.f12 %}<option value="{{m.f12.mappingid}}">{{m.f12}}</option>{% endif %}
+                          {% if m.f13 %}<option value="{{m.f13.mappingid}}">{{m.f13}}</option>{% endif %}
                     </select>
                 </td>
-                {% endif %}
             </tr>
+            {% endif %}
 
+            {% if m.c2 %}
             <tr>
-                {% if m.c2 %}<td><input type="text" value="{{m.c2}}" name="c2" readonly style="width:280%"/></td>
-             </tr>
-            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c2.coursecode}}" name="c2" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c2.coursetitle}}" readonly style="width: 100%;" /></td>
                 <td>
+                    <select name="faculty_c2" style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f21 %}<option value="{{m.f21.mappingid}}">{{m.f21}}</option>{% endif %}
+                        {% if m.f22 %}<option value="{{m.f22.mappingid}}">{{m.f22}}</option>{% endif %}
+                        {% if m.f23 %}<option value="{{m.f23.mappingid}}">{{m.f23}}</option>{% endif %}
+                    </select>
+                </td>
+            </tr>
+            {% endif %}
 
-                <select name="faculty_c2">
-                    <option value="">--Select--</option>
-                    {% if m.f21 %}<option >{{m.f21}}</option>{% endif %}
-                    {% if m.f22 %}<option>{{m.f22}}</option>{% endif %}
-                    {% if m.f23 %}<option>{{m.f23}}</option>{% endif %}
-                </select>
+            {% if m.c3 %}
+            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c3.coursecode}}" name="c3" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c3.coursetitle}}" readonly style="width: 100%;" /></td>
+                <td>
+                    <select  name="faculty_c3" style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f31 %}<option value="{{m.f31.mappingid}}">{{m.f31}}</option>{% endif %}
+                        {% if m.f32 %}<option value="{{m.f32.mappingid}}">{{m.f32}}</option>{% endif %}
+                        {% if m.f33 %}<option value="{{m.f33.mappingid}}">{{m.f33}}</option>{% endif %}
+                    </select>
                 </td>
-                {% endif %}
             </tr>
+            {% endif %}
 
+            {% if m.c4 %}
             <tr>
-                {% if m.c3 %}<td><input type="text" value="{{m.c3}}" name="c3" readonly style="width:280%"/></td>
-            </tr>
-            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c4.coursecode}}" name="c4" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c1.coursetitle}}" readonly style="width: 100%;" /></td>
                 <td>
-                <select name="faculty_c3">
-                    <option value="">--Select--</option>
-                    {% if m.f31 %}<option>{{m.f31}}</option>{% endif %}
-                    {% if m.f32 %}<option >{{m.f32}}</option>{% endif %}
-                    {% if m.f33 %}<option>{{m.f33}}</option>{% endif %}
-                </select>
+                    <select name="faculty_c4" style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f41 %}<option value="{{m.f41.mappingid}}">{{m.f41}}</option>{% endif %}
+                        {% if m.f42 %}<option value="{{m.f42.mappingid}}">{{m.f42}}</option>{% endif %}
+                        {% if m.f43 %}<option value="{{m.f43.mappingid}}">{{m.f43}}</option>{% endif %}
+                    </select>
                 </td>
-                {% endif %}
             </tr>
-            <tr>
-                {% if m.c4 %}<td><input type="text" value="{{m.c4}}" name="c4" readonly style="width:280%"/></td>
-            </tr>
-            <tr>
-                <td>
-                <select name="faculty_c4">
-                    <option value="">--Select--</option>
-                    {% if m.f41 %}<option>{{m.f41}}</option>{% endif %}
-                    {% if m.f42 %}<option >{{m.f42}}</option>{% endif %}
-                    {% if m.f43 %}<option>{{m.f43}}</option>{% endif %}
-                </select>
-                </td>
-                {% endif %}
-            </tr>
-            <tr>
-                {% if m.c5 %}<td><input type="text" value="{{m.c5}}" name="c5" readonly style="width:280%"/></td>
-            </tr>
-            <tr>
-                <td>
-                <select name="faculty_c5">
-                    <option value="">--Select--</option>
-                    {% if m.f51 %}<option>{{m.f51}}</option>{% endif %}
-                    {% if m.f52 %}<option>{{m.f52}}</option>{% endif %}
-                    {% if m.f53 %}<option>{{m.f53}}</option>{% endif %}
-                </select>
-                </td>
-                {% endif %}
-            </tr>
+            {% endif %}
 
+            {% if m.c5 %}
             <tr>
-                {% if m.c6 %}<td><input type="text" value="{{m.c6}}" name="c6" readonly style="width:280% "/></td>
-            </tr>
-            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c5.coursecode}}" name="c5" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c5.coursetitle}}" readonly style="width: 100%;" /></td>
                 <td>
-                <select name="faculty_c6">
-                    <option value="">--Select--</option>
-                    {% if m.f61 %}<option >{{m.f61}}</option>{% endif %}
-                    {% if m.f62 %}<option>{{m.f62}}</option>{% endif %}
-                    {% if m.f63 %}<option>{{m.f63}}</option>{% endif %}
-                </select>
+                    <select name="faculty_c5"style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f51 %}<option value="{{m.f51.mappingid}}">{{m.f51}}</option>{% endif %}
+                        {% if m.f52 %}<option value="{{m.f52.mappingid}}">{{m.f52}}</option>{% endif %}
+                        {% if m.f53 %}<option value="{{m.f53.mappingid}}">{{m.f53}}</option>{% endif %}
+                    </select>
                 </td>
-                {% endif %}
             </tr>
+            {% endif %}
 
+            {% if m.c6 %}
             <tr>
-                {% if m.c7 %}<td><input type="text" value="{{m.c7}}" name="c7" readonly style="width:280%"/></td>
-            </tr>
-            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c6.coursecode}}" name="c6" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c6.coursetitle}}" readonly style="width: 100%;" /></td>
                 <td>
-                <select name="faculty_c7">
-                    <option value="">--Select--</option>
-                     {% if m.f71 %}<option >{{m.f71}}</option>{% endif %}
-                    {% if m.f72 %}<option >{{m.f72}}</option>{% endif %}
-                    {% if m.f73 %}<option>{{m.f73}}</option>{% endif %}
-                </select>
+                    <select name="faculty_c6" style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f61 %}<option value="{{m.f61.mappingid}}">{{m.f61}}</option>{% endif %}
+                        {% if m.f62 %}<option value="{{m.f62.mappingid}}" >{{m.f62}}</option>{% endif %}
+                        {% if m.f63 %}<option value="{{m.f63.mappingid}}" >{{m.f63}}</option>{% endif %}
+                    </select>
                 </td>
-                {% endif %}
             </tr>
-            <tr>
-                <td>
-                    <input type="submit" value="SAVE" />
-                </td>
+            {% endif %}
 
-                 <td>
-                    <input type="clear" value="CLEAR" />
+            {% if m.c7 %}
+            <tr>
+                <td style="width: 70%;"><input type="text" value="{{m.c7.coursecode}}" name="c7" readonly style="width: 100%;" />&nbsp;<input type="text" value="{{m.c7.coursetitle}}" readonly style="width: 100%;" /></td>
+                <td>
+                    <select name="faculty_c7" style="width: 100%;">
+                        <option value="">--Select--</option>
+                        {% if m.f71 %}<option value="{{m.f71.mappingid}}">{{m.f71}}</option>{% endif %}
+                        {% if m.f72 %}<option value="{{m.f72.mappingid}}">{{m.f72}}</option>{% endif %}
+                        {% if m.f73 %}<option value="{{m.f73.mappingid}}">{{m.f73}}</option>{% endif %}
+                    </select>
                 </td>
             </tr>
+            {% endif %}
         </table>
+        <br>
+        <input type="submit" value="SAVE" class="addbutton" />&nbsp;&nbsp;
+        <input type="reset" value="CLEAR" class="addbutton" />
     </form>
 </center>
-
-
 {% endblock %}

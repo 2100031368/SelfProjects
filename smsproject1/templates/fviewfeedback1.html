@@ -2,29 +2,30 @@
 
 {% block 'body' %}
 <center>
-<table border="1">
+    <h4 style="font-family: 'Times New Roman', Times, serif;"><b>Feedback Submitted by {{c2}}/{{c1}} Number Of Students</b></h4><br>
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4CA; Analysis For Each Question &#x1F4CA;</b></h3><br>
+<table border="1" style="font-family: 'Times New Roman', Times, serif;">
 {% for i in y %}
-
 
     <tr>
         <td>{{i.q1}}</td>
-        <td><a href="{% url 'fviewfeedback2' '1' ay yr sem sfid cc sec %}">GET</a></td>
+        <td><a href="{% url 'fviewfeedback2' '1' ay yr sem sfid cc sec c1 c2 %}">GET</a></td>
     </tr>
     <tr>
         <td>{{i.q2}}</td>
-        <td><a href="{% url 'fviewfeedback2' '2' ay yr sem sfid cc sec %}">GET</a></td>
+        <td><a href="{% url 'fviewfeedback2' '2' ay yr sem sfid cc sec c1 c2 %}">GET</a></td>
     </tr>
     <tr>
         <td>{{i.q3}}</td>
-        <td><a href="{% url 'fviewfeedback2' '3' ay yr sem sfid cc sec %}">GET</a></td>
+        <td><a href="{% url 'fviewfeedback2' '3' ay yr sem sfid cc sec c1 c2 %}">GET</a></td>
     </tr>
     <tr>
         <td>{{i.q4}}</td>
-        <td><a href="{% url 'fviewfeedback2' '4' ay yr sem sfid cc sec %}">GET</a></td>
+        <td><a href="{% url 'fviewfeedback2' '4' ay yr sem sfid cc sec c1 c2 %}">GET</a></td>
     </tr>
     <tr>
         <td>{{i.q5}}</td>
-        <td><a href="{% url 'fviewfeedback2' '5' ay yr sem sfid cc sec %}">GET</a></td>
+        <td><a href="{% url 'fviewfeedback2' '5' ay yr sem sfid cc sec c1 c2 %}">GET</a></td>
     </tr>
 
 

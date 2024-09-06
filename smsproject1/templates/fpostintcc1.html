@@ -1,8 +1,11 @@
 {% extends 'facultyhome.html' %}
 
 {% block 'body' %}
+
 <center>
-    <form method="post" action="{% url 'fpostintcc2' %}">
+    <h3><b>&#x1F511; Access To Post Internals &#x1F511;</b></h3>
+<div class="box">
+    <form method="post" action="{% url 'fpostintcc2' %}" >
     {% csrf_token %}
         <label>Course-ID: </label>
         <input type="text" value="{{c}}" name="sno" readonly /><br>
@@ -12,7 +15,7 @@
 
 
         <label>FacultyId: </label>
-        <input type="number" value="{{sid}}" name="fid" readonly /><br>
+        <input type="number" value="{{sfid}}" name="fid" readonly /><br>
 
         <label>Academic Year</label>
         <input type="text" value="{{ay}}" name="ayr" readonly /><br>
@@ -24,9 +27,11 @@
         <input type="text" value="{{sem}}" name="sm" readonly /><br>
 
         <label>Enable/Disable to post Content</label>
-       <input type="number" name="sd" min="0" max="1" required/><br>
+       <input type="number" name="sd" min="0" max="1" required/><br><br>
 
-        <input type="submit" value="SUBMIT" />
+        <input type="submit" value="SUBMIT" class="addbutton" />
     </form>
+
 </center>
+</div>
 {% endblock %}

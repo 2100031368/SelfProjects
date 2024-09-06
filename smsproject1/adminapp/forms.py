@@ -1,5 +1,5 @@
 from django import forms
-from .models import Faculty, Student, FacultyCourseMapping
+from .models import Faculty, Student, FacultyCourseMapping,Grievance
 
 class AddFacultyForm(forms.ModelForm):
     class Meta:
@@ -14,24 +14,25 @@ class AddStudentForm(forms.ModelForm):
         fields="__all__"
         labels ={"studentid": "Give Student Id ", "fullname":"Full Name ", "ay":"Academic Year Joining ","cur_ay":"Current Academic Year ", "cur_yr":"Current Year ","cur_sem":"Current Semester" }
 
-    def __init__(self, *args, **kwargs):
-        super(AddStudentForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
 
 
 class StudentUpdateForm(forms.ModelForm):
     class Meta:
         model=Student
         fields="__all__"
-        exclude={"studentid"}
+        exclude={"studentid", "password"}
+        labels = {"fullname": "Full Name ", "ay": "Academic Year Joining ",
+                  "cur_ay": "Current Academic Year ", "cur_yr": "Current Year ", "cur_sem": "Current Semester"}
 
 
 class FacultyUpdateForm(forms.ModelForm):
     class Meta:
         model=Faculty
         fields="__all__"
-        exclude={"facultyid"}
+        exclude={"facultyid", "password"}
+        labels = {"fullname": "Full Name ", "ay": "Academic Year Joining ",
+                  "cur_ay": "Current Academic Year ", "cur_yr": "Current Year ", "cur_sem": "Current Semester", "graccess":"GrievancesViewAccess", "access":"Access", "flag":"SelfAccountAccess"}
+
 
 class FacultyCourseMappingForm(forms.ModelForm):
     class Meta:
@@ -40,5 +41,16 @@ class FacultyCourseMappingForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(FacultyCourseMappingForm, self).__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+class GrievanceForm(forms.ModelForm):
+    class Meta:
+        model=Grievance
+        fields ="__all__"
+        exclude={"pid", "prgm", "dept", "ay", "sem", "date", "status", "solved", "email", "solvedby"}
+
+    def __init__(self, *args, **kwargs):
+        super(GrievanceForm, self).__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'

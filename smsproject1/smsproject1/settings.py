@@ -36,8 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'adminapp',
+    'django.contrib.staticfiles',    'adminapp',
     'facultyapp',
     'studentapp',
     'regapp',
@@ -151,5 +150,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hemasreebhavana@gmail.com'  # Replace with your email address
-EMAIL_HOST_PASSWORD = 'zxbwuwzjikavjmxt'  # Replace with your email password
+EMAIL_HOST_USER = 'hemasreebhavana@gmail.com'
+EMAIL_HOST_PASSWORD = 'odfgtisgwkvwhmrp'
+EMAIL_TIMEOUT = 860
+

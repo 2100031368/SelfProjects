@@ -25,10 +25,7 @@ from . import views # . represent current directory
 urlpatterns = [
 
     path('admin/', admin.site.urls),
-    path("", views.demofunction, name='demo'),
-    path("demo1", views.demofunction1, name="demo1"),
-    path("demo2", views.demofunction2, name="demo2"),
-    path("home", views.home, name="home"),
+    path("", views.home, name="home"),
     path("about", views.about,name="about" ),
     path("login", views.login, name="login"),
     path("studentlogin", views.studentlogin, name="studentlogin"),

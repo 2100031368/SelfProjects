@@ -1,32 +1,37 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center">View Faculty Details</h2>
+<h4 align="center" style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; View Faculty Details &#x25BC; </b></h2>
 
 <center>
     <input class="form-control" id="myInput" type="text" placeholder="Search">
-    <table border="2" class="table table-bordered table-striped">
+    <table border="2" class="table table-bordered table-striped" style="font-family: 'Times New Roman', Times, serif;">
         <thead>
+
             <tr bgcolor="lightblue">
-                <td>Faculty id</td>
-                <td>Full name</td>
-                <td>Gender</td>
-                <td>Department</td>
-                <td>Qualification</td>
-                <td>Designation</td>
-                <td>Password</td>
-                <td>Email</td>
-                <td>Contact</td>
-                <td>Action</td>
+                <td><b>Faculty id</b></td>
+                <td><b>Full name</b></td>
+                <td><b>Gender</b></td>
+                <td><b>Department</b></td>
+                <td><b>Academic Year Joined</b></td>
+                <td><b>Qualification</b></td>
+                <td><b>Designation</b></td>
+                <td><b>Password</b></td>
+                <td><b>Email</b></td>
+                <td><b>Contact</b></td>
+                <td><b>Action</b></td>
             </tr>
-        </thead>
-        <tbody id="myTable">
+         </thead>
+
             {% for faculty in facultydata %}
+            <tbody class="myInput">
             <tr align="center">
                 <td>{{faculty.facultyid}}</td>
                 <td>{{faculty.fullname}}</td>
                 <td>{{faculty.gender}}</td>
                 <td>{{faculty.department}}</td>
+                <td>{{faculty.ay}}</td>
                 <td>{{faculty.qualification}}</td>
                 <td>{{faculty.designation}}</td>
                 <td>{{faculty.password}}</td>
@@ -34,8 +39,9 @@
                 <td>{{faculty.contact}}</td>
                 <td><a href="/updatefaculty2/{{faculty.facultyid}}">Update</a></td>
             </tr>
+            </tbody>
             {% endfor %}
-        </tbody>
+
     </table>
 </center>
 
@@ -47,19 +53,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function filterTable() {
     const filter = document.getElementById("myInput").value.toLowerCase();
-    const rows = document.getElementById("myTable").getElementsByTagName("tr");
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName("td");
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
         let display = "none";
-        for (let j = 0; j < cells.length; j++) {
-            const cellText = cells[j].textContent || cells[j].innerText;
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
             if (cellText.toLowerCase().indexOf(filter) > -1) {
                 display = "";
                 break;
             }
         }
-        rows[i].style.display = display;
-    }
+        row.style.display = display;
+    });
 }
 </script>
 

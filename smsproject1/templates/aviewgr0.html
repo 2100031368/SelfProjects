@@ -1,0 +1,17 @@
+{% extends 'adminhome.html' %}
+{% load static %}
+{% block 'body' %}
+      <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+<div id="header">
+    <h2 style="align:center;">Admin - Grievance Module </h2>
+    <nav id="nav1">
+      <button class="button" onclick="window.location.href='{% url 'aviewgrievance1' %}'"><b>FACULTY</b></button>&nbsp;&nbsp;
+      <button class="button" onclick="window.location.href='{% url 'aviewgrievance2' %}'"><b>STUDENT</b></button>
+    </nav>
+</div>
+
+<div id="content">
+    <img src="{% static 'images/grievance.png' %}" alt="Center Image" />
+</div>
+{% endblock %}

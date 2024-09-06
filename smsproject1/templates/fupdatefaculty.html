@@ -1,0 +1,15 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<h2 align="center">Update faculty: {{f}}</h2>
+<br>
+<div class="box">
+<form method="post" align="center" class="form-control">
+    {% csrf_token %}
+    {{form.as_p}}
+    <br>
+    <input type="submit" value="UPDATE" class="addbutton"/>&nbsp;
+    <input type="reset" value="CLEAR" class="addbutton"/>
+</form>
+ </div>
+{% endblock %}

@@ -4,32 +4,39 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/form1.css' %}" />
 
 {% block 'body' %}
+<style>
+    .login-container h1{
+     font-family: "Times New Roman", Times, serif;
+    }
+
+    .login-container h4{
+     font-family: "Times New Roman", Times, serif;
+    }
+</style>
 <body style="background-image: url('{% static 'images/lg2.png' %}'); background-size: cover;">
     <div class="login-container">
-        <h1 align="center"><u>Admin Login</u> </h1>
-        <h4 align="center" style="color:red">{{msg}}</h4>
+        <h4 align="center" style="color:red;font-family: 'Times New Roman', Times, serif;">{{msg}}</h4><br>
+        <h1 align="center" style="font-family: 'Times New Roman', Times, serif;">&#128100; Admin Login</h1><br>
         <center>
             <form method="post" action="{% url 'checkadminlogin' %}" >
                 {% csrf_token %}
-                <table>
+                <table style="font-family: 'Times New Roman', Times, serif;">
                     <tr>
-                        <td>Enter Username: </td>
+                        <td><b>Enter Username : </b></td>
                         <td><input type="text" name="uname" required/></td>
                     </tr>
-                    <tr><td></td></tr>
-                    <tr><td></td></tr>
-                    <tr><td></td></tr>
-                    <tr><td></td></tr>
+                    <tr><td>&nbsp</td></tr>
                     <tr>
-                        <td>Enter Password: </td>
+                        <td><b>Enter Password : </b></td>
                         <td><input type="password" name="pwd" required/></td>
                     </tr>
+                    <tr><td>&nbsp</td></tr>
 
                     <tr align="center">
-                        <td><input type="submit" value="Login" class="button"/> </td>
-                        <td><input type="reset" value="Clear" class="button"/></td>
+                        <td><input type="submit" value="LOGIN" class="button"/> </td>
+                        <td><input type="reset" value="CLEAR" class="button"/></td>
                     </tr>
-                    <tr><td></td></tr>
+
                 </table>
             </form>
         </center>

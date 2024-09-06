@@ -13,7 +13,9 @@
 .container {
   padding: 10px 20px;
 }
-
+.container h4{
+font-family: 'Times New Roman', Times, serif;
+}
 /* nav bar  -- vertical*/
 
 body {
@@ -80,3 +82,31 @@ body {
   border-right: none;
 }
 
+.feedback{
+ border: 2px solid black;
+ border-radius: 5px;
+ padding: 20px;
+ width: 40%;
+ margin: 0 auto;
+ font-family: 'Times New Roman', Times, serif;
+
+}
+
+/* Custom styles for checkboxes */
+    .custom-checkbox {
+        appearance: none; /* Remove default appearance */
+        width: 20px; /* Adjust width as needed */
+        height: 20px; /* Adjust height as needed */
+        border: 2px solid black; /* Black border for the checkbox */
+    }
+
+    /* Custom styles for checked state */
+    .custom-checkbox:checked {
+        background-color: green; /* Green background when checked */
+    }
+
+    /* Custom styles for check mark */
+    .custom-checkbox:checked::after {
+        content: '\2714'; /* Unicode check mark character */
+        color: white; /* White color for check mark */
+    }

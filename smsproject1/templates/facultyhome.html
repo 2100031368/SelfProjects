@@ -9,8 +9,8 @@
 </head>
 <body>
 <div class="topnavbar">
-  <h2 align="left"><strong>SMS->></strong></h2>
-	<h3 align="center">Student Course Management -> (Faculty Portal)</h3>
+    <img src="{% static 'images/scmslogo.png' %}" width="75" height="50" style="margin-right:100px;">
+	<h3 align="center" style="margin-left:100px;">Student Course Management -> (Faculty Portal)</h3>
 	<h4 align="right" style="color:white">Welcome {{sfid}}</h4>
 </div>
 
@@ -18,30 +18,32 @@
   <ul>
 <a href="{% url 'facultyhome' %}">Home</a>
       <a href="{% url 'viewfstudents1' %}">View Students</a>
-       <a href="{% url 'postatt0' %}">Post Attendance</a>
+       <a href="{% url 'postatt1' %}">Post Attendance</a>
        <li class="services">
       <a>Courses</a>
        <ul class="dropdown">
            <li><a href="{% url 'facultycourse' %}">My Courses</a></li>
-           <li><a href="{% url 'fccontent0' %}">Material</a></li>
+           <li><a href="{% url 'fccontent1' %}">Material</a></li>
            <li><a href="{% url 'fpostintcc0' %}">Internals</a></li>
-           <li><a href="{% url 'fhandout0' %}">HandOut</a></li>
+           <li><a href="{% url 'fhandout0' %}"> Handout</a></li>
 
        </ul>
     </li>
+<a href="{% url 'ffhome' %}">FacultyData</a>
+ <a href="{% url 'fshome' %}">StudentData</a>
+ <a href="{% url 'fgrievance0' %}">Grievances</a>
 <a href="{% url 'fviewfeedback0' %}">View Feedbacks</a>
-<a href="{% url 'facultychangepwd' %}">Change password</a>&nbsp;&nbsp;
+<a href="{% url 'facultyupdtpwd' %}">Change password</a>&nbsp;&nbsp;
 <a href="{% url 'facultylogin' %}">LogOut</a>
 
     </ul>
 </div>
 
 
-<div class="content" style="background-image: url('{% static 'images/clgbg1.jpg' %}'); width:100%; height:100%;">
-  <!-- Your page content goes here -->
+<div class="content">
    {% block 'body' %}
      <center>
-         <h3 style="color:green">{{msg}}</h3>
+         <h3 style="font-family: 'Times New Roman', Times, serif; color:red;" >{{msg}}</h3>
         <img src="{% static 'images/erpimg1.png' %}" width=30% height=50% >
      </center>
 	{% endblock %}

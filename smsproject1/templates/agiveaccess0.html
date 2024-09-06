@@ -1,0 +1,100 @@
+{% extends 'adminhome.html' %}
+
+ {% block 'body' %}
+
+<script>
+    function collectNumberData() {
+        const b = [];
+        const rows = document.querySelectorAll('tbody.myInput tr');
+
+        rows.forEach((row) => {
+            const numberInput = row.querySelector('input[type="number"]');
+
+                const facultyid = row.querySelector('.facultyid').innerText.trim();
+                const access = numberInput.value;
+                const rowData = {
+                    facultyid: facultyid,
+                    access: access
+                };
+                b.push(rowData);
+
+        });
+
+        // Convert data to JSON and store it in a hidden input
+        document.getElementById('hiddenData').value = JSON.stringify(b);
+    }
+</script>
+
+<h4 align="center" style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Faculty LIST AVAILABLE &#x25BC; </b></h2>
+
+<center>
+    <input class="form-control" id="myInput" type="text" placeholder="Search ...">
+    <form id="facultyForm" action="{% url 'agiveaccess1' %}" method="post" onsubmit="collectNumberData()">
+        {% csrf_token %}
+        <table border="1" style="font-family: 'Times New Roman', Times, serif; margin-left:15px;">
+            <thead>
+                <tr bgcolor="lightblue">
+                    <td><b>Faculty id</b></td>
+                    <td><b>Full name</b></td>
+                    <td><b>Gender</b></td>
+                    <td><b>Department</b></td>
+                    <td><b>Academic Year Joined</b></td>
+                    <td><b>Qualification</b></td>
+                    <td><b>Designation</b></td>
+                    <td><b>Password</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Contact</b></td>
+                    <td><b>Access</b></td>
+                </tr>
+            </thead>
+            <tbody class="myInput">
+                {% for faculty in facultydata %}
+                <tr align="center">
+                    <td class="facultyid">{{ faculty.facultyid }}</td>
+                    <td class="fullname">{{ faculty.fullname }}</td>
+                    <td class="gender">{{ faculty.gender }}</td>
+                    <td class="department">{{ faculty.department }}</td>
+                    <td class="ay">{{ faculty.ay }}</td>
+                    <td class="qualification">{{ faculty.qualification }}</td>
+                    <td class="designation">{{ faculty.designation }}</td>
+                    <td class="password">{{ faculty.password }}</td>
+                    <td class="email">{{ faculty.email }}</td>
+                    <td class="contact">{{ faculty.contact }}</td>
+                     <td><input type="number" value="{{faculty.access}}" min="0" max="1"/></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <input type="hidden" id="hiddenData" name="hiddenData">
+        <button type="submit" class="addbutton">Save</button>
+    </form>
+
+</center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
+
+
+{% endblock %}

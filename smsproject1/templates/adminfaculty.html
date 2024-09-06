@@ -7,15 +7,15 @@
 <div id="header">
     <h2>Admin - Faculty Module</h2>
     <nav id="nav1">
-        <a href="{% url 'viewfaculty' %}">ViewFaculties</a>&nbsp&nbsp
-        <a href="{% url 'addfaculty' %}" >ADD</a>&nbsp&nbsp
-        <a href="{% url 'deletefaculty' %}" >DELETE</a>&nbsp&nbsp
+    <button class="button" onclick="window.location.href='{% url 'viewfaculty' %}'"><b>VIEW</b></button>&nbsp;&nbsp;
+    <button class="button" onclick="window.location.href='{% url 'addfaculty' %}'"><b>ADD</b></button>&nbsp;&nbsp;
+        <!--<a href="{% url 'deletefaculty' %}" >DELETE</a>&nbsp&nbsp -->
 
     </nav>
 </div>
 
 <div id="content">
-    <img src="{% static 'images/facultybg1.png' %}" style="widht:50px" alt="Center Image" />
+    <img src="{% static 'images/flty1.png' %}" style="widht:50px" alt="Center Image" />
 </div>
 
 {% endblock %}

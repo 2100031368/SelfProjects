@@ -1,0 +1,18 @@
+{% extends 'facultyhome.html' %}
+{% load static %}
+{% block 'body' %}
+      <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
+
+<div id="header">
+    <h2 style="align:center;">Faculty - Student Module </h2>
+    <nav id="nav1">
+      <button class="button" onclick="window.location.href='{% url 'fviewstudents' %}'"><b>VIEW</b></button>&nbsp;&nbsp;
+
+        <button class="button" onclick="window.location.href='{% url 'faddstudent' %}'"><b>ADD</b></button>
+    </nav>
+</div>
+
+<div id="content">
+    <img src="{% static 'images/stubg1.jpg' %}" alt="Center Image" />
+</div>
+{% endblock %}

@@ -1,11 +1,11 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><u>View Course Details</u></h2>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; View Course Details &#11013;</b></h2>
 
 <center>
     <input class="form-control" id="myInput" type="text" placeholder="Search">
-    <table border="2" class="table table-bordered table-striped">
+    <table border="1" style="font-family: 'Times New Roman', Times, serif; margin-left:50px; font-size:14px;" align="center">
 
         <thead>
             <tr bgcolor="lightblue">
@@ -18,6 +18,7 @@
                 <td>Course Title</td>
                 <td>LTPS</td>
                 <td>Course Credits</td>
+                <td>Action</td>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -32,6 +33,7 @@
                 <td>{{course.coursetitle}}</td>
                 <td>{{course.ltps}}</td>
                 <td>{{course.credits}}</td>
+                <td><a href="/updatecourse1/{{course.coursecode}}">UPDATE</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -39,27 +41,14 @@
 </center>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const input = document.getElementById("myInput");
-    input.addEventListener("input", filterTable);
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 });
-
-function filterTable() {
-    const filter = document.getElementById("myInput").value.toLowerCase();
-    const rows = document.getElementById("myTable").getElementsByTagName("tr");
-    for (let i = 0; i < rows.length; i++) {
-        const cells = rows[i].getElementsByTagName("td");
-        let display = "none";
-        for (let j = 0; j < cells.length; j++) {
-            const cellText = cells[j].textContent || cells[j].innerText;
-            if (cellText.toLowerCase().indexOf(filter) > -1) {
-                display = "";
-                break;
-            }
-        }
-        rows[i].style.display = display;
-    }
-}
 </script>
 
 {% endblock %}

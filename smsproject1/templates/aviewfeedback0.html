@@ -3,18 +3,18 @@
 {% block 'body' %}
 
 <center>
-    <h3><u>FEEDBACKS</u></h3><br>
-    <input class="form-control" id="myInput" type="text" placeholder="Search">
-    <table border="2" style="font-size:13px">
-        <tr>
-            <td>Academic Year</td>
-            <td>Cycle - Year</td>
-            <td>Semester</td>
-            <td>Department</td>
-            <td>FacultyID - Faculty Name</td>
-            <td>CourseCode - CourseTitle</td>
-            <td>Section</td>
-            <td>Action</td>
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4AC; FEEDBACKS POSTED &#x1F4AC;</b></h3><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search"><br><br>
+    <table border="2" style="font-size: 14px;font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
+            <td><b>Academic Year</b></td>
+            <td><b>Cycle - Year</b></td>
+            <td><b>Semester</b></td>
+            <td><b>Department</b></td>
+            <td><b>FacultyID - Faculty Name</b></td>
+            <td><b>CourseCode - CourseTitle</b></td>
+            <td><b>Section</b></td>
+            <td><b>Action</b></td>
         </tr>
 
         {% for i in x %}
@@ -27,7 +27,7 @@
             <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
             <td>{{i.section}}</td>
             <td>
-                <a href="aviewfeedback1/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">VIEW</a><br>
+                <a href="aviewfeedback1/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">VIEW</a><br><br>
                 <a href="aviewfeedback3/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">Analyze</a>
             </td>
         </tr>

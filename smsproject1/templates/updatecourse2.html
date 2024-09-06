@@ -5,7 +5,7 @@
 <h3 align="center">Update Course</h3>
 <br>
 <center>
-<form method="post" action="{% url 'updatecourse3' %}" style="color:white">
+<form method="post" action="/updatecourse2" style="color:white">
     {% csrf_token %}
     <table align="center" width="40%" height="50%" >
         <tr bgcolor="lightblue">
@@ -17,10 +17,9 @@
             <td><label>Select Department:</label></td>
             <td>
                 <select name="dept" required>
-                    <option value=" ">{{c.department}}</option>
-                    <option value="CSE(HONORS)">CSE(H)</option>
-                    <option value="CSE(REGULAR)">CSE(R)</option>
-                    <option value="CS&IT">CSIT</option>
+                    <option value="{{c.department}} "></option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
                 </select>
             </td>
         </tr>
@@ -30,7 +29,7 @@
             <td><label>Select Program:</label></td>
             <td>
                 <select name="program" required>
-                    <option value="">{{c.program}}</option>
+                    <option value="{{c.program}}"></option>
                     <option value="BTECH">BTECH</option>
                     <option value="MTECH">MTECH</option>
                 </select>
@@ -42,7 +41,7 @@
             <td><label>Select Academic Year:</label></td>
             <td>
                 <select name="ay" required >
-                    <option value="">{{c.academicyear}}</option>
+                    <option value="{{c.academicyear}}"></option>
                     <option value="2023-2024">2023-2024</option>
                     <option value="2022-2023">2022-2023</option>
                 </select>
@@ -53,7 +52,7 @@
             <td><label>Select Semester:</label></td>
             <td>
                 <select name="sem" required >
-                    <option value=" ">{{c.semester}}</option>
+                    <option value="{{c.semester}} "></option>
                     <option value="ODD">ODD</option>
                     <option value="EVEN">EVEN</option>
                 </select>
@@ -63,7 +62,7 @@
 
         <tr>
               <td><label>Enter Year: </label></td>
-            <td><input type="number" name="year"  placeholder="{{c.year}}" min="1" max="4" required/></td>
+            <td><input type="number" name="year"  value="{{c.year}}" min="1" max="4" required/></td>
         </tr>
 
 

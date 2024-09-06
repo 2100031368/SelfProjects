@@ -2,44 +2,28 @@
 
 {% block 'body' %}
 
+<style>
+.readonly-field {
+    width: 410px;  /* Adjust the width as needed */
+}
+</style>
+
 <center>
-<form method="post" action="{% url 'sfeedback2' %}">
+
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4AC;SUBMIT YOUR VALUABLE FEEDBACK &#x1F4AC;</b></h3><br>
+    <div class="box">
+<form method="post" action="/sfeedback2/{{fid}}/{{cc}}/{{sec}} ">
     {% csrf_token %}
 
-    <label>Student Id</label>
-    <input type="number" value="{{st.studentid}}" name="sid" readonly /><br>
-
-    <label>Faculty Id</label>
-    <input type="number" value="{{fid}}" name="fid" readonly /><br>
-
-    <label>Program</label>
-    <input type="text" value="{{st.program}}" name="sprogram"readonly/><br>
-
-    <label>Department</label>
-    <input type="text" value="{{st.department}}" name="sdept" readonly/><br>
-
-    <label>Academic Year</label>
-    <input type="text" value="{{st.cur_ay}}" name="say" readonly/><br>
-
-    <label>Year</label>
-    <input type="number" value="{{st.cur_yr}}" name="syr" readonly/><br>
-
-    <label>Semester</label>
-    <input type="text" value="{{st.cur_sem}}" name="ssem" readonly/><br>
-
-    <label>CourseCode</label>
-    <input type="text" value="{{cc}}" name="ccode" readonly/><br>
-
-    <label>Section</label>
-    <input type="number" value="{{sec}}" name="section" readonly/><br>
-
    {{form.as_p}}
+    <br>
 
-    <input type="submit" value="Save" />
-    <input type="clear" value="Clear" />
+    <input type="submit" value="SUBMIT" class="addbutton"/>
+    <input type="reset" value="CLEAR" class="addbutton"/>
 
 
 </form>
+        </div>
 </center>
 
 {% endblock %}

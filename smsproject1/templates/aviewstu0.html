@@ -1,22 +1,26 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
+
 <center>
+    <div class="box">
     <form method="post" action="{% url 'viewstudents' %}">
         {% csrf_token %}
+
         <label>Program</label>
         <input type="text" name="prgm" required /><br>
 
         <label>Department</label>
-        <input type="text" name="dept" required/><br>
+        <input  type="text" name="dept" required/><br>
 
         <label>Academic Year</label>
-        <input type="text" name="ay"/><br>
+        <input  type="text" name="ay"/><br>
 
         <label>Semester</label>
         <input type="text" name="sem" /><br>
 
         <input type="submit" value="GET" />
     </form>
+    </div>
 </center>
 {% endblock %}

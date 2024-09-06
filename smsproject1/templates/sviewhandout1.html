@@ -1,11 +1,11 @@
 {% extends 'studenthome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><u>View Course Details</u></h2>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; View Course Details &#x25BC;</b></h2>
 
 
 <center>
-<table border="2" class="table table-bordered table-striped">
+<table border="2" class="table table-bordered table-striped" style="font-family: 'Times New Roman', Times, serif;">
     <thead>
     <tr bgcolor="lightblue">
         <td>CourseCode</td>
@@ -15,58 +15,58 @@
     </thead>
     <tbody id="myTable">
      <tr align="center">
-         {% if c.s1 %}
-         <td>{{c.cc1}}</td>
-         <td>{{c.s1}}</td>
-         <td><a href="sviewhd2/{{c.cc1}}">Handout</a></td>
+         {% if c.cc1 %}
+         <td>{{c.cc1.coursecode}}</td>
+         <td>{{c.cc1.coursetitle}}</td>
+         <td><a href="sviewhd2/{{c.cc1.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s2 %}
-          <td>{{c.cc2}}</td>
-         <td>{{c.s2}}</td>
-         <td><a href="sviewhd2/{{c.cc2}}">Handout</a></td>
+         {% if c.cc2 %}
+          <td>{{c.cc2.coursecode}}</td>
+         <td>{{c.cc2.coursetitle}}</td>
+         <td><a href="sviewhd2/{{c.cc2.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s3 %}
-          <td>{{c.cc3}}</td>
-         <td>{{c.s3}}</td>
-           <td><a href="sviewhd2/{{c.cc3}}">Handout</a></td>
+         {% if c.cc3 %}
+          <td>{{c.cc3.coursecode}}</td>
+         <td>{{c.cc3.coursetitle}}</td>
+           <td><a href="sviewhd2/{{c.cc3.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
 
     <tr align="center">
-         {% if c.s4 %}
-         <td>{{c.cc4}}</td>
-        <td>{{c.s4}}</td>
-          <td><a href="sviewhd2/{{c.cc4}}">Handout</a></td>
+         {% if c.cc4 %}
+         <td>{{c.cc4.coursecode}}</td>
+        <td>{{c.cc4.coursetitle}}</td>
+          <td><a href="sviewhd2/{{c.cc4.coursecode}}">Handout</a></td>
         {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s5 %}
-          <td>{{c.cc5}}</td>
-         <td>{{c.s5}}</td>
-           <td><a href="sviewhd2/{{c.cc5}}">Handout</a></td>
+         {% if c.cc5 %}
+          <td>{{c.cc5.coursecode}}</td>
+         <td>{{c.cc5.coursetitle}}</td>
+           <td><a href="sviewhd2/{{c.cc5.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s6 %}
-          <td>{{c.cc6}}</td>
-         <td>{{c.s6}}</td>
-           <td><a href="sviewhd2/{{c.cc6}}">Handout</a></td>
+         {% if c.cc6 %}
+          <td>{{c.cc6.coursecode}}</td>
+         <td>{{c.cc6.coursetitle}}</td>
+           <td><a href="sviewhd2/{{c.cc6.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s7 %}
-          <td>{{c.cc7}}</td>
-         <td>{{c.s7}}</td>
-           <td><a href="sviewhd2/{{c.cc7}}">Handout</a></td>
+         {% if c.cc7 %}
+          <td>{{c.cc7.coursecode}}</td>
+         <td>{{c.cc7.coursetile}}</td>
+           <td><a href="sviewhd2/{{c.cc7.coursecode}}">Handout</a></td>
          {% endif %}
      </tr>
      </tbody>

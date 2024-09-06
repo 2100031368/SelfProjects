@@ -3,19 +3,87 @@
 {% block 'body' %}
 
 <center>
-  <div class="card">
 
-  <div class="container">
-   {% if c.s1 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc1}}  - {{ c.f1 }} - {{c.sec1}}</h4>{% endif %}
-     {% if c.s2 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc2}} - {{ c.f2}} - {{c.sec2}}</h4>{% endif %}
-     {% if c.s3 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc3}} - {{ c.f3}} - {{c.sec3}}</h4>{% endif %}
-     {% if c.s4 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc4}} - {{ c.f4}} - {{c.sec4}}</h4>{% endif %}
-     {% if c.s5 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc5}} - {{ c.f5}} - {{c.sec5}}</h4>{% endif %}
-     {% if c.s6 %} v<h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc6}} - {{ c.f6}} - {{c.sec6}}</h4>{% endif %}
-     {% if c.s7 %} <h4><b>Course-Faculty-Section:&nbsp&nbsp&nbsp&nbsp</b>{{c.cc7}} - {{ c.f7}} - {{c.sec7}}</h4>{% endif %}
+   <h2 style="font-family: 'Times New Roman', Times, serif;"><b>Registration History of {{c.sid.studentid}}</b></h2>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+      <tr bgcolor="lightblue">
+        <td>CourseCode</td>
+        <td>CourseTitle</td>
+        <td>FacultyID</td>
+        <td>Faculty Name</td>
+        <td>Section</td>
+      </tr>
+      {% if c.cc1 %}
+       <tr>
+         <td>{{c.cc1.coursecode}}</td>
+         <td>{{c.cc1.coursetitle}}</td>
+         <td>{{c.fcm1.faculty.facultyid}}</td>
+         <td>{{c.fcm1.faculty.fullname}}</td>
+         <td>{{c.fcm1.section}}</td>
+       </tr>
+      {% endif %}
 
-  </div>
-</div>
+      {% if c.cc2 %}
+       <tr>
+         <td>{{c.cc2.coursecode}}</td>
+         <td>{{c.cc2.coursetitle}}</td>
+         <td>{{c.fcm2.faculty.facultyid}}</td>
+         <td>{{c.fcm2.faculty.fullname}}</td>
+         <td>{{c.fcm2.section}}</td>
+       </tr>
+      {% endif %}
+
+      {% if c.cc3 %}
+       <tr>
+         <td>{{c.cc3.coursecode}}</td>
+         <td>{{c.cc3.coursetitle}}</td>
+         <td>{{c.fcm3.faculty.facultyid}}</td>
+         <td>{{c.fcm3.faculty.fullname}}</td>
+         <td>{{c.fcm3.section}}</td>
+       </tr>
+      {% endif %}
+
+      {% if c.cc4 %}
+       <tr>
+         <td>{{c.cc4.coursecode}}</td>
+         <td>{{c.cc4.coursetitle}}</td>
+         <td>{{c.fcm4.faculty.facultyid}}</td>
+         <td>{{c.fcm4.faculty.fullname}}</td>
+         <td>{{c.fcm4.section}}</td>
+       </tr>
+      {% endif %}
+
+      {% if c.cc5 %}
+       <tr>
+         <td>{{c.cc5.coursecode}}</td>
+         <td>{{c.cc5.coursetitle}}</td>
+         <td>{{c.fcm5.faculty.facultyid}}</td>
+         <td>{{c.fcm5.faculty.fullname}}</td>
+         <td>{{c.fcm5.section}}</td>
+       </tr>
+       {% endif %}
+
+      {% if c.cc6 %}
+       <tr>
+         <td>{{c.cc6.coursecode}}</td>
+         <td>{{c.cc6.coursetitle}}</td>
+         <td>{{c.fcm6.faculty.facultyid}}</td>
+         <td>{{c.fcm6.faculty.fullname}}</td>
+         <td>{{c.fcm6.section}}</td>
+       </tr>
+      {% endif %}
+
+      {% if c.cc7 %}
+       <tr>
+         <td>{{c.cc7.coursecode}}</td>
+         <td>{{c.cc7.coursetitle}}</td>
+         <td>{{c.fcm7.faculty.facultyid}}</td>
+         <td>{{c.fcm7.faculty.fullname}}</td>
+         <td>{{c.fcm7.section}}</td>
+       </tr>
+      {% endif %}
+    </table>
+
 </center>
 
 {% endblock %}

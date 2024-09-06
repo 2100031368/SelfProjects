@@ -1,16 +1,15 @@
-.button {
-  position: relative;
-  background-color: lightgreen;
-  border: none;
-  font-size: 10px;
-  color: #FFFFFF;
-  padding: 10px;
-  width: 100px;
-  text-align: center;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer;
+.button{
+  background-color: white;
+  color: black;
+  border: 2px solid #04AA6D;
+  width:20%;
 }
+
+.button:hover {
+  background-color: lightblue;
+  color: white;
+}
+
 
 .addbutton {
   position: relative;
@@ -152,3 +151,62 @@ li {
     color: white;
     text-decoration: none;
 }
+
+.font{
+font-family: 'Times New Roman', Times, serif;
+}
+
+/*  box around forms */
+ .box {
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 20px;
+        width: 40%;
+        margin: 0 auto;
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url('/static/images/formbg2.jpg');
+ }
+
+
+
+ .vid {
+    width: 90%;
+    height: 10%;
+    position: relative;
+    overflow: hidden;
+}
+
+.vid video {
+    width: 100%;
+    height: 80%;
+    object-fit: cover; /* This ensures the video covers the div completely */
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.content{
+background-image: url('/static/images/use3.jpg');
+max-height: 1500px;
+overflow-y: auto;
+}
+
+ .form-control{
+     font-family:'Times New Roman', Times, serif;
+     font-size:15px;
+    }
+   .form-control label {
+    font-weight: bold; /* Making labels bold */
+    margin-bottom: 50px; /* Adding some space between labels */
+  }
+  .form-control input[type="text"],
+  .form-control select,
+  .form-control textarea {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 15px;
+    margin-bottom: 10px; /* Adding space below input fields */
+    width: 100%; /* Ensuring input fields take full width */
+    box-sizing: border-box; /* Including padding and border in width calculation */
+    padding: 5px; /* Adding padding for better spacing */
+  }
+

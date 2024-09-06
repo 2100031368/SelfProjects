@@ -2,64 +2,137 @@
 
 {% block 'body' %}
 <center>
-
+<h4><b>Post Internals for - {{sid}}</b></h4>
 <form method="post" action="{% url 'fpostint3' %}">
     {% csrf_token %}
-    <label>Department : </label>
-    <input type="text" value="{{dept}}" name="dept" readonly /><br>
-    <label>Academic year : </label>
-     <input type="text" value="{{ay}}" name="ay" readonly/><br>
-    <label>Year : </label>
-     <input type="number" value="{{yr}}" name="yr" readonly/><br>
+    <table style="font-family: 'Times New Roman', Times, serif;" border="1">
+        <tr>
+            <td>Student Id</td>
+            <td><input type="number" value="{{sid}}" name="sid" readonly/></td>
+        </tr>
+        <tr>
+            <td>Department</td>
+            <td><input type="text" value="{{dept}}" name="dept" readonly /></td>
+        </tr>
+        <tr>
+            <td>Academic Year</td>
+            <td><input type="text" value="{{ay}}" name="ay" readonly/></td>
+        </tr>
+        <tr>
+            <td>Year</td>
+            <td><input type="number" value="{{yr}}" name="yr" readonly/></td>
+        </tr>
+        <tr>
+            <td>Semester</td>
+            <td> <input type="text" value="{{sem}}"  name="sem" readonly /></td>
+        </tr>
+        <tr>
+            <td>Course Id</td>
+            <td><input type="text" value="{{c}}"  name="c" readonly/></td>
+        </tr>
+        <tr>
+            <td>Course Code</td>
+            <td><input type="text" value="{{ct}}" name="ct" readonly/></td>
+        </tr>
+        <tr>
+            <td>Section</td>
+            <td><input type="number" value="{{sec}}" name="sec" readonly /></td>
+        </tr>
+        <tr>
+            <td>Mid1 Marks</td>
+            {% if flag %}
+              <td><input type="text" name="sem1" value="{{x.sem1}}" /></td>
+            {% else %}
+               <td><input type="text" name="sem1" value="0.0" /></td>
+            {% endif %}
 
-    <label>Semester : </label>
-    <input type="text" value="{{sem}}"  name="sem" readonly /><br>
+        </tr>
+        <tr>
+            <td>Mid2 Marks</td>
+            {% if flag %}
+                <td><input type="text" name="sem2" value="{{x.sem2}}"/></td>
+            {% else %}
+               <td><input type="text" name="sem2" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Lab Internals</td>
+            {% if flag %}
+                <td><input type="text" name="lab1" value="{{x.lab1}}"/></td>
+            {% else %}
+               <td><input type="text" name="lab1" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Quiz1</td>
+            {% if flag %}
+                <td><input type="text" name="quiz1" value="{{x.quiz1}}"/></td>
+            {% else %}
+               <td><input type="text" name="quiz1" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Quiz2</td>
+            {% if flag %}
+                <td><input type="text" name="quiz2" value="{{x.quiz2}}"/></td>
+            {% else %}
+               <td><input type="text" name="quiz2" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Quiz3</td>
 
-    <label>StudentId : </label>
-    <input type="number" value="{{sid}}" name="sid" readonly/><br>
+            {% if flag %}
+                <td><input type="text" name="quiz3" value="{{x.quiz3}}"/></td>
+            {% else %}
+               <td><input type="text" name="quiz3" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Quiz4</td>
+            {% if flag %}
+                <td><input type="text" name="quiz4" value="{{x.quiz4}}"/></td>
+            {% else %}
+               <td><input type="text" name="quiz4" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>SemEnd</td>
+            {% if flag %}
+                <td><input type="text" name="semend" value="{{x.semend}}" /></td>
+            {% else %}
+               <td><input type="text" name="semend" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>LabEnd</td>
+            {% if flag %}
+                <td><input type="text" name="labend" value="{{x.labend}}"/></td>
+            {% else %}
+               <td><input type="text" name="labend" value="0.0" /></td>
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Grade Points</td>
+            {% if flag %}
+                <td><input type="text" name="gp" value="{{x.grade_points}}"/></td>
+            {% else %}
+               <td><input type="text" name="gp" value="0.0" /></td>
 
-     <label>Course Id : </label>
-     <input type="text" value="{{c}}"  name="c" readonly/><br>
-    <label>CourseCode : </label>
-     <input type="text" value="{{ct}}" name="ct" readonly/><br>
-
-    <label>Section : </label>
-    <input type="number" value="{{sec}}" name="sec" readonly /><br>
-
-    <label>Sem1 : </label>
-    <input type="text" name="sem1" /><br>
-
-    <label>Sem2 : </label>
-    <input type="text" name="sem2"/><br>
-
-    <label>Lab1 : </label>
-    <input type="text" name="lab1"/><br>
-
-    <label>Quiz1 : </label>
-    <input type="text" name="quiz1"/><br>
-
-      <label>Quiz2 : </label>
-    <input type="text" name="quiz2"/><br>
-
-    <label>Quiz3 : </label>
-    <input type="text" name="quiz3"/><br>
-
-    <label>Quiz4 : </label>
-    <input type="text" name="quiz4"/><br>
-
-    <label>Semend : </label>
-    <input type="text" name="semend" /><br>
-
-    <label>LabEnd : </label>
-    <input type="text" name="labend"/><br>
-
-    <label>GradePoints : </label>
-    <input type="text" name="gp"/><br>
-
-    <label>Grade : </label>
-    <input type="text" name="g"/><br>
-    <input type="submit" value="POST" />
-
+            {% endif %}
+        </tr>
+        <tr>
+            <td>Grade</td>
+            {% if flag %}
+                <td>
+                    <input type="text" name="g" value="{{x.grade}}"/><br>
+                </td>
+            {% else %}
+               <td><input type="text" name="g" value="F" /></td>
+            {% endif %}
+        </tr>
+    </table><br>
+    <input type="submit" value="POST"  class="addbutton"/>
 
 </form>
 </center>

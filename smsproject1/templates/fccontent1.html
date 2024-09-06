@@ -1,11 +1,13 @@
 {% extends 'facultyhome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><u>View Course Details</u></h2>
+<center>
 <h4 style="color:red" align="center">{{msg}}</h4>
- <input class="form-control" id="myInput" type="text" placeholder="Course Title">
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; View Course Details &#x25BC;</b></h2>
 
-<table border="2" class="table table-bordered table-striped">
+ <input class="form-control" id="myInput" type="text" placeholder="Search ...">
+
+<table border="2" class="table table-bordered table-striped" style="font-size:12px;">
     <thead>
     <tr bgcolor="lightblue">
         <td>Department</td>
@@ -25,7 +27,7 @@
     </thead>
     {% for y in fc %}
     <tbody id="myTable">
-     <tr align="center">
+     <tr align="center" >
          <td>{{y.course.department}}</td>
          <td>{{y.course.program}}</td>
          <td>{{y.course.academicyear}}</td>
@@ -57,14 +59,30 @@
     {% endfor %}
 
 </table>
+</center>
+
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
 });
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
 </script>
+
 {% endblock %}

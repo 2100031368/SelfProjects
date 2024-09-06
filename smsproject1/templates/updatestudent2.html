@@ -1,13 +1,16 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
+
 <h2 align="center" style="color:red">{{msg}}</h2>
-<h3 align="center">Update Student: {{s}}</h3>
+<h3 align="center">&#x1F504; Update Student Details : {{s}} &#x1F504;</h3>
 <br>
-<form method="post" align="center">
+<div class="box">
+<form method="post" align="center" class="form-control">
     {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Update" />
-    <input type="clear" value="Clear" />
+    {{form.as_p}}<br>
+    <input type="submit"  class="addbutton" value="UPDATE" />
 </form>
+</div>
 {% endblock %}
+

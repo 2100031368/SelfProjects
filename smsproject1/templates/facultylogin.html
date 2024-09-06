@@ -4,38 +4,31 @@
 {% block 'body' %}
 <body style="background-image: url('{% static 'images/lg2.png' %}'); background-size: cover;">
 <center>
-<h1><u>Faculty Login</u> </h1>
-<h4>{{msg}}</h4>
- </center>
-<center>
+<h4 style="font-family: 'Times New Roman', Times, serif; color:red;">{{msg}}</h4>
+<h1 style="font-family: 'Times New Roman', Times, serif;"><b>&#128100; Faculty Login</b></h1><br>
+
 <form method="post" action="{% url 'checkfacultylogin' %}" >
 
    {% csrf_token %}
-    <table >
+    <table style="font-family: 'Times New Roman', Times, serif;">
         <tr>
-            <td>Enter Faculty ID:
-            </td>
-            <td><input type="text" name="uid" required/></td>
+            <td><b>Enter Faculty ID:</b></td>
+            <td><input type="number" name="uid" required/></td>
         </tr>
 
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
+        <tr><td>&nbsp;</td></tr>
+
 
          <tr>
-            <td>Enter Password: </td>
+            <td><b>Enter Password: </b></td>
             <td><input type="password" name="pwd" required/></td>
         </tr>
 
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
+        <tr><td>&nbsp</td></tr>
 
         <tr align="center">
-            <td><input type="submit" value="Login" class="button"/> </td>
-            <td><input type="reset" value="Clear" class="button"/></td>
+           <td><input type="submit" value="LOGIN" class="button"/> </td>
+            <td><input type="reset" value="CLEAR" class="button"/></td>
         </tr>
 
         <tr><td></td></tr>

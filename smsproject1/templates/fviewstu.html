@@ -1,0 +1,60 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+    <h4 style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Students Available &#x25BC;</b></h2><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search"><br><br>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
+            <td><b>StudentId</b></td>
+            <td><b>FullName</b></td>
+            <td><b>AcademicYear</b></td>
+            <td><b>Current AY</b></td>
+            <td><b>Cycle</b></td>
+            <td><b>Semester</b></td>
+            <td><b>Email</b></td>
+            <td><b>ContactNo.</b></td>
+            <td><b>Action</b></td>
+        </tr>
+        {% for i in x %}
+        <tr>
+            <td>{{i.studentid}}</td>
+            <td>{{i.fullname}}</td>
+            <td>{{i.ay}}</td>
+            <td>{{i.cur_ay}}</td>
+            <td>{{i.cur_yr}}</td>
+            <td>{{i.cur_sem}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.contact}}</td>
+            <td><a href="/fupdatestudent/{{i.studentid}}">Update</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+        for (let j = 0; j < cells.length; j++) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        rows[i].style.display = display;
+    }
+}
+</script>
+
+{% endblock %}

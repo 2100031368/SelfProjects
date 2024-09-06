@@ -1,11 +1,11 @@
 {% extends 'studenthome.html' %}
 
 {% block 'body' %}
-<h2 align="center"><u>View Course Details</u></h2>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Select Course To View Materials &#x25BC; </b></h2><br>
 
 
 <center>
-<table border="2" class="table table-bordered table-striped">
+<table border="2" class="table table-bordered table-striped" style="font-family: 'Times New Roman', Times, serif;">
     <thead>
     <tr bgcolor="lightblue">
         <td>CourseCode</td>
@@ -15,58 +15,58 @@
     </thead>
     <tbody id="myTable">
      <tr align="center">
-         {% if c.s1 %}
-         <td>{{c.cc1}}</td>
-         <td>{{c.s1}}</td>
-         <td><a href="stmyccontent/{{c.cc1}}/{{c.f1}}">Material</a></td>
+         {% if c.cc1 %}
+         <td>{{c.cc1.coursecode}}</td>
+         <td>{{c.cc1.coursetitle}}</td>
+         <td><a href="stmyccontent/{{c.cc1.coursecode}}/{{c.fcm1.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s2 %}
-          <td>{{c.cc2}}</td>
-         <td>{{c.s2}}</td>
-         <td><a href="stmyccontent/{{c.cc2}}/{{c.f2}}">Material</a></td>
+         {% if c.cc2 %}
+          <td>{{c.cc2.coursecode}}</td>
+         <td>{{c.cc2.coursetitle}}</td>
+         <td><a href="stmyccontent/{{c.cc2.coursecode}}/{{c.fcm2.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s3 %}
-          <td>{{c.cc3}}</td>
-         <td>{{c.s3}}</td>
-           <td><a href="stmyccontent/{{c.cc3}}/{{c.f3}}">Material</a></td>
+         {% if c.cc3 %}
+          <td>{{c.cc3.coursecode}}</td>
+         <td>{{c.cc3.coursetitle}}</td>
+           <td><a href="stmyccontent/{{c.cc3.coursecode}}/{{c.fcm3.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
 
     <tr align="center">
-         {% if c.s4 %}
-         <td>{{c.cc4}}</td>
-        <td>{{c.s4}}</td>
-          <td><a href="stmyccontent/{{c.cc4}}/{{c.f4}}">Material</a></td>
+         {% if c.cc4 %}
+         <td>{{c.cc4.coursecode}}</td>
+        <td>{{c.cc4.coursetitle}}</td>
+          <td><a href="stmyccontent/{{c.cc4.coursecode}}/{{c.fcm4.faculty.facultyid}}">Material</a></td>
         {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s5 %}
-          <td>{{c.cc5}}</td>
-         <td>{{c.s5}}</td>
-           <td><a href="stmyccontent/{{c.cc5}}/{{c.f5}}">Material</a></td>
+         {% if c.cc5 %}
+          <td>{{c.cc5.coursecode}}</td>
+         <td>{{c.cc5.coursetitle}}</td>
+           <td><a href="stmyccontent/{{c.cc5.coursecode}}/{{c.fcm5.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s6 %}
-          <td>{{c.cc6}}</td>
-         <td>{{c.s6}}</td>
-           <td><a href="stmyccontent/{{c.cc6}}/{{c.f6}}">Material</a></td>
+         {% if c.cc6 %}
+          <td>{{c.cc6.coursecode}}</td>
+         <td>{{c.cc6.coursetitle}}</td>
+           <td><a href="stmyccontent/{{c.cc6.coursecode}}/{{c.fcm6.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
 
      <tr align="center">
-         {% if c.s7 %}
-          <td>{{c.cc7}}</td>
-         <td>{{c.s7}}</td>
-           <td><a href="stmyccontent/{{c.cc7}}/{{c.f7}}">Material</a></td>
+         {% if c.cc7 %}
+          <td>{{c.cc7.coursecode}}</td>
+         <td>{{c.cc7.coursetitle}}</td>
+           <td><a href="stmyccontent/{{c.cc7.coursecode}}/{{c.fcm7.faculty.facultyid}}">Material</a></td>
          {% endif %}
      </tr>
      </tbody>

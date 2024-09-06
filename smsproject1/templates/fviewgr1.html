@@ -1,0 +1,145 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+
+
+<style>
+
+  /* Custom styles for checkboxes */
+    .custom-checkbox {
+        appearance: none; /* Remove default appearance */
+        width: 20px; /* Adjust width as needed */
+        height: 20px; /* Adjust height as needed */
+        border: 2px solid grey; /* Black border for the checkbox */
+    }
+
+    /* Custom styles for checked state */
+    .custom-checkbox:checked {
+        background-color: green; /* Green background when checked */
+    }
+
+    /* Custom styles for check mark */
+    .custom-checkbox:checked::after {
+        content: '\2714'; /* Unicode check mark character */
+        color: white; /* White color for check mark */
+    }
+
+    .button1 {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  outline: none;
+  text-align: left;
+  background-color: lightgreen ;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  align:left;
+}
+
+      .button2 {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  outline: none;
+  text-align: left;
+  background-color: #87CEEB ;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  align:left;
+}
+
+
+.button2:hover {background-color: #3e8e41}
+
+#customers tr:nth-child(even){background-color: #cccccc;}
+
+</style>
+
+
+<center>
+
+    <h4 style="font-family: 'Times New Roman', Times, serif; color:green;">{{message}}</h4>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>⚠️ My Grievances ⚠️</b></h2><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
+
+    <table border="1px" style="font-family: 'Times New Roman', Times, serif;" id="customers">
+         <thead>
+        <tr bgcolor="lightblue">
+            <td>ID</td>
+            <td>PersonId</td>
+            <td>Name</td>
+            <td>Department</td>
+            <td>Program</td>
+            <td>Academic Year</td>
+            <td>Semester</td>
+            <td>Date and Time</td>
+            <td>Category</td>
+            <td>Issue</td>
+            <td>Status</td>
+            <td>Solved</td>
+        </tr>
+         </thead>
+        {% for i in lt %}
+
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.pid}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.dept}}</td>
+            <td>{{i.prgm}}</td>
+            <td>{{i.ay}}</td>
+            <td>{{i.sem}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.category}}</td>
+            <td><a href="/fviewgrissuestu/{{i.id}}">VIEW</a></td>
+            <td><input type="checkbox" class="custom-checkbox" {% if i.status %}checked{% endif %}   disabled /></td>
+            <td>
+                {% if i.solved %}
+                  <button class="button1"><b>SLOVED</b></button>&nbsp;
+                {% else %}
+                  <button class="button2" onclick="window.location.href='{% url 'fupdate_issue_status' i.id %}'"><b>UNSLOVED</b></button>&nbsp;
+                {% endif %}
+
+            </td>
+
+
+        </tr>
+
+        {% endfor %}
+    </table>
+</center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
+{% endblock %}

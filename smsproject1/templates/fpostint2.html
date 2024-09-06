@@ -3,9 +3,10 @@
 {% block 'body' %}
 
 <center>
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b> &#x2705; Students Available  &#x2705;</b></h3><br>
 
-    <table border="1">
-        <tr>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
             <td>Student</td>
             <td>Action</td>
         </tr>
@@ -13,7 +14,7 @@
         {% for i in r %}
         <tr>
             <td>{{i.sid}}</td>
-            <td><a href="{% url 'fpostint2' i.sid i.sdept i.say i.syr i.ssem c ct sec %}">Post Internals</a></td>
+            <td><a href="{% url 'fpostint2' i.sid.studentid i.sdept i.say i.syr i.ssem c ct sec %}">Post Internals</a></td>
 
         </tr>
         {% endfor %}

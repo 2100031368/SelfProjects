@@ -5,35 +5,42 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--adding css -->
+
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+
 </head>
+
 <!--<body bgcolor="skyblue"> -->
 <body>
 <nav class="navbar">
-    <div class="logo">SCMS</div>
+   <img src="{% static 'images/scmslogo.png' %}" width="80" height="60" style="margin-right:600px;">
     <ul class="nav-links">
         <div class="menu" >
 
-<li><a href="{% url 'home' %}">HOME</a></li>&nbsp;&nbsp;&nbsp;
-<li><a href="{% url 'about' %}">ABOUT</a></li>&nbsp;&nbsp;&nbsp;
+<li><a href="{% url 'home' %}"><b>HOME</b></a></li>&nbsp;&nbsp;&nbsp;
+<li><a href="{% url 'about' %}"><b>ABOUT</b></a></li>&nbsp;&nbsp;&nbsp;
 <li class="services">
-    <a href="{% url 'login' %}">LOGIN</a>
+    <a href="{% url 'login' %}"><b>LOGIN</b></a>
     <ul class="dropdown">
-            <li><a href="{% url 'studentlogin' %}">Student</a></li>
-            <li><a href="{% url 'facultylogin' %}">Faculty</a></li>
-
+            <li><a href="{% url 'studentlogin' %}"><b>Student</b></a></li>
+            <li><a href="{% url 'facultylogin' %}"><b>Faculty</b></a></li>
     </ul>
 </li>&nbsp;
-<li><a href="{% url  'contactus' %}">CONTACTUS</a></li>&nbsp;&nbsp;&nbsp;
-            </div>
+<li><a href="{% url  'contactus' %}"><b>CONTACTUS</b></a></li>&nbsp;&nbsp;&nbsp
+ </div>
     </ul>
 </nav>
 
+
 {% block 'body' %}
-<h2 align ="center">SCMS UNIVERITY</h2><br>
+<h2 align ="center" style="font-family: 'Times New Roman', Times, serif;">SCMS UNIVERSITY</h2><br>
 <center>
-<img src="{% static 'images/idx2.png' %}" height="70%" >
+<img src="{% static 'images/idx2.png' %}" width="60%" height="60%" style="margin-bottom:30px;">
 </center>
+
+<!--<div class="vid">
+    <video src="{% static 'images/clg1.mp4'%}" autoplay controls/>
+</div> -->
 {% endblock %}
 </body>
 </html>

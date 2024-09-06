@@ -1,0 +1,15 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+<center>
+<h2 style="font-family: 'Times New Roman', Times, serif;"><b>⚠️ Grievance Submission Form ⚠️</b></h2><br>
+    <div class="box">
+    <form method="post" class="form-control" action="{% url 'fgrievance1' %}">
+        {% csrf_token %}
+        {{x.as_p}}
+        <input type="submit" class="addbutton" value="SUBMIT"/>
+    </form>
+    </div>
+</center>
+
+{% endblock %}

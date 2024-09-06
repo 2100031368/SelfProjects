@@ -2,59 +2,60 @@
 
 {% block 'body' %}
 <center>
-    <table border="1">
-        <tr>
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Courses Available To View Internals &#x25BC;</b></h3><br>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
             <td>Course</td>
             <td>Action</td>
         </tr>
         {% for i in x %}
          {% if i.cc1 %}
           <tr>
-              <td>{{i.s1}}</td>
-              <td><a href="/sviewint1/{{i.cc1}}">GET</a></td>
+              <td>{{i.cc1.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc1.coursecode}}">GET</a></td>
           </tr>
          {% endif %}
 
           {% if i.cc2 %}
           <tr>
-              <td>{{i.s2}}</td>
-              <td><a href="/sviewint1/{{i.cc2}}">GET</a></td>
+              <td>{{i.cc2.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc2.coursecode}}">GET</a></td>
           </tr>
           {% endif %}
 
 
         {% if i.cc3 %}
           <tr>
-              <td>{{i.s3}}</td>
-              <td><a href="/sviewint1/{{i.cc3}}">GET</a></td>
+              <td>{{i.cc3.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc3.coursecode}}">GET</a></td>
           </tr>
         {% endif %}
 
         {% if i.cc4 %}
           <tr>
-              <td>{{i.s4}}</td>
-              <td><a href="/sviewint1/{{i.cc4}}">GET</a></td>
+              <td>{{i.cc4.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc4.coursecode}}">GET</a></td>
           </tr>
         {% endif %}
 
         {% if i.cc5 %}
           <tr>
-              <td>{{i.s5}}</td>
-              <td><a href="/sviewint1/{{i.cc5}}">GET</a></td>
+              <td>{{i.cc5.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc5.coursecode}}">GET</a></td>
           </tr>
         {% endif %}
 
         {% if i.cc6 %}
           <tr>
-              <td>{{i.s6}}</td>
-              <td><a href="/sviewint1/{{i.cc6}}">GET</a></td>
+              <td>{{i.cc6.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc6.coursecode}}">GET</a></td>
           </tr>
         {% endif %}
 
         {% if i.cc7 %}
           <tr>
-              <td>{{i.s7}}</td>
-              <td><a href="/sviewint1/{{i.cc7}}">GET</a></td>
+              <td>{{i.cc7.coursetitle}}</td>
+              <td><a href="/sviewint1/{{i.cc7.coursecode}}">GET</a></td>
           </tr>
         {% endif %}
 

@@ -1,43 +1,39 @@
 {% extends 'facultyhome.html' %}
 
 {% block 'body' %}
-<h1 align="center"><u>Change Password</u> </h1>
+
 <h4 align="center" style="color:red">{{msg}}</h4>
 <center>
+
+    <h2 align="center" style="font-family: 'Times New Roman', Times, serif;">&#x1F503; Update Password &#x1F503;</h2><br>
+    <div class="box">
 <form method="post" action="{% url 'facultyupdtpwd' %}" >
 
    {% csrf_token %}
-    <table>
+    <table style="font-family: 'Times New Roman', Times, serif;">
         <tr>
-            <td>Enter Old Pssword: </td>
-            <td><input type="text" name="opwd" required/></td>
+            <td><b>Enter Old Password: </b></td>
+            <td><input type="password" name="opwd" required/></td>
         </tr>
 
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
+        <tr><td>&nbsp;</td></tr>
 
          <tr>
-            <td>Enter New Password: </td>
+            <td><b>Enter New Password: </b></td>
             <td><input type="password" name="npwd" required/></td>
         </tr>
 
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
-        <tr><td></td></tr>
+        <tr><td>&nbsp;</td></tr>
+
 
         <tr align="center">
-            <td><input type="submit" value="Update" class="button"/> </td>
-            <td><input type="reset" value="Clear" class="button"/></td>
+            <td><input type="submit" value="Update" class="addbutton"/> </td>
+            <td><input type="reset" value="Clear" class="addbutton"/></td>
         </tr>
-
-        <tr><td></td></tr>
-
 
 
     </table>
 </form>
+        </div>
 </center>
 {% endblock %}

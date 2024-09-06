@@ -1,0 +1,36 @@
+{% extends 'studenthome.html' %}
+
+{% block 'body' %}
+<center>
+    <h3 style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h3><br>
+    <h3 style="font-family: 'Times New Roman', Times, serif; color:red;">SGPA : {{cred}}</h3><br>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
+            <td>CourseCode</td>
+            <td>Marks</td>
+            <td>GradePoints</td>
+            <td>Grade</td>
+        </tr>
+        {% for i in p %}
+        <tr>
+            <td>{{i.cc}}</td>
+            <td>
+                <label>SemIn1 : {{i.sem1}}</label><br>
+                <label>SemIn2 : {{i.sem2}}</label><br>
+                <label>Lab1   : {{i.lab1}}</label><br>
+                <label>Quiz1  : {{i.quiz1}}</label><br>
+                <label>Quiz2  : {{i.quiz2}}</label><br>
+                <label>Quiz3  : {{i.quiz3}}</label><br>
+                <label>Quiz4  : {{i.quiz4}}</label><br>
+                <label>SemEnd : {{i.semend}}</label><br>
+                <label>LabEnd : {{i.labend}}</label>
+            </td>
+            <td>{{i.grade_points}}</td>
+            <td>{{i.grade}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+</center>
+{% endblock %}

@@ -2,18 +2,24 @@
 
 {% block 'body' %}
 <center>
-    {{msg}}
+
     <form method="post">
-        <a href="{% url 'regadmin5' %}">ADD NEW REGISTRATION</a>
-    <table border="1">
-        <tr>
+       <h4 style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
+    <h1 style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; Registrations Available &#11013;</b></h1><br>
+    <a href="{% url 'regadmin5' %}" style="font-family: 'Times New Roman', Times, serif; color:green;">ADD NEW REGISTRATION</a><br>
+    <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <thead>
+        <tr bgcolor="lightblue">
             <td>Department</td>
             <td>Academic Year</td>
             <td>Cycle(Year)</td>
             <td>Semester</td>
             <td>Actions</td>
         </tr>
+        </thead>
         {% for x in a %}
+        <tbody class="myInput">
         <tr>
             <td id="row1">{{x.dept}}</td>
             <td id="row2">{{x.ay}}</td>
@@ -25,9 +31,34 @@
                 <a href="{% url 'regadmin2' %}">Student-Registration History</a>
             </td>
         </tr>
+        </tbody>
         {% endfor %}
     </table>
     </form>
 </center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
 
 {% endblock %}

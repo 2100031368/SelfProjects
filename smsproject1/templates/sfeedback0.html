@@ -2,10 +2,10 @@
 
 {% block 'body' %}
 <center>
-    <h3 style="color:red">{{msg}}</h3>
-    <h3>Give Feedback</h3>
-    <table border="1">
-        <tr>
+    <h3 style="color:red;font-family: 'Times New Roman', Times, serif;">{{msg}}</h3>
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4AC; POST FEEDBACK &#x1F4AC;</b></h3><br>
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <tr bgcolor="lightblue">
             <td>Course Code</td>
             <td>Course Title</td>
             <td>Faculty</td>
@@ -14,73 +14,73 @@
         </tr>
         {% for i in fb %}
 
-        {% if i.s1 %}
+        {% if i.cc1 %}
         <tr>
-            <td>{{i.cc1}}</td>
-            <td>{{i.s1}}</td>
-            <td>{{i.f1}}</td>
-            <td>{{i.sec1}}</td>
-            <td><a href="sfeedback1/{{i.cc1}}/{{i.f1}}/{{i.sec1}}">Post Feedback</a></td>
+            <td>{{i.cc1.coursecode}}</td>
+            <td>{{i.cc1.coursetitle}}</td>
+            <td>{{i.fcm1.faculty.facultyid}}-{{i.fcm1.faculty.fullname}}</td>
+            <td>{{i.fcm1.section}}</td>
+            <td><a href="sfeedback1/{{i.cc1.coursecode}}/{{i.fcm1.faculty.facultyid}}/{{i.fcm1.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s2 %}
+        {% if i.cc2 %}
         <tr>
-            <td>{{i.cc2}}</td>
-             <td>{{i.s2}}</td>
-            <td>{{i.f2}}</td>
-            <td>{{i.sec2}}</td>
-            <td><a href="sfeedback1/{{i.cc2}}/{{i.f2}}/{{i.sec2}}">Post Feedback</a></td>
+            <td>{{i.cc2.coursecode}}</td>
+             <td>{{i.cc2.coursetitle}}</td>
+            <td>{{i.fcm2.faculty.facultyid}}-{{i.fcm2.faculty.fullname}}</td>
+            <td>{{i.fcm2.section}}</td>
+            <td><a href="sfeedback1/{{i.cc2.coursecode}}/{{i.fcm2.faculty.facultyid}}/{{i.fcm2.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s3 %}
+        {% if i.cc3 %}
         <tr>
-            <td>{{i.cc3}}</td>
-             <td>{{i.s3}}</td>
-            <td>{{i.f3}}</td>
-            <td>{{i.sec3}}</td>
-            <td><a href="sfeedback1/{{i.cc3}}/{{i.f3}}/{{i.sec3}}">Post Feedback</a></td>
+            <td>{{i.cc3.coursecode}}</td>
+             <td>{{i.cc3.coursetitle}}</td>
+            <td>{{i.fcm3.faculty.facultyid}}-{{i.fcm3.faculty.fullname}}</td>
+            <td>{{i.fcm3.section}}</td>
+            <td><a href="sfeedback1/{{i.cc3.coursecode}}/{{i.fcm3.faculty.facultyid}}/{{i.fcm3.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s4 %}
+        {% if i.cc4 %}
         <tr>
-            <td>{{i.cc4}}</td>
-             <td>{{i.s4}}</td>
-            <td>{{i.f4}}</td>
-            <td>{{i.sec4}}</td>
-            <td><a href="sfeedback1/{{i.cc4}}/{{i.f4}}/{{i.sec4}}">Post Feedback</a></td>
+            <td>{{i.cc4.coursecode}}</td>
+             <td>{{i.cc4.coursetitle}}</td>
+            <td>{{i.fcm4.faculty.facultyid}}-{{i.fcm4.faculty.fullname}}</td>
+            <td>{{i.fcm4.section}}</td>
+            <td><a href="sfeedback1/{{i.cc4.coursecode}}/{{i.fcm4.faculty.facultyid}}/{{i.fcm4.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s5 %}
+        {% if i.cc5 %}
         <tr>
-            <td>{{i.cc5}}</td>
-             <td>{{i.s5}}</td>
-            <td>{{i.f5}}</td>
-            <td>{{i.sec5}}</td>
-            <td><a href="sfeedback1/{{i.cc5}}/{{i.f5}}/{{i.sec5}}">Post Feedback</a></td>
+            <td>{{i.cc5.coursecode}}</td>
+             <td>{{i.cc5.coursetitle}}</td>
+            <td>{{i.fcm5.faculty.facultyid}}-{{i.fcm5.faculty.fullname}}</td>
+            <td>{{i.fcm5.section}}</td>
+            <td><a href="sfeedback1/{{i.cc5.coursecode}}/{{i.fcm5.faculty.facultyid}}/{{i.fcm5.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s6 %}
+        {% if i.cc6 %}
         <tr>
-            <td>{{i.cc6}}</td>
-             <td>{{i.s6}}</td>
-            <td>{{i.f6}}</td>
-            <td>{{i.sec6}}</td>
-            <td><a href="sfeedback1/{{i.cc6}}/{{i.f6}}/{{i.sec6}}">Post Feedback</a></td>
+            <td>{{i.cc6.coursecode}}</td>
+             <td>{{i.cc6.coursetitle}}</td>
+            <td>{{i.fcm6.faculty.facultyid}}-{{i.fcm6.faculty.fullname}}</td>
+            <td>{{i.fcm6.section}}</td>
+            <td><a href="sfeedback1/{{i.cc6.coursecode}}/{{i.fcm6.faculty.facultyid}}/{{i.fcm6.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 
-        {% if i.s7 %}
+        {% if i.cc7 %}
         <tr>
-            <td>{{i.cc7}}</td>
-             <td>{{i.s7}}</td>
-            <td>{{i.f7}}</td>
-            <td>{{i.sec7}}</td>
-            <td><a href="sfeedback1/{{i.cc7}}/{{i.f7}}/{{i.sec7}}">Post Feedback</a></td>
+            <td>{{i.cc7.coursecode}}</td>
+             <td>{{i.cc7.coursetitle}}</td>
+            <td>{{i.fcm7.faculty.facultyid}}-{{i.fcm7.faculty.fullname}}</td>
+            <td>{{i.fcm7.section}}</td>
+            <td><a href="sfeedback1/{{i.cc7.coursecode}}/{{i.fcm7.faculty.facultyid}}/{{i.fcm7.section}}">Post Feedback</a></td>
         </tr>
         {% endif %}
 

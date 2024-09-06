@@ -4,19 +4,18 @@
    <link type="text/css" rel="stylesheet" href="{% static 'css/adminstudent.css' %}" >
 
 
-<div id="content">
-
 <div id="header">
 <h2> Admin Module - Courses</h2>
     <nav id="nav1">
-
-<a href="{% url 'viewcourses' %}">ViewCourses</a>&nbsp&nbsp
-<a href="{% url 'addcourse' %}">ADD</b></a>&nbsp&nbsp
-<a href="{% url 'deletecourse' %}" >DELETE</a>&nbsp&nbsp
-<a href="{% url 'updatecourse1' %}" >UPDATE</a>
-        </nav>
+    <button class="button" onclick="window.location.href='{% url 'viewcourses' %}'"><b>VIEW</b></button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="button" onclick="window.location.href='{% url 'addcourse' %}'"><b>ADD</b></button>&nbsp;&nbsp;&nbsp
+     <button class="button" onclick="window.location.href='{% url 'deletecourse' %}'"><b>DELETE</b></button>&nbsp;&nbsp;&nbsp
+     </nav>
+    <h2  style="font-family: 'Times New Roman', Times, serif; color:green;"><b>{{msg}}</b></h2>
 </div>
 
 
+<div id="content">
+    <img src="{% static 'images/courses.jpg' %}" style="widht:50px; margin-top:50px;" alt="Center Image" />
 </div>
 {% endblock %}

@@ -19,3 +19,14 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model=FeedbackPosted
         fields="__all__"
+        exclude={"sid", "fid", "sprogram", "sdept", "say", "syr", "ssem", "ccode", "section"}
+        labels={"q1":"Question1", "q2":"Question2", "q3":"Question3", "q4":"Question4", "q5":"Question5", "fdb1":"Answer1", "fdb2":"Answer2", "fdb3":"Answer3", "fdb4":"Answer4", "fdb5":"Answer5"}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set widgets for q1, q2, q3, q4, and q5 to ReadOnlyInput and add CSS class
+        for field_name in ['q1', 'q2', 'q3', 'q4', 'q5']:
+            self.fields[field_name].widget = forms.TextInput(attrs={
+                'readonly': 'readonly',
+                'class': 'readonly-field'
+            })

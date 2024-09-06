@@ -4,8 +4,12 @@
 <center>
     <form method="post">
         {% csrf_token %}
-    <table border="1">
-        <tr>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; Students Registration History  &#11013;</b></h2><br>
+     <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
+
+    <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+        <thead>
+        <tr bgcolor="lightblue">
             <td>Program</td>
             <td>Department</td>
             <td>ID</td>
@@ -15,7 +19,9 @@
             <td>Semester</td>
             <td>View</td>
         </tr>
+        </thead>
         {% for x in b %}
+        <tbody class="myInput">
         <tr>
             <td>{{x.sprogram}}</td>
             <td>{{x.sdept}}</td>
@@ -28,10 +34,36 @@
             <td>{{x.ssem}}</td>
             <td><a href="/history/{{x.sid}}/{{x.say}}/{{x.syr}}/{{x.ssem}}">History</a></td>
         </tr>
+        </tbody>
         {% endfor %}
 
     </table>
         </form>
 </center>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
+});
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+        const cells = row.getElementsByTagName("td");
+        let display = "none";
+        for (let i = 0; i < cells.length; i++) {
+            const cellText = cells[i].textContent || cells[i].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        row.style.display = display;
+    });
+}
+</script>
+
 
 {% endblock %}

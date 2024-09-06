@@ -5,15 +5,16 @@
 <center>
     <h3 style="color:red;">{{msg}}</h3>
 </center>
-<h3 align="center">Enter Details</h3>
+<h3 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC;  Enter Details &#x25BC;</b></h3>
 <br>
 <center>
+    <div class="box">
 <form method="post" action="{% url 'sviewhd1' %}">
     {% csrf_token %}
-    <table width="30%" height="30%" >
+    <table style="font-family: 'Times New Roman', Times, serif;">
 
         <tr>
-            <td><label>Academic Year:</label></td>
+            <td><label><b>Academic Year:</b></label></td>
             <td>
                 <select name="ay" required>
                     <option value="">--Select--</option>
@@ -23,8 +24,9 @@
             </td>
         </tr>
 
+        <tr><td>&nbsp;</td></tr>
          <tr>
-            <td><label>Semester:</label></td>
+            <td><label><b>Semester:</b></label></td>
             <td>
                 <select name="sem" required>
                     <option value="">--Select--</option>
@@ -34,6 +36,8 @@
             </td>
         </tr>
 
+        <tr><td>&nbsp;</td></tr>
+
         <tr>
             <td><input type="submit"  value="Submit" class="addbutton"/></td>
              <td><input type="reset"  value="Clear" class="addbutton"/></td>
@@ -41,6 +45,7 @@
 
     </table>
 </form>
+        </div>
 </center>
 
 

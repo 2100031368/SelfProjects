@@ -3,11 +3,14 @@
 {% block 'body' %}
 
 <center>
-   <h3 style="color:green">{{msg}}</h3>
+   <h3 style="color:red;font-family: 'Times New Roman', Times, serif; color:red;">{{msg}}</h3><br>
+     <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Enter Details &#x25BC;</b></h3><br>
+    <div class="box">
+        <div class="font">
     <form method ="post" action="{% url 'fccontent1'%}">
         {% csrf_token %}
-        <tr>
-            <td><label>Academic Year:</label></td>
+        <tr style="font-family: 'Times New Roman', Times, serif;">
+            <td><label><b>Academic Year:</b></label></td>
             <td>
                 <select name="ay" required>
                     <option value="">--Select--</option>
@@ -18,7 +21,7 @@
         </tr><br><br>
 
          <tr>
-            <td><label>Semester:</label></td>
+            <td><label><b>Semester:</b></label></td>
             <td>
                 <select name="sem" required>
                     <option value="">--Select--</option>
@@ -34,5 +37,7 @@
         </tr>
 
     </form>
+            </div>
+        </div>
 </center>
 {% endblock %}

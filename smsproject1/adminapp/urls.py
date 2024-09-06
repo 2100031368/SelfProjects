@@ -12,8 +12,6 @@ urlpatterns = [
    path("adminstudent", views.adminstudent, name="adminstudent"),
    path("viewstudents", views.viewstudents, name="viewstudents"),
    path("addstudent", views.addstudent, name="addstudent"),
-   path("deletestudent", views.deletestudent, name="deletestudent"),
-   path("studentdeletion/<int:sid>", views.studentdeletion, name="studentdeletion"),
    path("updatestudent2/<slug:sid>", views.updatestudent2, name="updatestudent2"),
 
    path("admincourse", views.admincourse, name="admincourse"),
@@ -21,10 +19,9 @@ urlpatterns = [
    path("addcourse", views.addcourse, name="addcourse"),
    path("insertcourse", views.insertcourse, name="insertcourse"),
    path("deletecourse", views.deletecourse, name="deletecourse"),
-   path("coursedeletion/<int:cid>", views.coursedeletion, name="coursedeletion"),
-   path("updatecourse1", views.updatecourse1, name="updatecourse1"),
-   path("updatecourse2",views.updatecourse2, name="updatecourse2"),
-   path("updatecourse3", views.updatecourse3, name="updatecourse3"),
+   path("coursedeletion/<str:ccode>", views.coursedeletion, name="coursedeletion"),
+   path("updatecourse1/<str:ccode>",views.updatecourse1, name="updatecourse1"),
+   path("updatecourse2", views.updatecourse2, name="updatecourse2"),
 
    path("facultycoursemapping", views.facultycoursemapping, name="facultycoursemapping"),
    path("addfacultycourse", views.addfacultycourse, name="addfacultycourse"),
@@ -54,4 +51,15 @@ urlpatterns = [
    path("addcc0", views.addcc0, name="addcc0"),
    path("addcc1/<int:fid>/<int:cc>/<str:ay>/<int:yr>/<str:sem>",views.addcc1, name="addcc1"),
    path("addcc2", views.addcc2, name="addcc2"),
+
+   path("agiveaccess0", views.agiveaccess0, name='agiveaccess0'),
+   path("agiveaccess1", views.agiveaccess1, name='agiveaccess1'),
+
+   path("astuinternals/<int:sid>/<str:ay>/<str:sem>/<str:pgm>/<str:dept>", views.astuinternals, name='astuinternals'),
+
+   path("aviewgrievance0", views.aviewgrievance0, name='aviewgrievance0'),
+   path("aviewgrievance1", views.aviewgrievance1, name='aviewgrievance1'),
+   path("aviewgrievance2", views.aviewgrievance2, name='aviewgrievance2'),
+   path("aviewgrissuestu/<int:id>", views.aviewgrissuestu, name="aviewgrissuestu"),
+   path("update_issue_status/<int:id>", views.update_issue_status, name="update_issue_status"),
 ]
