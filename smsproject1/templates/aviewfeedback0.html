@@ -5,7 +5,8 @@
 <center>
     <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4AC; FEEDBACKS POSTED &#x1F4AC;</b></h3><br>
     <input class="form-control" id="myInput" type="text" placeholder="Search"><br><br>
-    <table border="2" style="font-size: 14px;font-family: 'Times New Roman', Times, serif;">
+    <table border="2" style="font-size: 15px;font-family: 'Times New Roman', Times, serif; margin-left:4%">
+        <thead>
         <tr bgcolor="lightblue">
             <td><b>Academic Year</b></td>
             <td><b>Cycle - Year</b></td>
@@ -16,8 +17,9 @@
             <td><b>Section</b></td>
             <td><b>Action</b></td>
         </tr>
-
+        </thead>
         {% for i in x %}
+         <tbody id="myTable">
         <tr>
             <td>{{i.course.academicyear}}</td>
             <td>{{i.course.year}}</td>
@@ -31,6 +33,7 @@
                 <a href="aviewfeedback3/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.department}}/{{i.faculty.facultyid}}/{{i.course.coursecode}}/{{i.section}}">Analyze</a>
             </td>
         </tr>
+         </tbody>
         {% endfor %}
     </table>
 </center>

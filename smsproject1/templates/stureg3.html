@@ -2,67 +2,68 @@
 
 {% block 'body' %}
 <center>
+     <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4DA; Registrations History &#x1F4DA;</b></h3><br>
     {% for x in found %}
         <table border="1" style="font-family: 'Times New Roman', Times, serif;">
             <tr>
-                <td>Academic Year : </td>
-                <td>{{x.say}}</td>
+                <td><b>Academic Year : </b></td>
+                <td><b>{{x.say}}</b></td>
             </tr>
 
             <tr>
-                <td> Year : </td>
-                <td>{{x.syr}}</td>
+                <td><b> Year : </b></td>
+                <td><b>{{x.syr}}</b></td>
             </tr>
 
             <tr>
-                <td>Semester : </td>
-                <td>{{x.ssem}}</td>
+                <td><b>Semester : </b></td>
+                <td><b>{{x.ssem}} </b></td>
             </tr>
 
             <tr>
-                <td>CourseCode - {{x.cc1.coursecode}}</td>
-                <td>Course- {{x.cc1.coursetitle}}</td>
-                <td>Faculty- {{x.fcm1.faculty.facultyid}} - {{x.fcm1.faculty.fullname}}</td>
-                <td>Section -  {{x.fcm1.section}}</td>
+                <td>CourseCode - {{x.cc1.coursecode}} </td>
+                <td>Course- {{x.cc1.coursetitle}} </td>
+                <td>Faculty- {{x.fcm1.faculty.facultyid}} - {{x.fcm1.faculty.fullname}} </td>
+                <td>Section -  {{x.fcm1.section}} </td>
             </tr>
 
             <tr>
-                 <td>CourseCode - {{x.cc2.coursecode}}</td>
-                <td>Course- {{x.cc2.coursetitle}}</td>
-                <td>Faculty- {{x.fcm2.faculty.facultyid}} - {{x.fcm2.faculty.fullname}}</td>
-                <td>Section- {{x.fcm2.section}}</td>
+                 <td>CourseCode - {{x.cc2.coursecode}} </td>
+                <td>Course- {{x.cc2.coursetitle}} </td>
+                <td>Faculty- {{x.fcm2.faculty.facultyid}} - {{x.fcm2.faculty.fullname}} </td>
+                <td>Section- {{x.fcm2.section}} </td>
             </tr>
 
             <tr>
-                 <td>CourseCode - {{x.cc3.coursecode}}</td>
-                <td>Course- {{x.cc3.coursetitle}}</td>
+                 <td>CourseCode - {{x.cc3.coursecode}} </td>
+                <td>Course- {{x.cc3.coursetitle}} </td>
                 <td>Faculty- {{x.fcm3.faculty.facultyid}} - {{x.fcm3.faculty.fullname}}</td>
-                <td>Section- {{x.fcm3.section}}</td>
+                <td>Section- {{x.fcm3.section}} </td>
             </tr>
 
             {% if x.s4 %}
             <tr>
-                 <td>CourseCode - {{x.cc4.coursecode}}</td>
-                <td>Course- {{x.cc4.coursetitle}}</td>
-                <td>Faculty- {{x.fcm4.faculty.facultyid}} - {{x.fcm4.faculty.fullname}}</td>
-                <td>Section- {{x.fcm4.section}}</td>
+                 <td>CourseCode - {{x.cc4.coursecode}} </td>
+                <td>Course- {{x.cc4.coursetitle}} </td>
+                <td>Faculty- {{x.fcm4.faculty.facultyid}} - {{x.fcm4.faculty.fullname}} </td>
+                <td>Section- {{x.fcm4.section}} </td>
             </tr>
             {% endif %}
 
             {% if x.s5 %}
             <tr>
-                 <td>CourseCode - {{x.cc5.coursecode}}</td>
-                <td>Course- {{x.cc5.coursetitle}}</td>
-                <td>Faculty- {{x.fcm5.faculty.facultyid}} - {{x.fcm5.faculty.fullname}}</td>
-                <td>Section- {{x.fcm5.section}}</td>
+                 <td>CourseCode - {{x.cc5.coursecode}} </td>
+                <td>Course- {{x.cc5.coursetitle}} </td>
+                <td>Faculty- {{x.fcm5.faculty.facultyid}} - {{x.fcm5.faculty.fullname}} </td>
+                <td>Section- {{x.fcm5.section}} </td>
             </tr>
             {% endif %}
 
             {% if x.s6 %}
             <tr>
-                 <td>CourseCode - {{x.cc6.coursecode}}</td>
-                <td>Course- {{x.cc6.coursetitle}}</td>
-                <td>Faculty- {{x.fcm6.faculty.facultyid}} - {{x.fcm6.faculty.fullname}}</td>
+                 <td>CourseCode - {{x.cc6.coursecode}} </td>
+                <td>Course- {{x.cc6.coursetitle}} </td>
+                <td>Faculty- {{x.fcm6.faculty.facultyid}} - {{x.fcm6.faculty.fullname}} </td>
                 <td>Section- {{x.fcm6.section}}</td>
 
             </tr>
@@ -70,10 +71,10 @@
 
             {% if x.s7 %}
             <tr>
-                 <td>CourseCode - {{x.cc7.coursecode}}</td>
-                <td>Course- {{x.cc7.coursetitle}}</td>
-                <td>Faculty- {{x.fcm7.faculty.facultyid}} - {{x.fcm7.faculty.fullname}}</td>
-                <td>Section- {{x.sec7}}</td>
+                 <td>CourseCode - {{x.cc7.coursecode}} </td>
+                <td>Course- {{x.cc7.coursetitle}} </td>
+                <td>Faculty- {{x.fcm7.faculty.facultyid}} - {{x.fcm7.faculty.fullname}} </td>
+                <td>Section- {{x.sec7}} </td>
             </tr>
             {% endif %}
 

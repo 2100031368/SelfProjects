@@ -3,21 +3,21 @@
 {% block 'body' %}
 <center>
     <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x1F4DA; Materials You Have Uploaded For Cousre-{{ccode}} &#x1F4DA;</b></h3><br>
-    <table border="1" style="font-size:13px; font-family: 'Times New Roman', Times, serif;">
+    <table border="1" style="font-size:15px; font-family: 'Times New Roman', Times, serif; width:80%">
         <tr bgcolor="lightblue">
-            <td>Description</td>
-            <td>Link</td>
-            <td>ContentFile</td>
+            <td><b>Description</b></td>
+            <td><b>Link</b></td>
+            <td><b>ContentFile</b></td>
         </tr>
         {% for i in f %}
         <tr>
-            <td>{{i.description}}</td>
+            <td >{{i.description}}</td>
             <td>{{i.link}}</td>
             <!--<td><a href="fcontentview/{{i.contentimage}}">View FILE</a></td> -->
             <td>
-                <a href="/media/{{ i.contentimage }}">View</a><br>
+                <a href="/media/{{ i.contentimage }}"><b>VIEW</b></a><br><br>
                 <!--<a href="deltemyuploads1/{{i.course.coursecode}}/{{i.faculty.facultyid}}/media/{{i.contentimage}}">DELETE</a> -->
-                 <a href="{% url 'deltemyuploads1' i.id %}">DELETE</a>
+                 <a href="{% url 'deltemyuploads1' i.id %}"><b>DELETE</b></a>
             </td>
 
         </tr>

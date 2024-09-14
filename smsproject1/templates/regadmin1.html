@@ -5,17 +5,17 @@
 
     <form method="post">
        <h4 style="font-family: 'Times New Roman', Times, serif; color:green;">{{msg}}</h4>
-    <h1 style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; Registrations Available &#11013;</b></h1><br>
-    <a href="{% url 'regadmin5' %}" style="font-family: 'Times New Roman', Times, serif; color:green;">ADD NEW REGISTRATION</a><br>
+    <h1 style="font-family: 'Times New Roman', Times, serif;"><b>✅ Registrations Available ✅</b></h1><br>
+    <a href="{% url 'regadmin5' %}" style="font-family: 'Times New Roman', Times, serif; color:green;"><u><b>ADD NEW REGISTRATION</b></u></a><br><br>
     <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
     <table border="1" style="font-family: 'Times New Roman', Times, serif;">
         <thead>
         <tr bgcolor="lightblue">
-            <td>Department</td>
-            <td>Academic Year</td>
-            <td>Cycle(Year)</td>
-            <td>Semester</td>
-            <td>Actions</td>
+            <td><b>Department</b></td>
+            <td><b>Academic Year</b></td>
+            <td><b>Cycle(Year)</b></td>
+            <td><b>Semester</b></td>
+            <td><b>Actions</b></td>
         </tr>
         </thead>
         {% for x in a %}
@@ -26,7 +26,7 @@
             <td id="row3">{{x.yr}}</td>
             <td id="row4">{{x.sem}}</td>
             <td>
-                <a href="/regadmin4/{{x.dept}}/{{x.ay}}/{{x.yr}}/{{x.sem}}">VIEW</a><br>
+                <a href="/regadmin4/{{x.dept}}/{{x.ay}}/{{x.yr}}/{{x.sem}}">VIEW</a><br><br>
 
                 <a href="{% url 'regadmin2' %}">Student-Registration History</a>
             </td>

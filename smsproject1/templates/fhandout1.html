@@ -7,13 +7,12 @@
     <table border="1" style="font-family: 'Times New Roman', Times, serif;">
         <thead>
         <tr bgcolor="lightblue">
-            <td>Academic Year</td>
-            <td>Semester</td>
-            <td>CourseCode -  CourseTitle</td>
-            <td>Component</td>
-            <td>Type</td>
-            <td>Section</td>
-            <td>Action</td>
+            <td><b>Academic Year</b></td>
+            <td><b>Semester</b></td>
+            <td><b>CourseCode -  CourseTitle</b></td>
+            <td><b>Type</b></td>
+            <td><b>Section</b></td>
+            <td><b>Action</b></td>
         </tr>
         </thead>
         {% for i  in y %}
@@ -23,12 +22,11 @@
             <td>{{i.course.semester}}</td>
             <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
 
-             <td>{{i.component}}</td>
             <td>{{i.type}}</td>
             <td>{{i.section}}</td>
             <td>
-                <a href="/fhandoutadd/{{i.faculty.facultyid}}/{{i.course.id}}/{{i.type}}">Add</a><br>
-                <a href="/fhandoutview/{{i.course.id}}/{{i.faculty.facultyid}}">View</a><br>
+                <a href="/fhandoutadd/{{i.faculty.facultyid}}/{{i.course.id}}/{{i.type}}">Add</a><br><br>
+                <a href="/fhandoutview/{{i.course.id}}/{{i.faculty.facultyid}}">View</a><br><br>
                 <a href="/fhandoutdel/{{i.course.id}}/{{i.faculty.facultyid}}">Delete</a>
             </td>
         </tr>

@@ -2,7 +2,7 @@
 
 {% block 'body' %}
 <center>
-    <h3 style="font-family: 'Times New Roman', Times, serif; color:lightgreen;">{{msg}}</h3>
+    <h3 style="font-family: 'Times New Roman', Times, serif; color:red;">{{msg}}</h3>
     <h2 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Enter Details &#x25BC;</b></h2><br>
     <div class="box">
     <form method="post">
@@ -10,31 +10,7 @@
         <table width="30%" height="30%" >
 
         <tr>
-            <td><label><b>Program : </b></label></td>
-            <td>
-                <select name="pgm">
-                    <option value="">--Select--</option>
-                    <option value="BTECH">BTECH</option>
-                    <option value="MTECH">MTECH</option>
-                </select>
-            </td>
-        </tr>
-
-         <tr><td>&nbsp;</td></tr>
-        <tr>
-            <td><label><b>Department:</b></label></td>
-            <td>
-                <select name="dept" required>
-                    <option value="">--Select--</option>
-                    <option value="CSE">CSE</option>
-                    <option value="ECE">ECE</option>
-                </select>
-            </td>
-        </tr>
-         <tr><td>&nbsp;</td></tr>
-
-        <tr>
-            <td><label><b>Batch Academic Year:</b></label></td>
+            <td><label><b>Academic Year:</b></label></td>
             <td>
                 <select name="ay" required>
                     <option value="">--Select--</option>

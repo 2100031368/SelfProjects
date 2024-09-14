@@ -27,7 +27,11 @@
             <td>{{i.cur_sem}}</td>
             <td>{{i.email}}</td>
             <td>{{i.contact}}</td>
-            <td><a href="/fupdatestudent/{{i.studentid}}">Update</a></td>
+            <td>
+                <a href="/fupdatestudent/{{i.studentid}}">UPDATE INFO</a><br><br>
+                <a href="/fstuinternals/{{i.studentid}}">VIEW INTERNALS</a><br><br>
+                <a href="/fsgpa0/{{i.studentid}}">SGPA</a>
+            </td>
         </tr>
         {% endfor %}
     </table>

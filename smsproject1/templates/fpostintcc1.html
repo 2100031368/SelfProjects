@@ -3,35 +3,36 @@
 {% block 'body' %}
 
 <center>
-    <h3><b>&#x1F511; Access To Post Internals &#x1F511;</b></h3>
+    <h3><b>&#x1F511; Access To Post Internals &#x1F511;</b></h3><br>
 <div class="box">
-    <form method="post" action="{% url 'fpostintcc2' %}" >
+    <form method="post" action="{% url 'fpostintcc2' %}"style="font-family: 'Times New Roman', Times, serif;" >
     {% csrf_token %}
-        <label>Course-ID: </label>
-        <input type="text" value="{{c}}" name="sno" readonly /><br>
+        <label><b>Course-ID: </b></label>
+        <input type="text" value="{{fcm.course.id}}" name="cid" readonly /><br><br>
 
-        <label>CourseCode:</label>
-        <input type="text" value="{{ccode}}" readonly /><br>
+        <label><b> CourseCode:</b></label>
+        <input type="text" value="{{fcm.course.coursecode}}" readonly /><br><br>
 
 
-        <label>FacultyId: </label>
-        <input type="number" value="{{sfid}}" name="fid" readonly /><br>
+        <label><b> FacultyId: </b></label>
+        <input type="number" value="{{fcm.faculty.facultyid}}" name="fid" readonly /><br><br>
 
-        <label>Academic Year</label>
-        <input type="text" value="{{ay}}" name="ayr" readonly /><br>
+        <label><b> Academic Year </b></label>
+        <input type="text" value="{{fcm.course.academicyear}}" name="ayr" readonly /><br><br>
 
-        <label>Year</label>
-        <input type="number" value="{{yr}}" name="y" readonly /><br>
+        <label><b> Year </b></label>
+        <input type="number" value="{{fcm.course.year}}" name="y" readonly /><br><br>
 
-        <label>Semester</label>
-        <input type="text" value="{{sem}}" name="sm" readonly /><br>
+        <label><b> Semester </b></label>
+        <input type="text" value="{{fcm.course.semester}}" name="sm" readonly /><br><br>
 
-        <label>Enable/Disable to post Content</label>
-       <input type="number" name="sd" min="0" max="1" required/><br><br>
+        <label><b> Enable/Disable to post Internals </b></label>
+       <input type="number" name="post" min="0" max="1" required/><br><br>
 
         <input type="submit" value="SUBMIT" class="addbutton" />
     </form>
 
-</center>
+
 </div>
+</center>
 {% endblock %}

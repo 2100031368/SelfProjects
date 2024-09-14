@@ -105,27 +105,6 @@ def stmyccontent(request, cc,fid):
     return render(request, "stmyccontent.html", {"ssid":ssid, "x":x})
 
 
-'''def studentcourse(request):
-    ssid = request.session["sid"]
-    st=Student.objects.all()
-    ct=Course.objects.all()
-    flag1=Student.objects.filter(studentid=ssid)
-
-    z=[]
-    for x in st:
-        if(x.studentid==int(ssid)):
-            z.append(x)
-
-    listofc=[]
-    for y in ct:
-        c= Course.objects.filter(Q(year=z.year)&Q(semester=z.semester)&Q(program=z.program))
-        if(c):
-            listofc.append(c)
-
-    return render(request, "studentcourse.html", {"listofc":listofc, "ssid":ssid})
-
-
-'''
 
 
 def stureg1(request):

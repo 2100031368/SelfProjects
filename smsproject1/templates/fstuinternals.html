@@ -1,0 +1,34 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+    <center>
+        <h3 style="font-family: 'Times New Roman', Times, serif;">Internals of {{sid}} during Academic Year : {{ay}} and Semester : {{sem}}</h3><br>
+        <table border="1" style="font-family: 'Times New Roman', Times, serif;">
+            <tr bgcolor="lightblue">
+                <td>CourseCode</td>
+                <td>FacultyID</td>
+                <td>Internals</td>
+            </tr>
+            {% for i in x %}
+            <tr>
+                <td>{{i.cc}}</td>
+                <td>{{i.fid}}</td>
+                <td>
+                    <label>Sem1 - {{i.sem1}}</label><br>
+                    <label>Sem2 - {{i.sem2}}</label><br>
+                    <label>Lab1 - {{i.lab1}}</label><br>
+                    <label>Quiz1 - {{i.quiz1}}</label><br>
+                    <label>Quiz2 - {{i.quiz2}}</label><br>
+                    <label>Quiz3 - {{i.quiz3}}</label><br>
+                    <label>Quiz4 - {{i.quiz4}}</label><br>
+                    <label>SemEnd - {{i.semend}}</label><br>
+                    <label>LabEnd - {{i.labend}}</label><br>
+                    <label>GradePonits - {{i.grade_points}}</label>
+                    <label>Grade - {{i.grade}}</label>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </center>
+
+{% endblock %}

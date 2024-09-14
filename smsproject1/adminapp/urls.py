@@ -25,7 +25,6 @@ urlpatterns = [
 
    path("facultycoursemapping", views.facultycoursemapping, name="facultycoursemapping"),
    path("addfacultycourse", views.addfacultycourse, name="addfacultycourse"),
-   path("admodifyfcm/<str:dept>/<str:pgm>/<str:ay>/<str:sem>/<int:cid>/<int:fid>/<int:fcmid>", views.admodifyfcm, name='admodifyfcm'),
 
 
    path("adminfaculty", views.adminfaculty, name="adminfaculty"),
@@ -46,20 +45,20 @@ urlpatterns = [
    path("aviewfeedback1/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback1, name="aviewfeedback1"),
    path("aviewfeedback2/<int:sid>/<int:fid>/<str:ay>/<int:yr>/<str:sem>/<str:cc>/<int:sec>", views.aviewfeedback2, name="aviewfeedback2"),
    path("aviewfeedback3/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback3, name="aviewfeedback3"),
-   path("aviewfeedback4/<int:q>/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>", views.aviewfeedback4, name="aviewfeedback4"),
+   path("aviewfeedback4/<int:q>/<str:ay>/<int:yr>/<str:sem>/<str:dept>/<int:fid>/<str:cc>/<int:sec>/<int:c1>/<int:c2>", views.aviewfeedback4, name="aviewfeedback4"),
 
-   path("addcc0", views.addcc0, name="addcc0"),
-   path("addcc1/<int:fid>/<int:cc>/<str:ay>/<int:yr>/<str:sem>",views.addcc1, name="addcc1"),
-   path("addcc2", views.addcc2, name="addcc2"),
 
    path("agiveaccess0", views.agiveaccess0, name='agiveaccess0'),
    path("agiveaccess1", views.agiveaccess1, name='agiveaccess1'),
 
-   path("astuinternals/<int:sid>/<str:ay>/<str:sem>/<str:pgm>/<str:dept>", views.astuinternals, name='astuinternals'),
+   path("astuinternals/<int:sid>", views.astuinternals, name='astuinternals'),
+   path("astuinternals2/<int:sid>", views.astuinternals2, name='astuinternals2'),
 
    path("aviewgrievance0", views.aviewgrievance0, name='aviewgrievance0'),
    path("aviewgrievance1", views.aviewgrievance1, name='aviewgrievance1'),
    path("aviewgrievance2", views.aviewgrievance2, name='aviewgrievance2'),
    path("aviewgrissuestu/<int:id>", views.aviewgrissuestu, name="aviewgrissuestu"),
    path("update_issue_status/<int:id>", views.update_issue_status, name="update_issue_status"),
+
+   path("asgpa0/<int:sid>", views.asgpa0, name="asgpa0"),
 ]

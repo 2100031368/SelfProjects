@@ -5,7 +5,7 @@ class AddRegForm(forms.ModelForm):
     class Meta:
         model=RegM
         fields="__all__"
-        labels={"dept":"Department", "ay":"Academic Year", "yr":"Cycle", "sem":"Semester",
+        labels={"pgm":"Program","dept":"Department", "ay":"Academic Year", "yr":"Cycle", "sem":"Semester",
                 "c1": "Course1", "f11":"Faculty1", "f12":"Faculty2", "f13":"Faculty3",
                 "c2": "Course2", "f21":"Faculty1", "f22":"Faculty2", "f23":"Faculty3",
                 "c3": "Course3", "f31":"Faculty1", "f32":"Faculty2", "f33":"Faculty3",

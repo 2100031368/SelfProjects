@@ -6,12 +6,14 @@
       <table border="2">
           <tr bgcolor="lightblue">
               <td>My Courses</td>
+              <td>Section</td>
               <td>Action</td>
           </tr>
           {% for i in r  %}
           <tr>
               <td>{{i.course.coursetitle}}</td>
-              <td><a href="viewfstudents3/{{i.course.department}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.coursecode}}/{{i.faculty.facultyid}}">Get Students</a></td>
+              <td>{{i.section}}</td>
+              <td><a href="viewfstudents3/{{i.course.department}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.course.coursecode}}/{{i.faculty.facultyid}}/{{i.section}}">Get Students</a></td>
           </tr>
       </table>
        {% endfor %}

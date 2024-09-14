@@ -3,32 +3,38 @@
 {% block 'body' %}
 
 <center>
-    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x2705; Select Course To Post Internals &#x2705;</b></h3>
-     <input class="form-control" id="myInput" type="text" placeholder="Search .."><br><br>
-     <table border="2" class="table table-bordered table-striped" style="font-family: 'Times New Roman', Times, serif;">
+    <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x2705; Select Course To Post Internals &#x2705;</b></h3><br>
+     <input class="form-control" id="myInput" type="text" placeholder="Search ..."><br><br>
+     <table border="2" style="font-family: 'Times New Roman', Times, serif;">
+        <thead>
         <tr bgcolor="lightblue">
-            <td>CourseCode - Title</td>
-            <td>Academic Year</td>
-            <td>Cycle</td>
-            <td>Semester</td>
-            <td>Section</td>
-            <td>Action</td>
+            <td><b>CourseCode - Title</b></td>
+            <td><b>Academic Year</b></td>
+            <td><b>Cycle</b></td>
+            <td><b>Semester</b></td>
+            <td><b>Section</b></td>
+            <td><b>Action</b></td>
         </tr>
+        </thead>
         {% for i in x %}
-        <tr>
+         <tbody id="myTable">
+         <tr align="center" >
+
             <td>{{i.course.coursecode}} - {{i.course.coursetitle}}</td>
             <td>{{i.course.academicyear}}</td>
             <td>{{i.course.year}}</td>
             <td>{{i.course.semester}}</td>
             <td>{{i.section}}</td>
             <td>
-                <a href="fpostintcc1/{{i.course.id}}/{{i.course.coursecode}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}/{{i.faculty.facultyid}}">Enable</a><br>
-                <a href="fpostint0/{{i.section}}/{{i.course.department}}/{{i.course.coursecode}}/{{i.course.id}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}">Upload Internals</a>
+                <a href="fpostintcc1/{{i.course.id}}/{{i.faculty.facultyid}}"><b>Enable</b></a><br><br>
+                <a href="fpostint0/{{i.section}}/{{i.course.department}}/{{i.course.coursecode}}/{{i.course.id}}/{{i.course.academicyear}}/{{i.course.year}}/{{i.course.semester}}"><b>Upload Internals</b></a>
             </td>
         </tr>
+         </tbody>
         {% endfor %}
     </table>
 </center>
+
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

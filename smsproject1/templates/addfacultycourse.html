@@ -20,13 +20,15 @@
 </style>
 
 <center>
-    <h2>MAP FACULTY-COURSE</h2>
-    <h3 style="color:green">{{msg}}</h3>
+    <h2 style="font-family: 'Times New Roman', Times, serif;"><b>🔗 MAP FACULTY-COURSE  🔗</b></h2><br>
+    <h3 style="color:green;font-family: 'Times New Roman', Times, serif;">{{msg}}</h3>
+    <div class="box">
     <form method="post">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit" value="ADD" class="addbutton"/>
         <input type="clear" value="CLEAR" class="addbutton"/>
     </form>
+    </div>
 </center>
 {% endblock %}

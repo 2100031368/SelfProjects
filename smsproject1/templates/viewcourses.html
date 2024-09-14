@@ -1,24 +1,25 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>&#10145; View Course Details &#11013;</b></h2>
+<h2 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>📝 View Course Details 📝</b></h2><br>
 
 <center>
-    <input class="form-control" id="myInput" type="text" placeholder="Search">
-    <table border="1" style="font-family: 'Times New Roman', Times, serif; margin-left:50px; font-size:14px;" align="center">
+    <input class="form-control" id="myInput" type="text" placeholder="Search"><br><br>
+
+    <table border="1" style="font-family: 'Times New Roman', Times, serif; margin-left:50px; font-size:16px;" align="center">
 
         <thead>
             <tr bgcolor="lightblue">
-                <td>Department</td>
-                <td>Program</td>
-                <td>Academic Year</td>
-                <td>Semester</td>
-                <td>Year</td>
-                <td>Course Code</td>
-                <td>Course Title</td>
-                <td>LTPS</td>
-                <td>Course Credits</td>
-                <td>Action</td>
+                <td><b>Department</b></td>
+                <td><b>Program</b></td>
+                <td><b>Academic Year</b></td>
+                <td><b>Semester</b></td>
+                <td><b>Year</b></td>
+                <td><b>Course Code</b></td>
+                <td><b>Course Title</b></td>
+                <td><b>LTPS</b></td>
+                <td><b>Course Credits</b></td>
+                <td><b>Action</b></td>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -38,17 +39,30 @@
             {% endfor %}
         </tbody>
     </table>
-</center>
 
+</center>
 <script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+document.addEventListener("DOMContentLoaded", function() {
+    const input = document.getElementById("myInput");
+    input.addEventListener("input", filterTable);
 });
+
+function filterTable() {
+    const filter = document.getElementById("myInput").value.toLowerCase();
+    const rows = document.getElementsByTagName("tr");
+    for (let i = 1; i < rows.length; i++) { // Start from index 1 to skip header row
+        const cells = rows[i].getElementsByTagName("td");
+        let display = "none";
+        for (let j = 0; j < cells.length; j++) {
+            const cellText = cells[j].textContent || cells[j].innerText;
+            if (cellText.toLowerCase().indexOf(filter) > -1) {
+                display = "";
+                break;
+            }
+        }
+        rows[i].style.display = display;
+    }
+}
 </script>
 
 {% endblock %}

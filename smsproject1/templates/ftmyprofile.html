@@ -1,0 +1,26 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+
+<center>
+  <div class="card">
+
+  <div class="container">
+    <h4><b>Faculty Id: </b>{{ x.facultyid }}</h4><br>
+    <h4><b>Full Name: </b>{{ x.fullname }}</h4><br>
+    <h4><b>Gender: </b>{{ x.gender }}</h4><br>
+    <h4><b>Department: </b>{{ x.department }}</h4><br>
+    <h4><b>Program: </b>{{ x.program }}</h4><br>
+    <h4><b>Academic Year Joined: </b>{{ x.ay }}</h4><br>
+    <h4><b> Current Working Academic Year : </b>{{ x.cur_ay }}</h4><br>
+    <h4><b>Current Working Semester: </b>{{x.cur_sem}}</h4><br>
+    <h4><b>Email: </b>{{ x.email }}</h4><br>
+    <h4><b>Contact: </b>{{ x.contact }}</h4>
+
+
+
+  </div>
+</div>
+</center>
+
+{% endblock %}

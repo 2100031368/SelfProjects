@@ -11,11 +11,11 @@
     <button class="button" onclick="window.location.href='{% url 'addcourse' %}'"><b>ADD</b></button>&nbsp;&nbsp;&nbsp
      <button class="button" onclick="window.location.href='{% url 'deletecourse' %}'"><b>DELETE</b></button>&nbsp;&nbsp;&nbsp
      </nav>
-    <h2  style="font-family: 'Times New Roman', Times, serif; color:green;"><b>{{msg}}</b></h2>
 </div>
 
 
 <div id="content">
+     <h2  style="font-family: 'Times New Roman', Times, serif; color:green;"><b>{{msg}}</b></h2>
     <img src="{% static 'images/courses.jpg' %}" style="widht:50px; margin-top:50px;" alt="Center Image" />
 </div>
 {% endblock %}

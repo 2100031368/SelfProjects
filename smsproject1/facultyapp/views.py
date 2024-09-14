@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 from django.utils.html import strip_tags
 from regapp.models import RegHistoryM, FeedbackPosted
 
-from .models import CourseContent, CC, Internals, Handout
+from .models import CourseContent, InternalsAccess, Internals, Handout
 from .forms import HandoutForm
 
 from django.http import FileResponse, Http404
@@ -200,20 +200,18 @@ def viewfstudents1(request):
         dept=request.POST["dept"]
         pgm=request.POST["pgm"]
         sem=request.POST["sem"]
-        sec=request.POST["sec"]
-
         c=Course.objects.all()
         f=Faculty.objects.all()
         x=FacultyCourseMapping.objects.all()
         r=[]
         for i in x:
-            if(i.course.department == dept and i.course.academicyear ==ay and i.course.semester == sem and i.course.program == pgm and i.faculty.facultyid == int(sfid) and i.section == int(sec)):
+            if(i.course.department == dept and i.course.academicyear ==ay and i.course.semester == sem and i.course.program == pgm and i.faculty.facultyid == int(sfid)):
                 r.append(i)
         print(r)
         return render(request, "viewfstudents2.html", {"sfid":sfid, "r":r})
     else:
         return render(request, "viewfstudents1.html", {"sfid": sfid})
-def viewfstudents3(request, dept,ay,yr,sem,ct,fid):
+def viewfstudents3(request, dept,ay,yr,sem,ct,fid,sec):
     sfid = request.session["fid"]
     x=RegHistoryM.objects.filter(Q(say=ay)&Q(sdept=dept)&Q(syr=yr)&Q(ssem=sem))
     r=[]
@@ -230,89 +228,30 @@ def viewfstudents3(request, dept,ay,yr,sem,ct,fid):
             print(i.s1)'''
     for i in x:
 
-        if(i.cc1.coursecode == ct and i.fcm1.faculty.facultyid == fid):
+        if(i.cc1.coursecode == ct and i.fcm1.faculty.facultyid == fid and i.fcm1.section==sec):
             r.append(i)
-        elif (i.cc2.coursecode == ct and i.fcm2.faculty.facultyid == fid):
-            r.append(i)
-
-        elif (i.cc3.coursecode == ct and i.fcm3.faculty.facultyid == fid):
+        elif (i.cc2.coursecode == ct and i.fcm2.faculty.facultyid == fid and i.fcm2.section==sec):
             r.append(i)
 
-        elif (i.cc4.coursecode == ct and i.fcm4.faculty.facultyid == fid):
+        elif (i.cc3 and i.cc3.coursecode == ct and i.fcm3.faculty.facultyid == fid and i.fcm3.section==sec):
             r.append(i)
 
-        elif (i.cc5.coursecode == ct and i.fcm5.faculty.facultyid == fid):
+        elif (i.cc4 and i.cc4.coursecode == ct and i.fcm4.faculty.facultyid == fid and i.fcm4.section==sec):
             r.append(i)
 
-        elif (i.cc6.coursecode == ct and i.fcm6.faculty.facultyid == fid):
+        elif (i.cc5 and i.cc5.coursecode == ct and i.fcm5.faculty.facultyid == fid and i.fcm5.section==sec):
             r.append(i)
 
-        elif (i.cc7.coursecode == ct and i.fcm7.faculty.facultyid == fid):
+        elif (i.cc6 and i.cc6.coursecode == ct and i.fcm6.faculty.facultyid == fid and i.fcm6.section==sec):
+            r.append(i)
+
+        elif (i.cc7 and i.cc7.coursecode == ct and i.fcm7.faculty.facultyid == fid and i.fcm7.section==sec):
             r.append(i)
     #print(r)
 
     else:
         return render(request, "viewfstudents3.html", {"sfid":sfid,"r":r })
 
-
-###### posting att
-
-def postatt1(request):
-    sfid = request.session["fid"]
-    if(request.method == "POST"):
-
-        ay = request.POST["ay"]
-        yr = request.POST["yr"]
-        sem = request.POST["sem"]
-        sec = request.POST["sec"]
-        x=Faculty.objects.get(facultyid=sfid).cur_ay
-        y=Faculty.objects.get(facultyid=sfid).cur_sem
-        z=Course.objects.filter(Q(academicyear=x)&Q(semester=y))
-
-        fc = []
-        for i in z:
-            try:
-              p=FacultyCourseMapping.objects.get(Q(faculty=int(sfid))&Q(course=i))
-              fc.append(p)
-            except ObjectDoesNotExist:
-                print("hi")
-
-        print(fc)
-
-        count = len(fc)
-        return render(request, "postatt1.html", {"sfid": sfid, "fc": fc, "count": count})
-    else:
-        return render(request, "postatt0.html", {"sfid": sfid})
-
-
-def postatt2(request, dept, ay, yr, sem, cc, fid, sec):
-    sfid = request.session["fid"]
-    y=RegHistoryM.objects.filter(Q(sdept=dept)&Q(say=ay)&Q(syr=yr)&Q(ssem=sem))
-    r=[]
-    for i in y:
-        if(i.cc1==cc and i.sec1==int(sec) and i.f1==fid):
-            r.append(i)
-
-        elif (i.cc2 == cc and i.sec1==int(sec) and i.f2 == fid):
-            r.append(i)
-
-        elif (i.cc3 == cc and i.sec3 == int(sec) and i.f3 == fid):
-            r.append(i)
-
-        elif (i.cc4 == cc and i.sec4 == int(sec) and i.f4 == fid):
-            r.append(i)
-
-        elif (i.cc5 == cc and i.sec5 == int(sec) and i.f5 == fid):
-            r.append(i)
-
-        elif (i.cc6 == cc and i.sec6 == int(sec) and i.f6 == fid):
-                r.append(i)
-
-
-        elif (i.cc7 == cc and i.sec7 == int(sec) and i.f7 == fid):
-            r.append(i)
-        print(r)
-    return render(request, "postatt2.html", {"sfid": sfid, "r":r})
 
 
 #### VIEW FEEDBACKS #####
@@ -407,45 +346,55 @@ def fpostintcc0(request):
     x=FacultyCourseMapping.objects.filter(faculty=sfid)
     return render(request, "fpostintcc0.html", {"sfid":sfid, "x":x})
 
-def fpostintcc1(request, c,ccode, ayr,y, sm, ft):
+def fpostintcc1(request, cid,ft):
     sfid = request.session["fid"]
+    c=Course.objects.get(id=cid)
+    f=Faculty.objects.get(facultyid=ft)
+    fcm = FacultyCourseMapping.objects.get(Q(course=c)&Q(faculty=f))
+    if(fcm.type == True):
+        return render(request, "fpostintcc1.html",
+                      {"sfid": sfid, "fcm":fcm})
 
-    h=CC.objects.filter(Q(cc = int(c))&Q(ay=ayr)&Q(yr=int(y))&Q(sem=sm)&Q(fid=int(ft)))
-    if h:
-        #return HttpResponse("hi")
-        return render(request, "fpostintcc1.html", {"sfid":sfid, "c":c,"ccode":ccode, "ay":ayr, "yr": y, "sem":sm})
     else:
         msg="Only Course Cordinator are given access or you might not be granted permission"
         return render(request, "facultyhome.html", {"msg": msg})
 
 
-
+#### cc giving permission to post internals
 def fpostintcc2(request):
     sfid = request.session["fid"]
-    p=request.POST["sd"]
-    print(p)
-    a=request.POST["sno"]
-    b=request.POST["fid"]
-    c=request.POST["ayr"]
-    d=request.POST["y"]
-    e=request.POST["sm"]
-    CC.objects.filter(Q(cc=a)&Q(fid=sfid)&Q(ay=c)&Q(yr=int(d))&Q(sem=e)).update(post=p)
+    course_id=request.POST["cid"]
+    access=request.POST["post"]
+    #print(p)
+    x=Course.objects.get(id=course_id)
+    z=Faculty.objects.get(facultyid=sfid)
+    y=FacultyCourseMapping.objects.get(Q(course=x)&Q(faculty=z))
+    try:
+        InternalsAccess.objects.get(fid=y).update(post=access)
+    except:
+        new = InternalsAccess(fid=y, post=access)
+        InternalsAccess.save(new)
+
     msg="Posting Internals has been Updated"
     return render(request, "facultyhome.html", {"msg":msg})
 
-def fpostint0(request,sec,dept,ctitle, c,  ayr, y, sm):
+def fpostint0(request,sec,dept,ctitle, cid,  ayr, y, sm):
     sfid = request.session["fid"]
-
+    x = Course.objects.get(id=cid)
+    #fc = FacultyCourseMapping.objects.filter(Q(course=x))
+    print("hello sree")
     try:
-        k = CC.objects.get(Q(ay=ayr) & Q(yr=y) & Q(sem=sm) & Q(cc=c))
+
+        k = InternalsAccess.objects.get(fid__course=x)
+        print("hello bavana")
         if(k.post == 1):
-            return redirect("fpostint1",sec=sec,  dept=dept, ct=ctitle, c=c, ay=ayr, yr=y, sem=sm)
+            return redirect("fpostint1",sec=sec,  dept=dept, ct=ctitle, c=cid, ay=ayr, yr=y, sem=sm)
             #return HttpResponse("granted")
         else:
             msg="CC need to Grant Access To Post Internals"
             return render(request, "facultyhome.html", {"sfid":sfid, "msg":msg})
-    except ObjectDoesNotExist:
-        msg = f'CC need to Grant Access To Post Internals'
+    except:
+        msg = f'CC not yet Added Course in InternalsPage'
         return render(request, "facultyhome.html", {"sfid": sfid, "msg": msg})
 
 def fpostint1(request,sec,dept,ct, c,  ay, yr, sem):
@@ -785,8 +734,7 @@ def fviewstudents(request):
             pgm=request.POST["pgm"]
             dept=request.POST["dept"]
             ay=request.POST["ay"]
-            sem=request.POST["sem"]
-            x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay)&Q(semester=sem))
+            x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay))
             return render(request, "fviewstu.html", {"x": x, "sfid": sfid})
     else:
             return render(request, "ffilter.html", {"sfid": sfid})
@@ -933,3 +881,95 @@ def fupdate_issue_status(request, id):
     print(referer)
 
     return redirect(referer)
+
+
+### faculty - who (given access) to view internals of students
+def fstuinternals(request,sid):
+    sfid = request.session["fid"]
+    return render(request, "faysemfilter.html", {"sfid":sfid,"sid":sid})
+def fstuinternals2(request,sid):
+    sfid = request.session["fid"]
+    if(request.method=="POST"):
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        x=Internals.objects.filter(Q(sid=sid)&Q(ay=ay)&Q(sem=sem))
+
+        if x.exists():
+            return render(request, "fstuinternals.html", {"sfid":sfid, "x":x, "sid":sid, "ay":ay, "sem":sem})
+        else:
+            #print("empty")
+            msg=f'NO INTERNALS POSTED YET FOR ID-{sid} during Academic Year-{ay} and Sem-{sem}'
+            return render(request, "faysemfilter.html", {"x": x, "sfid":sfid, "msg":msg})
+    else:
+        return render(request, "faysemfilter.html", {"sfid":sfid,"sid":sid})
+
+
+### faculty viewing - student sgpa
+def fsgpa0(request,sid):
+    sfid = request.session["fid"]
+    if request.method == "POST":
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        s = Student.objects.get(studentid=sid)
+        try:
+
+            x=RegHistoryM.objects.get(Q(say=ay)&Q(ssem = sem)&Q(sid=s))
+
+            y=Course.objects.filter(Q(department=s.department)&Q(program=s.program)&Q(academicyear=ay)&Q(semester=sem))
+            q=0
+            for i in y:
+                q = q + i.credits
+            p=Internals.objects.filter(Q(sid=sid)&Q(dept=s.department)&Q(ay=ay)&Q(sem=sem))
+            for i in p:
+               if(x.cc1.coursecode == i.cc):
+                   cred = x.cc1.credits * i.grade_points
+               elif(x.cc2 and x.cc2.coursecode == i.cc):
+                   cred = x.cc2.credits * i.grade_points
+               elif(x.cc3 and x.cc3.coursecode == i.cc):
+                   cred = x.cc3.credits * i.grade_points
+               elif(x.cc4 and x.cc4.coursecode == i.cc):
+                   cred = x.cc4.credits * i.grade_points
+               elif(x.cc5 and x.cc5.coursecode == i.cc):
+                   cred = x.cc5.credits * i.grade_points
+               elif(x.cc6 and x.cc6.coursecode == i.cc):
+                   cred = x.cc6.credits * i.grade_points
+               elif(x.cc7 and x.cc7.coursecode == i.cc):
+                   cred = x.cc7.credits * i.grade_points
+            cred=cred/q
+
+            b=0
+
+            if(x.cc1):
+                b=b+1
+            if(x.cc2):
+                b=b+1
+            if (x.cc3):
+                b = b + 1
+            if (x.cc4):
+                b = b + 1
+            if (x.cc5):
+                b = b + 1
+            if (x.cc6):
+                b = b + 1
+            if (x.cc7):
+                b = b + 1
+            c=len(p)
+            if(c < b):
+                msg=f'Registered Number of Courses {b} , Total Credits {q}, Missing in {b-c} courses'
+                return render(request, "fsgpa1.html", {"msg":msg, "p":p, "cred":cred})
+            else:
+                return HttpResponse("hi")
+
+
+        except ObjectDoesNotExist:
+            msg="Doesn't Exist"
+            return render(request, "fsgpa.html", {"sfid":sfid, "msg":msg})
+    else:
+        return render(request, "fsgpa.html", {"sfid":sfid})
+
+
+def ftmyprofile(request):
+    sfid = request.session["fid"]
+    y=Faculty.objects.get(facultyid=sfid)
+    print(y)
+    return render(request, "ftmyprofile.html", {"sfid":sfid,"x":y})

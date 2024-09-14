@@ -2,12 +2,14 @@
 
 {% block 'body' %}
 <center>
-  <form method="post">
+     <div class="box">
+  <form  method="post" class="form-control">
       {% csrf_token %}
      {{form.as_p}}
-     <input type="submit" value="ADD" />
-     <input type="clear" value="Clear" />
+     <input type="submit" value="ADD" class="addbutton" />
+     <input type="clear" value="Clear" class="addbutton"/>
   </form>
+     </div>
 </center>
 
 {% endblock %}

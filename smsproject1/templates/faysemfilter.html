@@ -1,0 +1,43 @@
+{% extends 'facultyhome.html' %}
+
+{% block 'body' %}
+
+<center>
+   <h3 style="color:red;font-family: 'Times New Roman', Times, serif; color:red;">{{msg}}</h3><br>
+     <h3 style="font-family: 'Times New Roman', Times, serif;"><b>&#x25BC; Enter Details &#x25BC;</b></h3><br>
+    <div class="box">
+        <div class="font">
+    <form method ="post" action="/fstuinternals2/{{sid}}">
+        {% csrf_token %}
+        <tr style="font-family: 'Times New Roman', Times, serif;">
+            <td><label><b>Academic Year:</b></label></td>
+            <td>
+                <select name="ay" required>
+                    <option value="">--Select--</option>
+                    <option value="2023-2024">2023-2024</option>
+                    <option value="2022-2023">2022-2023</option>
+                </select>
+            </td>
+        </tr><br><br>
+
+         <tr>
+            <td><label><b>Semester:</b></label></td>
+            <td>
+                <select name="sem" required>
+                    <option value="">--Select--</option>
+                    <option value="ODD">ODD</option>
+                    <option value="EVEN">EVEN</option>
+                </select>
+            </td>
+        </tr><br><br>
+
+        <tr>
+            <td><input type="submit"  value="Submit" class="addbutton"/></td>
+             <td><input type="reset"  value="Clear" class="addbutton"/></td>
+        </tr>
+
+    </form>
+            </div>
+        </div>
+</center>
+{% endblock %}

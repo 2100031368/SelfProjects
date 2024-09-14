@@ -1,4 +1,4 @@
-{% extends 'studenthome.html' %}
+{% extends 'adminhome.html' %}
 
 {% block 'body' %}
 <center>
@@ -6,10 +6,10 @@
     <h3 style="font-family: 'Times New Roman', Times, serif; color:red;">SGPA : {{cred}}</h3><br>
     <table border="1" style="font-family: 'Times New Roman', Times, serif;">
         <tr bgcolor="lightblue">
-            <td><b>CourseCode</b></td>
-            <td><b>Marks</b></td>
-            <td><b>GradePoints</b></td>
-            <td><b>Grade</b></td>
+            <td>CourseCode</td>
+            <td>Marks</td>
+            <td>GradePoints</td>
+            <td>Grade</td>
         </tr>
         {% for i in p %}
         <tr>

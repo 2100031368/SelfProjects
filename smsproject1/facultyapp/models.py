@@ -1,7 +1,8 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 # Create your models here.
-from adminapp.models import Faculty, Course
+from adminapp.models import Faculty, Course, FacultyCourseMapping
 
 class CourseContent(models.Model):
     id=models.AutoField(primary_key=True)
@@ -14,15 +15,10 @@ class CourseContent(models.Model):
     class Meta:
         db_table="coursecontent_table"
 
-class CC(models.Model):
+class InternalsAccess(models.Model):
     id = models.AutoField(primary_key=True)
-    fid = models.BigIntegerField(blank=False)
-    cc = models.CharField(blank=False)
-    ay = models.CharField(blank=False, max_length=100)
-    yr=models.IntegerField(blank=False)
-    sem=models.CharField(blank=False)
-
-    post=models.IntegerField(blank=False, default=0)
+    fid = models.ForeignKey(FacultyCourseMapping, blank=False, on_delete=models.CASCADE)
+    post=models.IntegerField(blank=False, default=0, validators=[MinValueValidator(0), MaxValueValidator(1)])
 
 
 class Internals(models.Model):

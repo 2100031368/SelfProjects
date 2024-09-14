@@ -1,14 +1,17 @@
 {% extends 'adminhome.html' %}
 
 {% block 'body' %}
-<h2 align="center" style="color:red">{{msg}}</h2>
-<h3 align="center">Add New Course</h3>
+<h2 align="center" style="color:red;font-family: 'Times New Roman', Times, serif;">{{msg}}</h2>
+<h3 align="center" style="font-family: 'Times New Roman', Times, serif;"><b>🆕 Add New Course 🆕</b></h3>
 <br>
-<form method="post" action="{% url 'insertcourse' %}" align="center">
+
+<form method="post" action="{% url 'insertcourse' %}" >
     {% csrf_token %}
-    <table align="center" width="40%" height="50%" >
+    <center>
+    <div class="box">
+    <table  width="40%" height="50%" style="font-family: 'Times New Roman', Times, serif;">
         <tr>
-            <td><label>Select Department:</label></td>
+            <td><label><b>Select Department:</b></label></td>
             <td>
                 <select name="dept" required>
                     <option value="">--Select--</option>
@@ -18,10 +21,11 @@
                 </select>
             </td>
         </tr>
+        <tr><td>&nbsp;</td></tr>
 
 
         <tr >
-            <td><label>Select Program:</label></td>
+            <td><label><b>Select Program:</b></label></td>
             <td>
                 <select name="program" required>
                     <option value="">--Select--</option>
@@ -30,10 +34,10 @@
                 </select>
             </td>
         </tr>
-
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><label>Select Academic Year:</label></td>
+            <td><label><b>Select Academic Year:</b></label></td>
             <td>
                 <select name="ay" required>
                     <option value="">--Select--</option>
@@ -42,9 +46,10 @@
                 </select>
             </td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
          <tr>
-            <td><label>Select Semester:</label></td>
+            <td><label><b>Select Semester:</b></label></td>
             <td>
                 <select name="sem" required>
                     <option value="">--Select--</option>
@@ -53,32 +58,37 @@
                 </select>
             </td>
         </tr>
-
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
-              <td><label>Enter Year: </label></td>
+              <td><label><b>Enter Year: </b></label></td>
             <td><input type="number" name="year" placeholder="Year" min="1" max="4" required/></td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
          <tr>
-            <td><label>Enter CourseCode:</label></td>
+            <td><label><b>Enter CourseCode:</b></label></td>
              <td><input type="text" required name="ccode" placeholder="course - code"/></td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
          <tr>
-            <td><label>Enter CourseTitle:</label></td>
+            <td><label><b>Enter CourseTitle:</b></label></td>
              <td><input type="text" name="ctitle" required placeholder="course - title"/></td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><label>LTPS</label></td>
+            <td><label><b>LTPS</b></label></td>
             <td><input type="text" name="ltps" required /></td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
-            <td><label>Credits</label></td>
+            <td><label><b>Credits</b></label></td>
             <td><input type="number" name="credits" min="0.0" max="8.0" /></td>
         </tr>
+         <tr><td>&nbsp;</td></tr>
 
         <tr>
             <td><input type="submit"  value="Submit" class="addbutton"/></td>
@@ -86,5 +96,8 @@
         </tr>
 
     </table>
+    </div>
+    </center>
 </form>
+
 {% endblock %}

@@ -7,6 +7,7 @@ from urllib.parse import unquote
 from django.db.models import Q
 from django.contrib.auth import logout
 
+
 import matplotlib.pyplot as plt
 from django.shortcuts import redirect
 
@@ -25,7 +26,7 @@ from django.shortcuts import render, redirect
 from regapp.models import RegM,RegHistoryM, FeedbackPosted
 from regapp.forms import AddRegForm
 
-from facultyapp.models import CC, Internals
+from facultyapp.models import InternalsAccess, Internals
 
 from django import forms
 
@@ -237,8 +238,7 @@ def viewstudents(request):
         pgm=request.POST["pgm"]
         dept=request.POST["dept"]
         ay=request.POST["ay"]
-        sem=request.POST["sem"]
-        x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay)&Q(semester=sem))
+        x= Student.objects.filter(Q(program=pgm)&Q(department=dept)&Q(ay=ay))
         return render(request, "aviewstu1.html", {"x": x, "adminuname": auname})
     else:
         return render(request, "filter.html", {"adminuname": auname})
@@ -297,43 +297,46 @@ def deletecourse(request):
 
 
 def coursedeletion(request, ccode):
-    course=Course.objects.get(coursecode = ccode)
-    x=RegHistoryM.objects.filter(Q(sprogram=course.program)&Q(sdept=course.department)&Q(say=course.academicyear)&Q(syr=course.year)&Q(ssem=course.semester))
-    if x is not None:
-        for r in x:
-            for i in range(1, 8):
-                cc_field = f'cc{i}'
-                if getattr(r, cc_field) == ccode:
-                    setattr(r, cc_field, "")
-                    setattr(r, f's{i}', "")
-                    setattr(r, f'f{i}', 0)
-                    setattr(r, f'sec{i}', 0)
-            r.save()
-            email = Student.objects.get(studentid=r.sid.studentid).email
+    try:
 
-            subject = "Course Deletion from your Registered Courses."
-            message = f'Dear {r.sname} from your Registered Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.\n Thank You.\n Team SCMS.'
-            sender = settings.EMAIL_HOST_USER
-            rec = [email]
-            send_mail(subject, message, sender, rec)
-    fcm = FacultyCourseMapping.objects.filter(course=course)
-    if fcm is not None:
-        for i in fcm:
-            fid = i.faculty.facultyid
-            email = i.faculty.email
+        course=Course.objects.get(coursecode = ccode)
+        x=RegHistoryM.objects.filter(Q(sprogram=course.program)&Q(sdept=course.department)&Q(say=course.academicyear)&Q(syr=course.year)&Q(ssem=course.semester))
+        if x is not None:
+            for r in x:
+                for i in range(1, 8):
+                    cc_field = f'cc{i}'
+                    if getattr(r, cc_field) == ccode:
+                        setattr(r, cc_field, "")
+                        setattr(r, f's{i}', "")
+                        setattr(r, f'f{i}', 0)
+                        setattr(r, f'sec{i}', 0)
+                r.save()
+                email = Student.objects.get(studentid=r.sid.studentid).email
 
-            subject = "Course Deletion from your Allotted Courses."
-            message = f'Dear {i.faculty.fullname} from your Allotted Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.For more details verify ERP.\n Thank You.\nTeam SCMS.'
-            sender = settings.EMAIL_HOST_USER
-            rec = [email]
-            send_mail(subject, message, sender, rec)
+                subject = "Course Deletion from your Registered Courses."
+                message = f'Dear {r.sname} from your Registered Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.\n Thank You.\n Team SCMS.'
+                sender = settings.EMAIL_HOST_USER
+                rec = [email]
+                send_mail(subject, message, sender, rec)
+        fcm = FacultyCourseMapping.objects.filter(course=course)
+        if fcm is not None:
+            for i in fcm:
+                fid = i.faculty.facultyid
+                email = i.faculty.email
 
-    Course.objects.filter(coursecode=ccode).delete()
-    msg="Delete Course Successfully"
-    # return HttpResponse("deleted successfully")
-    return render(request, "admincourse.html", {"msg":msg})
+                subject = "Course Deletion from your Allotted Courses."
+                message = f'Dear {i.faculty.fullname} from your Allotted Courses from academic year {course.academicyear} the Course - {course.coursetitle}, bearing CourseCode - {course.coursecode} has been deleted by the administration.For more details verify ERP.\n Thank You.\nTeam SCMS.'
+                sender = settings.EMAIL_HOST_USER
+                rec = [email]
+                send_mail(subject, message, sender, rec)
 
-
+        Course.objects.filter(coursecode=ccode).delete()
+        FacultyCourseMapping.objects.filter(course=course).delete()
+        msg="Deleted Course Successfully"
+        # return HttpResponse("deleted successfully")
+        return render(request, "admincourse.html", {"msg":msg})
+    except:
+        return redirect("deletecourse")
 
 
 def updatecourse1(request, ccode):
@@ -559,7 +562,7 @@ def aviewfeedback3(request, ay, yr, sem, dept, fid, cc, sec):
             c1 = c1 + 1
     c2=len(x)
     return render(request, "aviewfeedback3.html", {"ay": ay, "yr":yr, "sem":sem, "dept":dept, "fid":fid,"cc":cc, "sec":sec,"x":x, "adminuname": auname, "c1":c1, "c2":c2})
-def aviewfeedback4(request, q, ay, yr, sem, dept, fid, cc, sec):
+def aviewfeedback4(request, q, ay, yr, sem, dept, fid, cc, sec,c1,c2):
     auname = request.session.get("auname")
     q = int(q)
     mp={}
@@ -608,52 +611,13 @@ def aviewfeedback4(request, q, ay, yr, sem, dept, fid, cc, sec):
     plt.ylabel('Frequencies')
     plt.title(q)
     plt.show()
-    return render(request, "aviewfeedback3.html",{"ay": ay, "yr": yr, "sem": sem, "dept": dept, "fid": fid, "cc": cc, "sec": sec, "x": x, "adminuname": auname})
+    return render(request, "aviewfeedback3.html",{"ay": ay, "yr": yr, "sem": sem, "dept": dept, "fid": fid, "cc": cc, "sec": sec, "x": x, "adminuname": auname,"c1":c1, "c2":c2})
     #return HttpResponse("hi")
-
-#### addin cc's to cc group #####
-
-def addcc0(request):
-    auname = request.session.get("auname")
-    k=FacultyCourseMapping.objects.filter(type=True)
-    return render(request, "addcc0.html", {"adminuname": auname, "k":k})
-
-def addcc1(request, fid, cc, ay, yr, sem):
-    auname = request.session.get("auname")
-    x=CC.objects.filter(Q(fid=fid)&Q(cc=cc)&Q(ay=ay)&Q(yr=yr)&Q(sem=sem))
-    if x:
-        return HttpResponse("already exist")
-    else:
-        return render(request, "addcc1.html",
-                      {"adminuname": auname, "fid": fid, "cc": cc, "ay": ay, "yr": yr, "sem": sem})
-
-
-
-def addcc2(request):
-    auname = request.session.get("auname")
-    a=request.POST["fid"]
-    k=Faculty.objects.get(facultyid=a)
-    b=request.POST["cc"]
-    l=Course.objects.get(id=b)
-    c=request.POST["ay"]
-    d=request.POST["yr"]
-    e=request.POST["sem"]
-    h=CC(fid=k, cc=l, ay=c, yr=int(d), sem=e)
-    CC.save(h)
-    return HttpResponse("added successfully")
 
 ##EFC050;
 
 ################################################################3
-#modifying faculty course mapping
-def admodifyfcm(request, dept, pgm,ay,sem, fid, cid, fcmid):
-   auname = request.session.get("auname")
-   fcm=FacultyCourseMapping.objects.get(mappingid=fcmid)
-   course=fcm.course.coursecode
-   faculty=fcm.faculty.facultyid
-   print(course)
-   print(faculty)
-   return HttpResponse('hi')
+
 
 ########## giving access to other faculty
 def agiveaccess0(request):
@@ -666,7 +630,8 @@ from django.http import JsonResponse
 
 def agiveaccess1(request):
     auname = request.session.get("auname")
-    x = x = Faculty.objects.all()
+    x = Faculty.objects.all()
+
     if request.method == 'POST':
         hidden_data = request.POST.get('hiddenData', '[]')
 
@@ -676,26 +641,43 @@ def agiveaccess1(request):
             for faculty in faculty_data:
                 fid = faculty.get('facultyid')
                 access = int(faculty.get('access', 0))
+                graccess = int(faculty.get('graccess', 0))  # Get grievance access
+
+                # Update access and grievance access in the database
                 a = Faculty.objects.get(facultyid=fid)
-                a.access=access
+                a.access = access
+                a.graccess = graccess
                 a.save()
-            msg="Accesses have been Modified"
-            return render(request, "agiveaccess0.html", {"facultydata":x, "msg":msg, "adminuname":auname})
+
+            msg = "Accesses have been Modified"
+            return render(request, "agiveaccess0.html", {"facultydata": x, "msg": msg, "adminuname": auname})
+
         except json.JSONDecodeError as e:
             print(f"JSONDecodeError: {str(e)}")
             return HttpResponse("Error: Invalid JSON data received.", status=400)
 
-    return render(request, "agiveaccess0.html", {"facultydata": x,  "adminuname":auname})
+    return render(request, "agiveaccess0.html", {"facultydata": x, "adminuname": auname})
 
 ######### view student internals
-def astuinternals(request,sid, ay, sem, pgm,dept):
+def astuinternals(request,sid):
     auname = request.session.get("auname")
-    x=Internals.objects.filter(Q(sid=sid)&Q(ay=ay)&Q(sem=sem))
-    if x is not None:
-        return render(request, "astuinternals.html", {"adminuname":auname, "x":x, "sid":sid, "ay":ay, "sem":sem})
+    return render(request, "aysemfilter.html", {"adminuname":auname,"sid":sid})
+def astuinternals2(request,sid):
+    auname = request.session.get("auname")
+    if(request.method=="POST"):
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        x=Internals.objects.filter(Q(sid=sid)&Q(ay=ay)&Q(sem=sem))
+
+        if x.exists():
+            #print("x" + x)
+            return render(request, "astuinternals.html", {"adminuname":auname, "x":x, "sid":sid, "ay":ay, "sem":sem})
+        else:
+            #print("empty")
+            msg=f'NO INTERNALS POSTED YET FOR ID-{sid} during Academic Year-{ay} and Sem-{sem}'
+            return render(request, "aysemfilter.html", {"x": x, "adminuname": auname, "msg":msg})
     else:
-        x = Student.objects.filter(Q(program=pgm) & Q(department=dept) & Q(ay=ay) & Q(semester=sem))
-        return render(request, "aviewstu1.html", {"x": x, "adminuname": auname})
+        return render(request, "aysemfilter.html", {"adminuname":auname,"sid":sid})
 
 def aviewgrievance0(request):
     auname = request.session.get("auname")
@@ -757,3 +739,68 @@ def update_issue_status(request, id):
 
     referer = request.META.get('HTTP_REFERER')
     return redirect(referer)
+
+
+
+### admin viewing - student sgpa
+def asgpa0(request,sid):
+    auname = request.session.get("auname")
+    if request.method == "POST":
+        ay=request.POST["ay"]
+        sem=request.POST["sem"]
+        s = Student.objects.get(studentid=sid)
+        try:
+
+            x=RegHistoryM.objects.get(Q(say=ay)&Q(ssem = sem)&Q(sid=s))
+
+            y=Course.objects.filter(Q(department=s.department)&Q(program=s.program)&Q(academicyear=ay)&Q(semester=sem))
+            q=0
+            for i in y:
+                q = q + i.credits
+            p=Internals.objects.filter(Q(sid=sid)&Q(dept=s.department)&Q(ay=ay)&Q(sem=sem))
+            for i in p:
+               if(x.cc1.coursecode == i.cc):
+                   cred = x.cc1.credits * i.grade_points
+               elif(x.cc2 and x.cc2.coursecode == i.cc):
+                   cred = x.cc2.credits * i.grade_points
+               elif(x.cc3 and x.cc3.coursecode == i.cc):
+                   cred = x.cc3.credits * i.grade_points
+               elif(x.cc4 and x.cc4.coursecode == i.cc):
+                   cred = x.cc4.credits * i.grade_points
+               elif(x.cc5 and x.cc5.coursecode == i.cc):
+                   cred = x.cc5.credits * i.grade_points
+               elif(x.cc6 and x.cc6.coursecode == i.cc):
+                   cred = x.cc6.credits * i.grade_points
+               elif(x.cc7 and x.cc7.coursecode == i.cc):
+                   cred = x.cc7.credits * i.grade_points
+            cred=cred/q
+
+            b=0
+
+            if(x.cc1):
+                b=b+1
+            if(x.cc2):
+                b=b+1
+            if (x.cc3):
+                b = b + 1
+            if (x.cc4):
+                b = b + 1
+            if (x.cc5):
+                b = b + 1
+            if (x.cc6):
+                b = b + 1
+            if (x.cc7):
+                b = b + 1
+            c=len(p)
+            if(c < b):
+                msg=f'Registered Number of Courses {b} , Total Credits {q}, Missing in {b-c} courses'
+                return render(request, "asgpa1.html", {"msg":msg, "p":p, "cred":cred})
+            else:
+                return HttpResponse("hi")
+
+
+        except ObjectDoesNotExist:
+            msg="Doesn't Exist"
+            return render(request, "asgpa.html", {"adminuname":auname, "msg":msg})
+    else:
+        return render(request, "asgpa.html", {"adminuname":auname,})
